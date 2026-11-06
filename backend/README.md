@@ -16,8 +16,7 @@ app/
 ```
 
 There is no retrieval layer. `/tutor` sends the question and the learner's level straight to
-Claude; `chromadb`, `transformers`, `torch`, `fugashi` and `sqlalchemy` are declared dependencies
-that no module under `app/` imports yet.
+Claude.
 
 ## Dev
 

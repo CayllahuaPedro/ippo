@@ -31,7 +31,7 @@ routes are not.
 | `POST /classify` | **Stub** — returns `{"detail": "not implemented"}` |
 | `GET /mining/queue` | **Stub** |
 | `GET /progress` | **Stub** |
-| Retrieval / embeddings (ChromaDB) | **Not built** — dependency declared, no retrieval code |
+| Retrieval / embeddings (ChromaDB) | **Not built** — no retrieval code |
 | Learner-model persistence (SQLite) | **Not built** — `DATABASE_URL` is wired, nothing reads it |
 | Fine-tuned JLPT BERT | Roadmap — see [Roadmap](#roadmap) |
 | CI, Docker, deployment | **Not set up** |
