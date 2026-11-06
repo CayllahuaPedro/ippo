@@ -1,13 +1,13 @@
+import type { Forecast } from "@/lib/types";
+
 /** The reader's own vocabulary: how a passage is shaped and how a word
  *  sits against the learner model. */
-
-export type Pairing = "kohi" | "washi" | "sumi";
 
 export type FuriganaMode = "hover" | "always" | "off";
 
 export type ReaderMode = "learn" | "book" | "dense";
 
-/** How a word sits against the learner model, which is what colours it. */
+/** How a word sits against the learner model, which is what marks it. */
 export type WordState = "known" | "learning" | "selected";
 
 /** One run of text inside a token. `reading` present means it renders as ruby. */
@@ -34,6 +34,10 @@ export type Passage = {
   title: string;
   japaneseTitle: string;
   kicker: string;
+  /** Absolute difficulty of the text, kept apart from the personal forecast. */
+  textLevel: string;
+  /** Expected personal comprehension; `null` when the model abstains. */
+  forecast: Forecast | null;
   page: number;
   pageCount: number;
   unknownOnPage: number;

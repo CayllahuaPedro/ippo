@@ -1,8 +1,7 @@
-import type { FuriganaMode, Pairing, ReaderMode } from "../types";
+import type { FuriganaMode, ReaderMode } from "../types";
 
 /** Reading preferences, as they are persisted between visits. */
 export type ReaderSettingsValues = {
-  pairing: Pairing;
   furigana: FuriganaMode;
   mode: ReaderMode;
 };
@@ -10,12 +9,10 @@ export type ReaderSettingsValues = {
 export const STORAGE_KEY = "nihon-ai.reader-settings";
 
 export const defaultSettings: ReaderSettingsValues = {
-  pairing: "kohi",
   furigana: "hover",
   mode: "learn",
 };
 
-const PAIRINGS: Pairing[] = ["kohi", "washi", "sumi"];
 const FURIGANA: FuriganaMode[] = ["hover", "always", "off"];
 const MODES: ReaderMode[] = ["learn", "book", "dense"];
 
@@ -26,7 +23,7 @@ function pick<T extends string>(allowed: T[], value: unknown, fallback: T): T {
 /**
  * Stored settings are attacker-adjacent in the mildest sense — anyone can edit
  * localStorage — and stale after a rename. Either way an unrecognised value
- * must fall back rather than reach the DOM as a bogus `data-pairing`.
+ * must fall back rather than reach the page as a bogus mode.
  */
 export function parseSettings(raw: string | null): ReaderSettingsValues {
   if (!raw) return defaultSettings;
@@ -42,7 +39,6 @@ export function parseSettings(raw: string | null): ReaderSettingsValues {
   const values = parsed as Partial<ReaderSettingsValues>;
 
   return {
-    pairing: pick(PAIRINGS, values.pairing, defaultSettings.pairing),
     furigana: pick(FURIGANA, values.furigana, defaultSettings.furigana),
     mode: pick(MODES, values.mode, defaultSettings.mode),
   };

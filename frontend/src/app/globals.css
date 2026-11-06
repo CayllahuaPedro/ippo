@@ -1,103 +1,97 @@
 @import "tailwindcss";
 
-/* Design tokens mirrored from the Claude Design "Organic" system
-   (_ds/organic-2ba17b7c/styles.css). Ramps are generated in OKLCH on one
-   shared lightness scale, so the same step of any role matches in value. */
 @theme {
-  --color-bg: #f5ead8;
-  --color-surface: #ebddc5;
-  --color-text: #201e1d;
-  --color-accent: #c67139;
-  --color-accent-2: #7a8a5e;
+  --color-ground: #ffffff;
+  --color-wash: #f7f7fa;
+  --color-track: #f4f5f7;
+  --color-ink: #1b1547;
+  --color-muted: #4b5165;
+  --color-faint: #636880;
+  --color-hairline: #e6e7ee;
+  --color-handle: #c9cbd6;
+  --color-accent: #6b5ce7;
+  --color-accent-hover: #5a4bd6;
+  --color-tint: #efedfc;
+  --color-on-accent: #ffffff;
+  --color-scrim: #1b1547;
 
-  --color-neutral-100: #f9f4ed;
-  --color-neutral-200: #eee7db;
-  --color-neutral-300: #dcd3c4;
-  --color-neutral-400: #c0b6a5;
-  --color-neutral-500: #a19786;
-  --color-neutral-600: #82796a;
-  --color-neutral-700: #645c50;
-  --color-neutral-800: #474238;
-  --color-neutral-900: #2e2b25;
+  --color-forecast-low: #7fd8d0;
+  --color-forecast-mid: #c9b8f0;
+  --color-forecast-high: #5b4fd6;
 
-  --color-accent-100: #fff2eb;
-  --color-accent-200: #ffe1d0;
-  --color-accent-300: #ffc6a5;
-  --color-accent-400: #f6a06b;
-  --color-accent-500: #d67f48;
-  --color-accent-600: #b2622d;
-  --color-accent-700: #8c491a;
-  --color-accent-800: #643312;
-  --color-accent-900: #402310;
+  --radius-control: 8px;
+  --radius-panel: 12px;
 
-  --color-accent-2-100: #f0fae1;
-  --color-accent-2-200: #e1eecc;
-  --color-accent-2-300: #ccdbb2;
-  --color-accent-2-400: #aebf92;
-  --color-accent-2-500: #8fa073;
-  --color-accent-2-600: #728157;
-  --color-accent-2-700: #56633f;
-  --color-accent-2-800: #3d472b;
-  --color-accent-2-900: #272e1b;
-
-  --font-heading: "Caprasimo", system-ui, sans-serif;
-  --font-body: "Figtree", system-ui, sans-serif;
-  /* Overridden per pairing below; declared here so `font-jp` exists. */
-  --font-jp: "Zen Maru Gothic", "Noto Sans JP", sans-serif;
-
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 28px;
-
-  --shadow-sm: 0 1px 2px color-mix(in srgb, #2e2b25 14%, transparent);
-  --shadow-md: 0 3px 10px color-mix(in srgb, #2e2b25 16%, transparent);
-  --shadow-lg: 0 12px 32px color-mix(in srgb, #2e2b25 22%, transparent);
+  --shadow-float: 0 12px 32px -12px rgb(27 21 71 / 0.18);
 }
 
-/* Pairings. The design brief holds the passage, the popup and the tutor rail
-   constant across 1a/1b/1c — only the ground, the accent voice and the
-   Japanese face change. So a pairing is a token swap, not a component fork. */
-:root,
-[data-pairing="kohi"] {
-  --color-ground: var(--color-bg);
-  --color-ground-raised: var(--color-surface);
-  --color-ink: var(--color-text);
-  --color-muted: var(--color-neutral-700);
-  --color-voice: var(--color-accent);
-  --color-voice-contrast: var(--color-bg);
-  --color-raised: var(--color-neutral-100);
-  --color-raised-ink: var(--color-neutral-900);
-  --color-inset: var(--color-neutral-200);
-  --color-inset-deep: var(--color-bg);
-  --font-jp: "Zen Maru Gothic", "Noto Sans JP", sans-serif;
+/* Dark is a token swap, never a component fork: the same world at night, on a
+   deep indigo ground. An explicit choice wins; otherwise the system decides. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-ground: #14122b;
+    --color-wash: #1c1a38;
+    --color-track: #2a2745;
+    --color-ink: #e8e6f5;
+    --color-muted: #a5a3bd;
+    --color-faint: #8f8daa;
+    --color-hairline: #2c2948;
+    --color-handle: #4a4668;
+    --color-accent: #8b7ff0;
+    --color-accent-hover: #a296f5;
+    --color-tint: #252050;
+    --color-on-accent: #14122b;
+    --color-scrim: #05040f;
+    --color-forecast-low: #6fd0c7;
+    --color-forecast-mid: #c3b1f2;
+    --color-forecast-high: #8b7ff0;
+    --shadow-float: 0 16px 40px -12px rgb(0 0 0 / 0.55);
+    color-scheme: dark;
+  }
 }
 
-[data-pairing="washi"] {
-  --color-ground: var(--color-neutral-100);
-  --color-ground-raised: var(--color-neutral-200);
-  --color-ink: var(--color-neutral-900);
-  --color-muted: var(--color-neutral-600);
-  --color-voice: var(--color-accent-2-600);
-  --color-voice-contrast: var(--color-neutral-100);
-  --color-raised: var(--color-neutral-100);
-  --color-raised-ink: var(--color-neutral-900);
-  --color-inset: var(--color-neutral-200);
-  --color-inset-deep: var(--color-neutral-100);
-  --font-jp: "Shippori Mincho", serif;
+:root[data-theme="dark"] {
+  --color-ground: #14122b;
+  --color-wash: #1c1a38;
+  --color-track: #2a2745;
+  --color-ink: #e8e6f5;
+  --color-muted: #a5a3bd;
+  --color-faint: #8f8daa;
+  --color-hairline: #2c2948;
+  --color-handle: #4a4668;
+  --color-accent: #8b7ff0;
+  --color-accent-hover: #a296f5;
+  --color-tint: #252050;
+  --color-on-accent: #14122b;
+  --color-scrim: #05040f;
+  --color-forecast-low: #6fd0c7;
+  --color-forecast-mid: #c3b1f2;
+  --color-forecast-high: #8b7ff0;
+  --shadow-float: 0 16px 40px -12px rgb(0 0 0 / 0.55);
+  color-scheme: dark;
 }
 
-[data-pairing="sumi"] {
-  --color-ground: var(--color-accent-2-900);
-  --color-ground-raised: var(--color-neutral-900);
-  --color-ink: var(--color-neutral-200);
-  --color-muted: var(--color-neutral-400);
-  --color-voice: var(--color-accent-400);
-  --color-voice-contrast: var(--color-accent-900);
-  --color-raised: var(--color-neutral-900);
-  --color-raised-ink: var(--color-neutral-200);
-  --color-inset: var(--color-accent-2-900);
-  --color-inset-deep: var(--color-neutral-800);
-  --font-jp: "Noto Sans JP", sans-serif;
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* Only for controls about the theme itself, such as the theme toggle. Same
+   precedence as the tokens: an explicit choice wins, else the system decides. */
+@custom-variant night {
+  &:where([data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/* The faces arrive as CSS variables from next/font in the root layout. */
+@theme inline {
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+  --font-jp: var(--font-zen-kaku), "Hiragino Sans", "Noto Sans JP", sans-serif;
 }
 
 @layer base {
@@ -105,13 +99,14 @@
      that scrolls internally needs a bounded height, and hard-coding the header
      in three files is how they drift apart. */
   :root {
-    --header-h: 60px;
+    --header-h: 56px;
     --tabbar-h: 56px;
+    scrollbar-color: var(--color-handle) transparent;
   }
 
   @media (min-width: 1024px) {
     :root {
-      --header-h: 68px;
+      --header-h: 72px;
       --tabbar-h: 0px;
     }
   }
@@ -122,11 +117,13 @@
 
   body {
     margin: 0;
-    background: #e6dcc9;
-    color: var(--color-text);
-    font-family: var(--font-body);
-    font-size: 15px;
+    background: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
     line-height: 1.55;
+    caret-color: var(--color-accent);
+    -webkit-font-smoothing: antialiased;
   }
 
   button {
@@ -138,49 +135,70 @@
     text-align: inherit;
   }
 
+  a {
+    text-underline-offset: 0.2em;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
   :focus {
     outline: none;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-voice);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-voice) 30%, transparent);
+    background: var(--color-tint);
+    color: var(--color-ink);
+  }
+
+  ::placeholder {
+    color: var(--color-faint);
+    opacity: 1;
   }
 }
 
 /* Furigana reveal. `hover` is the default: readings stay out of the way until
    you reach for one, so the eye trains on the kanji first. */
 ruby rt {
-  font-size: 0.42em;
-  font-weight: 500;
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--color-muted);
   opacity: 0;
   transition: opacity 0.14s ease;
 }
 
 ruby:hover rt {
-  opacity: 0.72;
+  opacity: 1;
 }
 
 /* A phone cannot hover, so the selected word reveals its own reading. Without
    this, "on hover" reads as "never" on touch. */
 [aria-pressed="true"] rt {
-  opacity: 0.72;
+  opacity: 1;
 }
 
 [data-furi="always"] rt {
-  opacity: 0.72;
+  opacity: 1;
 }
 
 [data-furi="off"] rt {
   display: none;
 }
 
-/* The tutor's thinking indicator. Kept in CSS rather than as three staggered
-   utility classes so the timing lives in one place. */
 @keyframes thinking {
   0%,
   70%,
@@ -194,7 +212,6 @@ ruby:hover rt {
   }
 }
 
-/* Marks the end of text that is still being written. */
 @keyframes caret {
   0%,
   50% {

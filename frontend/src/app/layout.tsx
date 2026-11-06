@@ -1,12 +1,30 @@
 import type { Metadata, Viewport } from "next";
+import { Figtree, Zen_Kaku_Gothic_New } from "next/font/google";
 import { AppShell } from "@/components/app-shell";
+import { cn } from "@/lib/cn";
 import { ReaderSettingsProvider } from "@/features/reader";
+import { themeBootScript } from "@/lib/theme";
 import "./globals.css";
 
+const figtree = Figtree({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-figtree",
+  display: "swap",
+});
+
+const zenKaku = Zen_Kaku_Gothic_New({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-zen-kaku",
+  display: "swap",
+  preload: false,
+});
+
 export const metadata: Metadata = {
-  title: "Yabai — read Japanese at your level",
+  title: "Nihon AI — read Japanese at your level",
   description:
-    "A reader that scores every text against the words you already know, so you always read at the edge of what you understand.",
+    "A reader that forecasts how much of every text you will understand, so you always read at the edge of what you know.",
 };
 
 /* `viewport-fit=cover` lets the tab bar and sheets paint into the home-indicator
@@ -15,7 +33,10 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ebddc5",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#14122b" },
+  ],
 };
 
 export default function RootLayout({
@@ -24,18 +45,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={cn(figtree.variable, zenKaku.variable)}
+      suppressHydrationWarning
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body>
         <ReaderSettingsProvider>
