@@ -1,0 +1,829 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T16:59:35+00:00",
+  "title": "Design System: Nihon AI",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Paper White (light)",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "wash": {
+        "role": "neutral",
+        "displayName": "Wash (light)",
+        "canonical": "#f7f7fa",
+        "oklch": "oklch(97.7% 0.004 286.3)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#262627",
+          "#454546",
+          "#666668",
+          "#89898b",
+          "#aeaeaf",
+          "#d1d1d2",
+          "#eeeeef"
+        ]
+      },
+      "track": {
+        "role": "neutral",
+        "displayName": "Track (light)",
+        "canonical": "#f4f5f7",
+        "oklch": "oklch(97.0% 0.003 264.5)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262627",
+          "#444546",
+          "#656668",
+          "#88898b",
+          "#adaeaf",
+          "#d0d1d2",
+          "#eeeeef"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Bureau Ink (light)",
+        "canonical": "#1b1547",
+        "oklch": "oklch(23.9% 0.090 282.7)",
+        "tonalRamp": [
+          "#0a0a15",
+          "#23233b",
+          "#404066",
+          "#5f6094",
+          "#8283b7",
+          "#a8aad2",
+          "#cdceeb",
+          "#ecedff"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Slate (light)",
+        "canonical": "#4b5165",
+        "oklch": "oklch(43.7% 0.034 271.9)",
+        "tonalRamp": [
+          "#0a0b0f",
+          "#23262f",
+          "#404452",
+          "#5f6579",
+          "#83899b",
+          "#a9adbc",
+          "#cdd1db",
+          "#eceef5"
+        ]
+      },
+      "faint": {
+        "role": "neutral",
+        "displayName": "Faint Slate (light)",
+        "canonical": "#636880",
+        "oklch": "oklch(52.2% 0.038 275.8)",
+        "tonalRamp": [
+          "#0a0b10",
+          "#242630",
+          "#414454",
+          "#60657b",
+          "#83889d",
+          "#a9adbe",
+          "#ced0dc",
+          "#eceef6"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline (light)",
+        "canonical": "#e6e7ee",
+        "oklch": "oklch(92.9% 0.009 279.7)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#262629",
+          "#444549",
+          "#65666b",
+          "#88898e",
+          "#adadb2",
+          "#d0d1d4",
+          "#eeeef0"
+        ]
+      },
+      "handle": {
+        "role": "neutral",
+        "displayName": "Handle (light)",
+        "canonical": "#c9cbd6",
+        "oklch": "oklch(84.4% 0.015 277.8)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#25262a",
+          "#43454b",
+          "#64656e",
+          "#878991",
+          "#acadb4",
+          "#d0d1d5",
+          "#eeeef1"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Prospectus Violet (light)",
+        "canonical": "#6b5ce7",
+        "oklch": "oklch(56.7% 0.202 282.7)",
+        "tonalRamp": [
+          "#090621",
+          "#221b54",
+          "#3e338e",
+          "#5c4dcc",
+          "#7d76ed",
+          "#a2a3fd",
+          "#c8caff",
+          "#e8ebff"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Prospectus Violet, hover (light)",
+        "canonical": "#5a4bd6",
+        "oklch": "oklch(51.3% 0.204 281.3)",
+        "tonalRamp": [
+          "#080621",
+          "#211c55",
+          "#3c348f",
+          "#594ecd",
+          "#7a77ee",
+          "#a0a3fe",
+          "#c6cbff",
+          "#e7ebff"
+        ]
+      },
+      "tint": {
+        "role": "primary",
+        "displayName": "Violet Tint (light)",
+        "canonical": "#efedfc",
+        "oklch": "oklch(95.2% 0.020 292.1)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#26262b",
+          "#45444c",
+          "#666470",
+          "#898793",
+          "#aeadb6",
+          "#d1d0d6",
+          "#eeeef2"
+        ]
+      },
+      "on-accent": {
+        "role": "primary",
+        "displayName": "On Accent (light)",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "scrim": {
+        "role": "neutral",
+        "displayName": "Scrim (light)",
+        "canonical": "#1b1547",
+        "oklch": "oklch(23.9% 0.090 282.7)",
+        "tonalRamp": [
+          "#0a0a15",
+          "#23233b",
+          "#404066",
+          "#5f6094",
+          "#8283b7",
+          "#a8aad2",
+          "#cdceeb",
+          "#ecedff"
+        ]
+      },
+      "forecast-low": {
+        "role": "tertiary",
+        "displayName": "Forecast Teal (light)",
+        "canonical": "#7fd8d0",
+        "oklch": "oklch(82.4% 0.087 188.2)",
+        "tonalRamp": [
+          "#010e0d",
+          "#062d2a",
+          "#104f4b",
+          "#1c756f",
+          "#4f9892",
+          "#86bab4",
+          "#b6d9d6",
+          "#def4f1"
+        ]
+      },
+      "forecast-mid": {
+        "role": "tertiary",
+        "displayName": "Forecast Lilac (light)",
+        "canonical": "#c9b8f0",
+        "oklch": "oklch(81.6% 0.080 298.5)",
+        "tonalRamp": [
+          "#0c0913",
+          "#292237",
+          "#493e5f",
+          "#6b5d8b",
+          "#8e80ad",
+          "#b2a7ca",
+          "#d3cde5",
+          "#f0ecfc"
+        ]
+      },
+      "forecast-high": {
+        "role": "tertiary",
+        "displayName": "Forecast Deep Violet (light)",
+        "canonical": "#5b4fd6",
+        "oklch": "oklch(52.0% 0.199 280.9)",
+        "tonalRamp": [
+          "#080721",
+          "#201c54",
+          "#3b358d",
+          "#594fcb",
+          "#7978ec",
+          "#a0a4fc",
+          "#c6cbff",
+          "#e7ebff"
+        ]
+      },
+      "ground-dark": {
+        "role": "neutral",
+        "displayName": "Paper White (dark)",
+        "canonical": "#14122b",
+        "oklch": "oklch(20.0% 0.049 284.7)",
+        "tonalRamp": [
+          "#0a0a11",
+          "#252532",
+          "#434357",
+          "#636380",
+          "#8686a2",
+          "#abacc1",
+          "#cfcfdf",
+          "#ededf7"
+        ]
+      },
+      "wash-dark": {
+        "role": "neutral",
+        "displayName": "Wash (dark)",
+        "canonical": "#1c1a38",
+        "oklch": "oklch(23.7% 0.056 284.3)",
+        "tonalRamp": [
+          "#0a0a11",
+          "#252534",
+          "#42425a",
+          "#626283",
+          "#8586a6",
+          "#ababc4",
+          "#cfcfe1",
+          "#ededf9"
+        ]
+      },
+      "track-dark": {
+        "role": "neutral",
+        "displayName": "Track (dark)",
+        "canonical": "#2a2745",
+        "oklch": "oklch(29.1% 0.054 287.1)",
+        "tonalRamp": [
+          "#0b0a11",
+          "#252533",
+          "#434259",
+          "#646282",
+          "#8785a4",
+          "#acabc3",
+          "#cfcfe0",
+          "#ededf8"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Bureau Ink (dark)",
+        "canonical": "#e8e6f5",
+        "oklch": "oklch(93.1% 0.020 292.1)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#26262b",
+          "#45444c",
+          "#666470",
+          "#898793",
+          "#aeadb6",
+          "#d1d0d6",
+          "#eeeef2"
+        ]
+      },
+      "muted-dark": {
+        "role": "neutral",
+        "displayName": "Muted Slate (dark)",
+        "canonical": "#a5a3bd",
+        "oklch": "oklch(72.6% 0.037 289.0)",
+        "tonalRamp": [
+          "#0b0a0f",
+          "#26252f",
+          "#444353",
+          "#656379",
+          "#88869c",
+          "#adacbd",
+          "#d0cfdb",
+          "#eeedf5"
+        ]
+      },
+      "faint-dark": {
+        "role": "neutral",
+        "displayName": "Faint Slate (dark)",
+        "canonical": "#8f8daa",
+        "oklch": "oklch(65.5% 0.043 288.3)",
+        "tonalRamp": [
+          "#0b0a10",
+          "#262530",
+          "#444355",
+          "#65637c",
+          "#88869f",
+          "#adacbf",
+          "#d0cfdd",
+          "#eeedf6"
+        ]
+      },
+      "hairline-dark": {
+        "role": "neutral",
+        "displayName": "Hairline (dark)",
+        "canonical": "#2c2948",
+        "oklch": "oklch(30.0% 0.055 287.0)",
+        "tonalRamp": [
+          "#0b0a11",
+          "#252433",
+          "#434259",
+          "#646282",
+          "#8785a5",
+          "#acabc4",
+          "#cfcfe1",
+          "#ededf8"
+        ]
+      },
+      "handle-dark": {
+        "role": "neutral",
+        "displayName": "Handle (dark)",
+        "canonical": "#4a4668",
+        "oklch": "oklch(41.3% 0.056 289.1)",
+        "tonalRamp": [
+          "#0b0a11",
+          "#262433",
+          "#444259",
+          "#656183",
+          "#8885a5",
+          "#adabc4",
+          "#d0cfe1",
+          "#eeedf8"
+        ]
+      },
+      "accent-dark": {
+        "role": "primary",
+        "displayName": "Prospectus Violet (dark)",
+        "canonical": "#8b7ff0",
+        "oklch": "oklch(65.9% 0.164 285.8)",
+        "tonalRamp": [
+          "#0a071d",
+          "#241e4b",
+          "#41387f",
+          "#6154b7",
+          "#837ad9",
+          "#a8a4ed",
+          "#cccbff",
+          "#ebebff"
+        ]
+      },
+      "accent-hover-dark": {
+        "role": "primary",
+        "displayName": "Prospectus Violet, hover (dark)",
+        "canonical": "#a296f5",
+        "oklch": "oklch(72.2% 0.136 288.3)",
+        "tonalRamp": [
+          "#0b081a",
+          "#262045",
+          "#443b75",
+          "#6457a9",
+          "#867dcb",
+          "#aba6e2",
+          "#cfcbf7",
+          "#edebff"
+        ]
+      },
+      "tint-dark": {
+        "role": "primary",
+        "displayName": "Violet Tint (dark)",
+        "canonical": "#252050",
+        "oklch": "oklch(27.9% 0.085 284.2)",
+        "tonalRamp": [
+          "#0a0a15",
+          "#24243a",
+          "#414064",
+          "#616092",
+          "#8383b4",
+          "#a9aad0",
+          "#cdcee9",
+          "#ecedfe"
+        ]
+      },
+      "on-accent-dark": {
+        "role": "primary",
+        "displayName": "On Accent (dark)",
+        "canonical": "#14122b",
+        "oklch": "oklch(20.0% 0.049 284.7)",
+        "tonalRamp": [
+          "#0a0a11",
+          "#252532",
+          "#434357",
+          "#636380",
+          "#8686a2",
+          "#abacc1",
+          "#cfcfdf",
+          "#ededf7"
+        ]
+      },
+      "scrim-dark": {
+        "role": "neutral",
+        "displayName": "Scrim (dark)",
+        "canonical": "#05040f",
+        "oklch": "oklch(11.8% 0.028 287.0)",
+        "tonalRamp": [
+          "#0b0b0e",
+          "#26262d",
+          "#44444f",
+          "#656475",
+          "#888797",
+          "#adacb9",
+          "#d0d0d9",
+          "#eeeef3"
+        ]
+      },
+      "forecast-low-dark": {
+        "role": "tertiary",
+        "displayName": "Forecast Teal (dark)",
+        "canonical": "#6fd0c7",
+        "oklch": "oklch(79.6% 0.093 187.6)",
+        "tonalRamp": [
+          "#000f0d",
+          "#022d2a",
+          "#05504b",
+          "#0c766f",
+          "#499992",
+          "#82bbb5",
+          "#b4dad6",
+          "#dcf4f1"
+        ]
+      },
+      "forecast-mid-dark": {
+        "role": "tertiary",
+        "displayName": "Forecast Lilac (dark)",
+        "canonical": "#c3b1f2",
+        "oklch": "oklch(79.8% 0.093 297.0)",
+        "tonalRamp": [
+          "#0c0914",
+          "#29213a",
+          "#493d64",
+          "#6b5b91",
+          "#8e7fb4",
+          "#b1a7cf",
+          "#d3cce9",
+          "#f0ebfe"
+        ]
+      },
+      "forecast-high-dark": {
+        "role": "tertiary",
+        "displayName": "Forecast Deep Violet (dark)",
+        "canonical": "#8b7ff0",
+        "oklch": "oklch(65.9% 0.164 285.8)",
+        "tonalRamp": [
+          "#0a071d",
+          "#241e4b",
+          "#41387f",
+          "#6154b7",
+          "#837ad9",
+          "#a8a4ed",
+          "#cccbff",
+          "#ebebff"
+        ]
+      }
+    },
+    "themes": {
+      "light": {
+        "selector": ":root (Tailwind @theme) and :root[data-theme=\"light\"]",
+        "tokens": {
+          "ground": "#ffffff",
+          "wash": "#f7f7fa",
+          "track": "#f4f5f7",
+          "ink": "#1b1547",
+          "muted": "#4b5165",
+          "faint": "#636880",
+          "hairline": "#e6e7ee",
+          "handle": "#c9cbd6",
+          "accent": "#6b5ce7",
+          "accent-hover": "#5a4bd6",
+          "tint": "#efedfc",
+          "on-accent": "#ffffff",
+          "scrim": "#1b1547",
+          "forecast-low": "#7fd8d0",
+          "forecast-mid": "#c9b8f0",
+          "forecast-high": "#5b4fd6"
+        }
+      },
+      "dark": {
+        "selector": ":root[data-theme=\"dark\"], and @media (prefers-color-scheme: dark) :root:not([data-theme=\"light\"])",
+        "tokens": {
+          "ground": "#14122b",
+          "wash": "#1c1a38",
+          "track": "#2a2745",
+          "ink": "#e8e6f5",
+          "muted": "#a5a3bd",
+          "faint": "#8f8daa",
+          "hairline": "#2c2948",
+          "handle": "#4a4668",
+          "accent": "#8b7ff0",
+          "accent-hover": "#a296f5",
+          "tint": "#252050",
+          "on-accent": "#14122b",
+          "scrim": "#05040f",
+          "forecast-low": "#6fd0c7",
+          "forecast-mid": "#c3b1f2",
+          "forecast-high": "#8b7ff0"
+        },
+        "colorScheme": "dark"
+      },
+      "note": "Dark is a token swap of the same --color-* custom properties; an explicit data-theme wins, otherwise the system preference decides. theme-color meta: #ffffff light, #14122b dark."
+    },
+    "typographyMeta": {
+      "forecast-figure": {
+        "displayName": "Forecast figure",
+        "purpose": "Comprehension percentage. 56/72/88px by breakpoint at size lg, 44px at md; tabular."
+      },
+      "display-jp": {
+        "displayName": "Display JP",
+        "purpose": "Passage title; 40px on phones, 56px from 640px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles; Discover 32/40px, Tutor 28/36px."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Shelf and section headings; 19px variant for brand mark and panel headings."
+      },
+      "reading-jp": {
+        "displayName": "Reading JP",
+        "purpose": "Passage body, max 36em; book layout 19/23px at 2.2 justified, compact 17/19px at 2.0 in two columns."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text and chat turns."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, nav, forecast caption, card metadata."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Margin notes, legend, hints, tab bar labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "float",
+        "value": "0 12px 32px -12px rgb(27 21 71 / 0.18)",
+        "purpose": "Light theme. Only on elements floating over the text: word popup, phone floating action."
+      },
+      {
+        "name": "float-dark",
+        "value": "0 16px 40px -12px rgb(0 0 0 / 0.55)",
+        "purpose": "Dark theme value of the same token."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid var(--color-accent); outline-offset: 2px",
+        "purpose": "Global :focus-visible treatment."
+      },
+      {
+        "name": "accent-ring",
+        "value": "0 0 0 1px var(--color-accent)",
+        "purpose": "Composer focus-within ring; inset variant marks the selected segment."
+      }
+    ],
+    "motion": [
+      {
+        "name": "color-transition",
+        "value": "transition: color, background-color, border-color 150ms",
+        "purpose": "Hover and state changes on buttons, links, chips (Tailwind transition-colors)."
+      },
+      {
+        "name": "furigana-reveal",
+        "value": "opacity 0.14s ease",
+        "purpose": "Ruby readings fade in on hover."
+      },
+      {
+        "name": "sheet-rise",
+        "value": "0.22s ease-out; translateY(12%) and opacity 0 to rest",
+        "purpose": "Bottom sheet entrance."
+      },
+      {
+        "name": "veil-in",
+        "value": "0.18s ease-out; opacity 0 to 1",
+        "purpose": "Sheet scrim entrance."
+      },
+      {
+        "name": "thinking",
+        "value": "opacity 0.25 to 1 with -3px lift, staggered",
+        "purpose": "Tutor thinking dots."
+      },
+      {
+        "name": "caret",
+        "value": "step blink at 50%",
+        "purpose": "Streaming caret in tutor replies."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all durations 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce collapses every animation and transition."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px",
+        "note": "Header 56 to 72px; bottom tab bar removed; side rails and popup appear."
+      },
+      {
+        "name": "xl",
+        "value": "1280px",
+        "note": "Reader margin note column (140px); header known-words count."
+      }
+    ],
+    "layout": {
+      "headerHeight": {
+        "phone": "56px",
+        "desk": "72px"
+      },
+      "tabbarHeight": {
+        "phone": "56px",
+        "desk": "0px"
+      },
+      "readerRail": "320px",
+      "readingMeasure": "36em",
+      "discoverMax": "1240px",
+      "tutorMax": "760px"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single filled violet action per view.",
+      "html": "<button class=\"ds-btn-primary\">Continue reading</button>",
+      "css": ".ds-btn-primary{background:var(--color-accent,#6b5ce7);color:var(--color-on-accent,#fff);border:1px solid var(--color-accent,#6b5ce7);border-radius:var(--radius-control,8px);padding:10px 18px;font:400 15px/1.55 Figtree,system-ui,sans-serif;cursor:pointer;transition:background-color .15s,border-color .15s}.ds-btn-primary:hover{background:var(--color-accent-hover,#5a4bd6);border-color:var(--color-accent-hover,#5a4bd6)}.ds-btn-primary:focus-visible{outline:2px solid var(--color-accent,#6b5ce7);outline-offset:2px}.ds-btn-primary:disabled{background:var(--color-wash,#f7f7fa);border-color:var(--color-hairline,#e6e7ee);color:var(--color-muted,#4b5165);cursor:default}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action beside a primary one.",
+      "html": "<button class=\"ds-btn-outline\">Ask the tutor</button>",
+      "css": ".ds-btn-outline{background:var(--color-ground,#fff);color:var(--color-accent,#6b5ce7);border:1px solid var(--color-accent,#6b5ce7);border-radius:var(--radius-control,8px);padding:10px 20px;font:400 15px/1.55 Figtree,system-ui,sans-serif;cursor:pointer;transition:background-color .15s}.ds-btn-outline:hover{background:var(--color-tint,#efedfc)}.ds-btn-outline:focus-visible{outline:2px solid var(--color-accent,#6b5ce7);outline-offset:2px}"
+    },
+    {
+      "name": "Suggestion Chip",
+      "kind": "chip",
+      "refersTo": "chip-suggestion",
+      "description": "Prompt suggestions above the tutor composer.",
+      "html": "<button class=\"ds-chip\">Explain this grammar</button>",
+      "css": ".ds-chip{background:var(--color-ground,#fff);color:var(--color-ink,#1b1547);border:1px solid var(--color-hairline,#e6e7ee);border-radius:var(--radius-control,8px);padding:8px 14px;font:400 14px/1.55 Figtree,system-ui,sans-serif;cursor:pointer;transition:color .15s,border-color .15s}.ds-chip:hover{border-color:var(--color-accent,#6b5ce7);color:var(--color-accent,#6b5ce7)}.ds-chip:focus-visible{outline:2px solid var(--color-accent,#6b5ce7);outline-offset:2px}"
+    },
+    {
+      "name": "Tutor Composer",
+      "kind": "input",
+      "refersTo": "input-composer",
+      "description": "Hairline field with an inline violet send button.",
+      "html": "<form class=\"ds-composer\"><input class=\"ds-composer-input\" placeholder=\"Ask about this passage\"><button type=\"button\" class=\"ds-composer-send\" aria-label=\"Send\"><svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 16V4M5 9l5-5 5 5\"/></svg></button></form>",
+      "css": ".ds-composer{display:flex;align-items:center;gap:8px;background:var(--color-ground,#fff);border:1px solid var(--color-hairline,#e6e7ee);border-radius:var(--radius-control,8px);padding:6px 6px 6px 16px;transition:border-color .15s,box-shadow .15s}.ds-composer:focus-within{border-color:var(--color-accent,#6b5ce7);box-shadow:0 0 0 1px var(--color-accent,#6b5ce7)}.ds-composer-input{flex:1;min-width:0;border:0;background:transparent;color:var(--color-ink,#1b1547);font:400 16px/1.55 Figtree,system-ui,sans-serif;outline:none}.ds-composer-input::placeholder{color:var(--color-faint,#636880)}.ds-composer-send{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:0;border-radius:var(--radius-control,8px);background:var(--color-accent,#6b5ce7);color:var(--color-on-accent,#fff);cursor:pointer}.ds-composer-send:hover{background:var(--color-accent-hover,#5a4bd6)}"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "custom",
+      "refersTo": "segmented-selected",
+      "description": "Radio group for display settings; selected segment is tint with an inset violet ring.",
+      "html": "<div class=\"ds-seg\" role=\"radiogroup\"><button class=\"ds-seg-opt\" aria-checked=\"true\">Learn</button><button class=\"ds-seg-opt\" aria-checked=\"false\">Book</button><button class=\"ds-seg-opt\" aria-checked=\"false\">Compact</button></div>",
+      "css": ".ds-seg{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--color-hairline,#e6e7ee);border-radius:var(--radius-control,8px);background:var(--color-ground,#fff)}.ds-seg-opt{border:0;background:none;padding:8px 16px;border-radius:6px;font:400 15px/1.55 Figtree,system-ui,sans-serif;color:var(--color-muted,#4b5165);cursor:pointer;transition:color .15s,background-color .15s}.ds-seg-opt:hover{color:var(--color-ink,#1b1547)}.ds-seg-opt[aria-checked=true]{background:var(--color-tint,#efedfc);color:var(--color-ink,#1b1547);font-weight:500;box-shadow:inset 0 0 0 1px var(--color-accent,#6b5ce7)}.ds-seg-opt:focus-visible{outline:2px solid var(--color-accent,#6b5ce7);outline-offset:2px}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "header-bar",
+      "description": "Sticky 72px bar: mark, section links with a violet current underline, the theme toggle (40px icon button, the only theme control), one filled action.",
+      "html": "<header class=\"ds-nav\"><span class=\"ds-nav-mark\">Nihon AI</span><nav class=\"ds-nav-links\"><span class=\"ds-nav-soon\">SRS <em>soon</em></span><a href=\"#\" class=\"ds-nav-link\" aria-current=\"page\">Reader</a><a href=\"#\" class=\"ds-nav-link\">Discover</a><a href=\"#\" class=\"ds-nav-link\">Tutor</a></nav><span style=\"flex:1\"></span><a href=\"#\" class=\"ds-nav-action\">Find your next read</a></header>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:40px;height:72px;padding:0 48px;background:var(--color-ground,#fff);border-bottom:1px solid var(--color-hairline,#e6e7ee);font-family:Figtree,system-ui,sans-serif;color:var(--color-ink,#1b1547)}.ds-nav-mark{font-size:19px;font-weight:500}.ds-nav-links{display:flex;align-self:stretch;gap:28px}.ds-nav-link,.ds-nav-soon{position:relative;display:flex;align-items:center;gap:6px;font-size:15px;text-decoration:none;color:var(--color-muted,#4b5165);transition:color .15s}.ds-nav-link:hover{color:var(--color-ink,#1b1547)}.ds-nav-link[aria-current=page]{color:var(--color-ink,#1b1547);font-weight:500}.ds-nav-link[aria-current=page]::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--color-accent,#6b5ce7)}.ds-nav-soon{color:var(--color-faint,#636880)}.ds-nav-soon em{font-style:normal;font-size:12px;line-height:1.4;padding:0 4px;border:1px solid var(--color-hairline,#e6e7ee);border-radius:4px}.ds-nav-action{background:var(--color-accent,#6b5ce7);color:var(--color-on-accent,#fff);border-radius:var(--radius-control,8px);padding:10px 18px;font-size:15px;text-decoration:none;transition:background-color .15s}.ds-nav-action:hover{background:var(--color-accent-hover,#5a4bd6)}.ds-nav-link:focus-visible,.ds-nav-action:focus-visible{outline:2px solid var(--color-accent,#6b5ce7);outline-offset:2px}"
+    },
+    {
+      "name": "Forecast Block",
+      "kind": "custom",
+      "refersTo": "forecast-track",
+      "description": "Signature: tabular percentage over an uncertainty band; the only place colour is spent.",
+      "html": "<div class=\"ds-forecast\"><p class=\"ds-forecast-num\">78%</p><div class=\"ds-forecast-track\"><span class=\"ds-forecast-band\" style=\"left:66%;width:22%\"></span><span class=\"ds-forecast-tick\" style=\"left:78%\"></span></div><p class=\"ds-forecast-cap\">you'll understand · likely 66–88%</p></div>",
+      "css": ".ds-forecast{display:flex;flex-direction:column;font-family:Figtree,system-ui,sans-serif;color:var(--color-ink,#1b1547)}.ds-forecast-num{margin:0;font-size:72px;line-height:1;font-weight:500;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}.ds-forecast-track{position:relative;margin-top:16px;height:12px;width:100%;max-width:320px;background:var(--color-track,#f4f5f7)}.ds-forecast-band{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,var(--color-forecast-low,#7fd8d0),var(--color-forecast-mid,#c9b8f0),var(--color-forecast-high,#5b4fd6))}.ds-forecast-tick{position:absolute;top:-4px;bottom:-4px;width:2px;transform:translateX(-50%);background:var(--color-ink,#1b1547)}.ds-forecast-cap{margin:10px 0 0;font-size:15px;color:var(--color-muted,#4b5165);font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Word Marks",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature: word state by underline style; known none, learning dotted 2px, selected solid 3px over tint.",
+      "html": "<p class=\"ds-words\" lang=\"ja\"><span>今日</span>は<span class=\"ds-word-learning\">図書館</span>で<span class=\"ds-word-selected\">本</span>を読みました。</p>",
+      "css": ".ds-words{font-family:'Zen Kaku Gothic New','Hiragino Sans','Noto Sans JP',sans-serif;font-size:23px;line-height:2.3;color:var(--color-ink,#1b1547)}.ds-word-learning{text-decoration:underline dotted var(--color-accent,#6b5ce7) 2px;text-underline-offset:0.32em}.ds-word-selected{background:var(--color-tint,#efedfc);text-decoration:underline solid var(--color-accent,#6b5ce7) 3px;text-underline-offset:0.32em;border-radius:3px}"
+    },
+    {
+      "name": "Recommendation Card",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "12px hairline panel with a Japanese title, a forecast, and a hairline-ruled metadata list. No shadow.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-card-title\" lang=\"ja\">走れメロス</h3><p class=\"ds-card-num\">71%</p><dl class=\"ds-card-meta\"><dt>Format</dt><dd>Story · 12 min</dd><dt>Source</dt><dd>Aozora Bunko</dd></dl></article>",
+      "css": ".ds-card{display:flex;flex-direction:column;gap:20px;padding:20px;background:var(--color-ground,#fff);border:1px solid var(--color-hairline,#e6e7ee);border-radius:var(--radius-panel,12px);color:var(--color-ink,#1b1547);font-family:Figtree,system-ui,sans-serif}.ds-card-title{margin:0;font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;font-size:21px;line-height:1.4;font-weight:500}.ds-card-num{margin:0;font-size:44px;line-height:1;font-weight:500;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}.ds-card-meta{display:grid;grid-template-columns:72px 1fr;gap:6px 16px;margin:0;padding-top:16px;border-top:1px solid var(--color-hairline,#e6e7ee);font-size:15px}.ds-card-meta dt{color:var(--color-muted,#4b5165)}.ds-card-meta dd{margin:0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Civic Prospectus",
+    "overview": "A plain, trustworthy bureau document about one question: how much of this text will you understand? Everything on the page is ink on a white (or deep indigo) ground, ruled with 1px hairlines, set in a quiet humanist sans for English and Zen Kaku Gothic New for Japanese. The only place the page spends colour is the comprehension forecast: a large tabular percentage above an uncertainty band that runs teal to lilac to violet. Violet otherwise appears only where you can act.\n\nDensity is calm and editorial. The reading column is held to about 36 Japanese characters with generous line height so furigana has room above the line. Surfaces are flat and separated by hairlines rather than fills; a panel is a 12px-radius hairline box, never a card inside a card. Elevation is reserved for things that float over the text: the word popup, the floating action on phones, and the bottom sheet.\n\nDark is a token swap, never a component fork: the same world at night on a deep indigo ground (#14122b), reached by an explicit theme choice or by the system preference when no choice was made. The world refuses the JLPT-badge-on-a-card arrangement and the warm \"Japan app\" palette; the text's own level is stated in muted metadata, kept apart from the personal forecast.",
+    "keyCharacteristics": [
+      "Ink (never pure black) on white; deep indigo ground in dark.",
+      "Colour budget: the forecast gradient, plus the violet interactive accent.",
+      "1px hairlines as the main structural device; two radii only (8px controls, 12px panels).",
+      "Figtree 400/500 for UI, Zen Kaku Gothic New 400/500 for Japanese; no bold anywhere.",
+      "Word state carried by underline style (none, dotted, solid), not by hue.",
+      "One shadow token, used only on elements that float above the text."
+    ],
+    "rules": [
+      {
+        "name": "The Forecast Spends the Colour Rule",
+        "body": "The teal-lilac-violet gradient appears only inside the forecast band. If a surface has colour that is neither the forecast nor something you can act on, it is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Violet Rule",
+        "body": "Violet means \"interactive\" or \"your current state\". It is never decoration, never a heading colour, never a background panel.",
+        "section": "colors"
+      },
+      {
+        "name": "The Token Swap Rule",
+        "body": "Dark mode changes token values only. A component never branches on theme.",
+        "section": "colors"
+      },
+      {
+        "name": "The Medium Ceiling Rule",
+        "body": "Only weights 400 and 500 are loaded and used. Emphasis is 500 plus ink colour; nothing is bold.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Numbers Rule",
+        "body": "Every percentage, range and count is set with tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Only-What-Floats Rule",
+        "body": "A shadow means \"this sits above the text and will go away\". Cards, panels in the layout flow and the header never carry one.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep colour to the forecast gradient and the violet accent; everything else is ink, muted, faint and hairline.",
+      "Do state the text's own level (\"Text level N4\") as muted metadata, separate from the personal forecast.",
+      "Do mark word state with underline style (none, dotted 2px, solid 3px), so it survives colour-vision differences.",
+      "Do use 8px for controls and 12px for panels, with 1px hairline borders.",
+      "Do set every number tabular, and cap weight at 500.",
+      "Do define both a light and a dark value for any new colour token and swap them at the root.",
+      "Do honour reduced motion; all animation and transition collapses to near zero."
+    ],
+    "donts": [
+      "Don't put a JLPT badge on a card or tint a card by level.",
+      "Don't use warm \"Japan app\" palettes (reds, cream, terracotta) or pure black text.",
+      "Don't nest a card inside a card.",
+      "Don't use the forecast gradient anywhere outside the forecast band.",
+      "Don't add shadows to anything that sits in the layout flow.",
+      "Don't fork a component for dark mode."
+    ]
+  }
+}
