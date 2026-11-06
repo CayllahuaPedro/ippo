@@ -6,9 +6,9 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     anthropic_api_key: str = ""
-    # Sonnet handles short, level-pinned tutor answers well; the Opus tier is a
-    # setting away when a harder explanation is worth the cost.
-    tutor_model: str = "claude-sonnet-5"
+    # Haiku handles short, level-pinned tutor answers well at the lowest cost;
+    # Sonnet or Opus is a setting away when a harder explanation is worth it.
+    tutor_model: str = "claude-haiku-5-5"
     api_host: str = "0.0.0.0"
     api_port: int = 8000
     # Origins the browser app is served from. The LAN and Tailscale entries let

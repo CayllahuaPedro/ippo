@@ -55,10 +55,10 @@ async def test_the_configured_model_can_be_changed(monkeypatch):
     assert client.messages.captured["model"] == "claude-haiku-4-5"
 
 
-def test_defaults_to_sonnet():
+def test_defaults_to_haiku():
     from app.core.config import Settings
 
-    assert Settings().tutor_model == "claude-sonnet-5"
+    assert Settings().tutor_model == "claude-haiku-5-5"
 
 
 def test_system_prompt_states_the_learner_level():
