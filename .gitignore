@@ -55,3 +55,6 @@ out/
 .impeccable/mocks/
 .impeccable/questions/
 .impeccable/review/
+
+# Locally installed agent tooling
+.claude/
