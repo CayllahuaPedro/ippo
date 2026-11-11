@@ -4,7 +4,7 @@ import { ReaderSettingsProvider } from "@/features/reader";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Yabai — read Japanese at your level",
+  title: "Ippo — read Japanese at your level",
   description:
     "A reader that scores every text against the words you already know, so you always read at the edge of what you understand.",
 };

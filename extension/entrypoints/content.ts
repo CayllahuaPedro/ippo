@@ -51,7 +51,7 @@ export default defineContentScript({
         try {
           await parseTextNode(node, analyze);
         } catch (err) {
-          console.warn('[yabai-jp] nodo falló, se omite', err);
+          console.warn('[ippo] nodo falló, se omite', err);
         }
       }
     }
@@ -80,7 +80,7 @@ export default defineContentScript({
           parts,
         })) as LookupResult | ErrorResult;
         if (isErrorResult(res)) {
-          console.warn('[yabai-jp] lookup falló', res.error);
+          console.warn('[ippo] lookup falló', res.error);
           return;
         }
         getPopup().show(el.getBoundingClientRect(), {
@@ -92,7 +92,7 @@ export default defineContentScript({
           parts: res.parts,
         });
       } catch (err) {
-        console.warn('[yabai-jp] lookup falló', err);
+        console.warn('[ippo] lookup falló', err);
       }
     });
 

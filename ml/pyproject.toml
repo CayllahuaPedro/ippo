@@ -1,7 +1,7 @@
 [project]
-name = "nihon-ai-ml"
+name = "ippo-ml"
 version = "0.1.0"
-description = "Nihon AI — ML data ETL & research (weak-label vocab-difficulty; JLPT fine-tune on the roadmap)"
+description = "Ippo — ML data ETL & research (weak-label vocab-difficulty; JLPT fine-tune on the roadmap)"
 requires-python = ">=3.11"
 dependencies = [
     "fugashi[unidic-lite]>=1.3",

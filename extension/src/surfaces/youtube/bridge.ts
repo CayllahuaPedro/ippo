@@ -1,15 +1,15 @@
 import type { CaptionTrack } from './tracks';
 
-export const BRIDGE_SOURCE = 'yabai-jp';
+export const BRIDGE_SOURCE = 'ippo';
 
 export type ToIsolated =
-  | { source: 'yabai-jp'; type: 'timedtext-url'; videoId: string; url: string }
-  | { source: 'yabai-jp'; type: 'tracks'; videoId: string; tracks: CaptionTrack[]; isLive: boolean };
+  | { source: 'ippo'; type: 'timedtext-url'; videoId: string; url: string }
+  | { source: 'ippo'; type: 'tracks'; videoId: string; tracks: CaptionTrack[]; isLive: boolean };
 
 export type ToMain =
-  | { source: 'yabai-jp'; type: 'ensure-captions'; track: CaptionTrack }
-  | { source: 'yabai-jp'; type: 'restore-captions' }
-  | { source: 'yabai-jp'; type: 'request-state' };
+  | { source: 'ippo'; type: 'ensure-captions'; track: CaptionTrack }
+  | { source: 'ippo'; type: 'restore-captions' }
+  | { source: 'ippo'; type: 'request-state' };
 
 export function isBridgeMessage<T extends { source: string }>(data: unknown): data is T {
   return typeof data === 'object' && data !== null && (data as { source?: unknown }).source === BRIDGE_SOURCE;

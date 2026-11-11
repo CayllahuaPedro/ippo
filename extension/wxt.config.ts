@@ -10,7 +10,7 @@ export default defineConfig({
     },
   }),
   manifest: {
-    name: 'Yabai-JP',
+    name: 'Ippo for Chrome',
     description: 'Japanese furigana, pitch accent colouring and dictionary — fully offline',
     permissions: ['activeTab', 'storage'],
     host_permissions: ['*://www.youtube.com/*'],

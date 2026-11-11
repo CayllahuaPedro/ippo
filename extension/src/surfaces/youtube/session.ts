@@ -25,7 +25,7 @@ const RETRY_DELAY_MS = 2000;
 const TEMPLATE_TIMEOUT_MS = 5000;
 const MAX_RETRIES = 3;
 
-const warn = (message: string, ...details: unknown[]) => console.warn(`[yabai-jp] ${message}`, ...details);
+const warn = (message: string, ...details: unknown[]) => console.warn(`[ippo] ${message}`, ...details);
 
 function guard(label: string, action: () => void): boolean {
   try {

@@ -1,10 +1,12 @@
-# 🇯🇵 Nihon AI
+# 🇯🇵 Ippo
 
 **Comprehensible-input Japanese learning that models _you_, not just the text.**
 
+_Ippo_ (一歩) means "one step": every text one step past what you already know.
+
 > Every Japanese learning tool treats difficulty as a property of the text — "this article is N3."
 > It isn't. Difficulty is a function of **the learner × the text**.
-> Nihon AI models the learner first, then uses that model to decide what you read, what is worth
+> Ippo models the learner first, then uses that model to decide what you read, what is worth
 > mining, and how the AI tutor explains things to you.
 
 [![CI](https://github.com/CayllahuaPedro/nihon_ai/actions/workflows/ci.yml/badge.svg)](https://github.com/CayllahuaPedro/nihon_ai/actions/workflows/ci.yml)
@@ -28,6 +30,7 @@ routes are not.
 | Vocabulary-difficulty estimator — weak supervision + abstention | **Working** (Phase 0, CPU-only) |
 | Reader UI — tokenization, furigana modes, word states, popups | **Working** (fixture passage) |
 | Discover UI — shelves, comprehension dial | **Working** (fixture data) |
+| Ippo for Chrome — furigana, pitch-accent colouring, YouTube dual subtitles | **Working** (offline, see [extension/](extension/README.md)) |
 | `POST /classify` | **Stub** — returns `{"detail": "not implemented"}` |
 | `GET /mining/queue` | **Stub** |
 | `GET /progress` | **Stub** |
@@ -36,7 +39,8 @@ routes are not.
 | Fine-tuned JLPT BERT | Roadmap — see [Roadmap](#roadmap) |
 | CI, Docker, deployment | **Not set up** |
 
-144 tests pass across the three units (`53` backend, `25` ML, `66` frontend).
+144 tests pass across the three app units (`53` backend, `25` ML, `66` frontend), and the
+Chrome extension adds `240` more.
 
 ---
 
@@ -115,8 +119,9 @@ because a demo that quietly lies about being live is the worst possible failure 
 
 ## Architecture
 
-Three independently runnable units. Only the tutor crosses a process boundary today; the rest is
-either stubbed or fixture-driven, and the diagram says which.
+Four independently runnable units. Only the tutor crosses a process boundary today; the rest is
+either stubbed or fixture-driven, and the diagram says which. The Chrome extension is fully
+offline and does not talk to the backend yet.
 
 ```
 frontend (Next.js 15)
@@ -134,6 +139,9 @@ ml (offline, CPU-only)
   fetch JLPT lists ──► tokenize ──► weak-label (OOV gate + length gate + ABSTAIN)
                                         │
                                         └──► spot-check: blind label ──► score
+
+extension (Chrome MV3, offline)
+  web text · YouTube dual subs ──► tokenize ──► JMdict lookup ──► pitch ──► furigana
 ```
 
 `backend/app/db/` and `CHROMA_PATH` exist as wiring for the learner model and retrieval; nothing
@@ -184,12 +192,21 @@ To point the tutor at the backend, add `frontend/.env.local`:
 NEXT_PUBLIC_TUTOR_API=http://localhost:8000
 ```
 
+### Chrome extension
+
+```bash
+cd extension
+npm install
+npm run build                 # load extension/.output/chrome-mv3 as an unpacked extension
+```
+
 ### Tests
 
 ```bash
 cd backend  && .venv/bin/python -m pytest      # 53 tests
 cd ml       && .venv/bin/python -m pytest      # 25 tests
 cd frontend && npm run check                   # typecheck + arch lint + 66 tests
+cd extension && npm test                       # 240 tests
 ```
 
 ---
@@ -229,7 +246,7 @@ Not built. Listed so the gap between this repo and the product is explicit.
 
 I've spent ~5 years learning Japanese through comprehensible input. The tools exist — Migaku,
 Anki, Yomitan — but they all hand the hard decisions back to the learner: _what's at my level?
-what's worth studying? what does this actually mean, in words I already know?_ Nihon AI is me
+what's worth studying? what does this actually mean, in words I already know?_ Ippo is me
 handing that problem to a model — the same problem I had myself.
 
 ---

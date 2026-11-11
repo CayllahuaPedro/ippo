@@ -38,7 +38,7 @@ const CAPTION_STORAGE_KEYS = [
   'yt-player-caption-language-preferences',
 ];
 
-const warn = (message: string, ...details: unknown[]) => console.warn(`[yabai-jp] ${message}`, ...details);
+const warn = (message: string, ...details: unknown[]) => console.warn(`[ippo] ${message}`, ...details);
 
 function guard<T>(label: string, action: () => T): T | undefined {
   try {

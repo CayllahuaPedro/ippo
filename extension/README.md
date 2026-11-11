@@ -1,4 +1,4 @@
-# Yabai-JP
+# Ippo for Chrome
 
 A Chrome extension for learning Japanese from real content:
 

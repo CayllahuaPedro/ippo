@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ToIsolated } from '../src/surfaces/youtube/bridge';
 import { MainWorldAgent, hookTimedtext, type YoutubePlayer } from '../src/surfaces/youtube/mainWorld';
 
-const msg = <T extends object>(body: T) => ({ source: 'yabai-jp' as const, ...body });
+const msg = <T extends object>(body: T) => ({ source: 'ippo' as const, ...body });
 
 describe('hookTimedtext', () => {
   function fakeTarget() {
@@ -61,7 +61,7 @@ describe('hookTimedtext', () => {
 
     expect(fetch).toHaveBeenCalledOnce();
     expect(open).toHaveBeenCalledOnce();
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('[yabai-jp]'), expect.any(Error));
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('[ippo]'), expect.any(Error));
     warn.mockRestore();
   });
 });
@@ -177,7 +177,7 @@ describe('MainWorldAgent', () => {
     t.serveResponseFor('v2');
     vi.advanceTimersByTime(1000);
     expect(t.posted).toEqual([]);
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('[yabai-jp]'));
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('[ippo]'));
   });
 
   it('waits for a player that is not ready yet', () => {
@@ -314,7 +314,7 @@ describe('MainWorldAgent', () => {
 
     t.setPlayer(null);
     expect(() => t.agent.onMessage(msg({ type: 'ensure-captions', track: JA }))).not.toThrow();
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('[yabai-jp]'), expect.anything());
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('[ippo]'), expect.anything());
   });
 
   describe('caption preferences in storage', () => {
@@ -451,7 +451,7 @@ describe('MainWorldAgent', () => {
       expect(() => t.agent.onPageHide()).not.toThrow();
       expect(() => t.agent.onMessage(msg({ type: 'restore-captions' }))).not.toThrow();
       expect(t.player.unloadModule).toHaveBeenCalledWith('captions');
-      expect(warn).toHaveBeenCalledWith(expect.stringContaining('[yabai-jp]'), expect.anything());
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining('[ippo]'), expect.anything());
     });
   });
 });

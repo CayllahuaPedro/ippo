@@ -27,7 +27,7 @@ export default defineBackground(() => {
     (posTagsPromise ??= fetch(browser.runtime.getURL('/dict/pos-tags.json'))
       .then((res) => res.json() as Promise<PosTagMap>)
       .catch((err) => {
-        console.warn('[yabai-jp] pos-tags.json no disponible; sigue sin descripciones', err);
+        console.warn('[ippo] pos-tags.json no disponible; sigue sin descripciones', err);
         return {};
       }));
 
@@ -36,7 +36,7 @@ export default defineBackground(() => {
       .then((db) => handleBackgroundMessage(db, msg, loadAssets, loadPosTags))
       .then(sendResponse)
       .catch((err) => {
-        console.error('[yabai-jp] background error', err);
+        console.error('[ippo] background error', err);
         sendResponse({ error: String(err) });
       });
     return true;

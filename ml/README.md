@@ -1,4 +1,4 @@
-# Nihon AI — ML
+# Ippo — ML
 
 The vocabulary-difficulty estimator: data ETL, the weak-labeling function, and the Phase 0
 evaluation gate. Separate from `backend/` because research has a different lifecycle than serving.

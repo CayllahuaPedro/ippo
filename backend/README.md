@@ -1,4 +1,4 @@
-# Nihon AI — Backend
+# Ippo — Backend
 
 FastAPI service: a level-aware tutor streamed over SSE, plus stubs for the routes that would
 carry the classifier, mining and progress. Only `/tutor` and `/health` do anything today.

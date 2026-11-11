@@ -1838,7 +1838,7 @@ wheels = [
 ]
 
 [[package]]
-name = "nihon-ai-backend"
+name = "ippo-backend"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

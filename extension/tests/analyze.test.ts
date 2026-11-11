@@ -71,7 +71,7 @@ describe('analyzeText', () => {
       }),
     );
     expect(warn).toHaveBeenCalledTimes(1);
-    expect(warn).toHaveBeenCalledWith('[yabai-jp] compound lookup failed, annotating unmerged', error);
+    expect(warn).toHaveBeenCalledWith('[ippo] compound lookup failed, annotating unmerged', error);
     expect(annotated[0].map((t) => t.surface)).toEqual(['食肉', '目', 'の']);
     expect(out.map((t) => t.surface)).toEqual(['食肉', '目', 'の']);
   });

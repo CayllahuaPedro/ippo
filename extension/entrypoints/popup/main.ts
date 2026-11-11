@@ -23,7 +23,7 @@ function setStatus(state: StatusState, text: string): void {
 }
 
 function fail(text: string, detail: unknown): void {
-  console.error('[yabai-jp]', detail);
+  console.error('[ippo]', detail);
   setStatus('error', text);
 }
 

@@ -28,7 +28,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <span className="flex h-[34px] w-[34px] flex-none items-center justify-center rounded-full bg-[var(--color-voice)] font-heading text-[17px] text-[var(--color-voice-contrast)]">
             読
           </span>
-          <span className="font-heading text-[19px] text-[var(--color-ink)]">Yabai</span>
+          <span className="font-heading text-[19px] text-[var(--color-ink)]">Ippo</span>
         </Link>
 
         <nav aria-label="Sections" className="ml-2.5 hidden gap-1 lg:flex">

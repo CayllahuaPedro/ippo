@@ -1,4 +1,4 @@
-# Nihon AI — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,7 +18,7 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
     ]
     chroma_path: str = ".chroma"
-    database_url: str = "sqlite:///./nihon_ai.db"
+    database_url: str = "sqlite:///./ippo.db"
 
 
 settings = Settings()

@@ -1,4 +1,4 @@
-# Nihon AI — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
 import json
 
 import pytest
