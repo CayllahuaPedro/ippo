@@ -47,16 +47,14 @@ Both are wired in configuration and read by nothing.
 
 - **SQLite** — `DATABASE_URL` is a setting; `app/db/__init__.py` is empty. Planned home for the
   learner model (known-set), reading history and progress.
-- **ChromaDB** — `CHROMA_PATH` is a setting and `chromadb` is a declared dependency; there is no
-  retrieval code. Planned home for `multilingual-e5` sentence embeddings.
+- **ChromaDB** — `CHROMA_PATH` is a setting; there is no retrieval code and `chromadb` is not a
+  dependency yet. Planned home for `multilingual-e5` sentence embeddings.
 
-## Declared dependencies that nothing imports
+## Dependencies
 
-`backend/pyproject.toml` lists `chromadb`, `transformers`, `torch`, `fugashi` and `sqlalchemy`.
-No module under `backend/app/` imports any of them. They are there for the roadmap, and they are
-the main reason a clean install of the backend is slow. Trimming them to what the code actually
-imports — `fastapi`, `uvicorn`, `pydantic`, `pydantic-settings`, `anthropic` — is a pending
-cleanup, not a design decision.
+`backend/pyproject.toml` declares only what `backend/app/` imports: `fastapi`, `uvicorn`,
+`pydantic`, `pydantic-settings` and `anthropic`. Roadmap libraries (`chromadb`, `sqlalchemy`, a
+tokenizer, a model runtime) get added in the same change as the code that imports them.
 
 ## Deployment
 
