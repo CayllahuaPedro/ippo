@@ -21,6 +21,7 @@ jobs:
       frontend: ${{ steps.filter.outputs.frontend }}
       backend: ${{ steps.filter.outputs.backend }}
       ml: ${{ steps.filter.outputs.ml }}
+      extension: ${{ steps.filter.outputs.extension }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -35,6 +36,9 @@ jobs:
               - '.github/workflows/ci.yml'
             ml:
               - 'ml/**'
+              - '.github/workflows/ci.yml'
+            extension:
+              - 'extension/**'
               - '.github/workflows/ci.yml'
 
   frontend:
@@ -54,6 +58,24 @@ jobs:
       - run: npm ci
       - name: Typecheck, architecture rules, tests
         run: npm run check
+      - run: npm run build
+
+  extension:
+    needs: changes
+    if: needs.changes.outputs.extension == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extension
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: extension/package-lock.json
+      - run: npm ci
+      - run: npm test
       - run: npm run build
 
   backend:
