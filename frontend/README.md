@@ -1,4 +1,4 @@
-# Nihon AI — Frontend
+# Ippo — Frontend
 
 Next.js 15 (App Router) + TypeScript + Tailwind v4. Runs on its own; not deployed — there is no
 deploy configuration in the repo.

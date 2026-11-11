@@ -115,7 +115,7 @@ describe('WordLookup', () => {
     wl.close();
     await flush();
     await flush();
-    expect(warn).toHaveBeenCalledWith('[yabai-jp] resume failed', error);
+    expect(warn).toHaveBeenCalledWith('[ippo] resume failed', error);
     warn.mockRestore();
   });
 
@@ -234,7 +234,7 @@ describe('WordLookup', () => {
     const { video, wl, shown } = setup({ lookup: async () => Promise.reject(new Error('boom')) });
     await wl.open(word('猫'), anchor);
     expect(shown()).toBeNull();
-    expect(warn).toHaveBeenCalledWith('[yabai-jp] lookup failed', expect.any(Error));
+    expect(warn).toHaveBeenCalledWith('[ippo] lookup failed', expect.any(Error));
     await flush();
     expect(video.play).toHaveBeenCalledTimes(1);
     warn.mockRestore();

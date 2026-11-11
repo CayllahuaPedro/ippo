@@ -1,4 +1,4 @@
-# Nihon AI — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
 """Token-level streaming of an answer that is still being written."""
 
 import pytest

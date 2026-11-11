@@ -14,14 +14,14 @@ const json3 = (text: string) =>
 const cues = (text: string) => [{ start: 0, end: 1, text }];
 
 const tracksMsg = (videoId: string, tracks: CaptionTrack[], isLive = false): ToIsolated => ({
-  source: 'yabai-jp',
+  source: 'ippo',
   type: 'tracks',
   videoId,
   tracks,
   isLive,
 });
 const urlMsg = (videoId: string): ToIsolated => ({
-  source: 'yabai-jp',
+  source: 'ippo',
   type: 'timedtext-url',
   videoId,
   url: `https://www.youtube.com/api/timedtext?v=${videoId}&lang=ja&pot=TOKEN&fmt=srv3`,
@@ -79,23 +79,23 @@ beforeEach(() => {
   warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 });
 afterEach(() => warn.mockRestore());
-const warned = () => warn.mock.calls.some(([message]) => String(message).startsWith('[yabai-jp]'));
+const warned = () => warn.mock.calls.some(([message]) => String(message).startsWith('[ippo]'));
 
 describe('YoutubeSession', () => {
   it('asks main to ensure captions when tracks include Japanese', async () => {
     const { session, deps } = setup(BOTH);
     session.onNavigate('v1');
     await session.onMessage(tracksMsg('v1', [ja, en]));
-    expect(deps.send).toHaveBeenCalledWith({ source: 'yabai-jp', type: 'ensure-captions', track: ja });
+    expect(deps.send).toHaveBeenCalledWith({ source: 'ippo', type: 'ensure-captions', track: ja });
   });
 
   it('sends request-state when it starts tracking a video', () => {
     const { session, deps } = setup();
     session.onNavigate('v1');
-    expect(deps.send).toHaveBeenCalledWith({ source: 'yabai-jp', type: 'request-state' });
+    expect(deps.send).toHaveBeenCalledWith({ source: 'ippo', type: 'request-state' });
     deps.send.mockClear();
     session.onNavigate(null);
-    expect(deps.send).not.toHaveBeenCalledWith({ source: 'yabai-jp', type: 'request-state' });
+    expect(deps.send).not.toHaveBeenCalledWith({ source: 'ippo', type: 'request-state' });
   });
 
   it('attaches Japanese + human native cues once tracks and template are known', async () => {
@@ -354,7 +354,7 @@ describe('YoutubeSession', () => {
     session.onNavigate('v1');
     expect(deps.send).not.toHaveBeenCalled();
     await session.onSettings(ON);
-    expect(deps.send).toHaveBeenCalledWith({ source: 'yabai-jp', type: 'request-state' });
+    expect(deps.send).toHaveBeenCalledWith({ source: 'ippo', type: 'request-state' });
     await session.onMessage(urlMsg('v1'));
     await session.onMessage(tracksMsg('v1', [ja, en]));
     expect(deps.attach).toHaveBeenCalledWith(overlays[0], cues('こんにちは'), cues('Hello'));

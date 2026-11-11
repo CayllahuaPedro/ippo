@@ -68,7 +68,7 @@ export class WordLookup {
       );
     } catch (err) {
       if (id !== this.requestId) return;
-      console.warn('[yabai-jp] lookup failed', err);
+      console.warn('[ippo] lookup failed', err);
       this.close();
     }
   }
@@ -83,7 +83,7 @@ export class WordLookup {
     this.resumeTimer = setTimeout(() => {
       this.resumeTimer = undefined;
       if (!this.deps.video.paused) return;
-      Promise.resolve(this.deps.video.play()).catch((error) => console.warn('[yabai-jp] resume failed', error));
+      Promise.resolve(this.deps.video.play()).catch((error) => console.warn('[ippo] resume failed', error));
     }, 0);
   }
 

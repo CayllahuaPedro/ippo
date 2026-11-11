@@ -1,4 +1,4 @@
-# Nihon AI — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
 """The contract the model's output is held to.
 
 Claude is asked for these shapes and usually obliges, but "usually" is not a

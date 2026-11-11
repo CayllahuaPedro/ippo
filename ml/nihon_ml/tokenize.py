@@ -1,4 +1,4 @@
-"""Shared tokenization identity for Nihon AI (spec §3).
+"""Shared tokenization identity for Ippo (spec §3).
 
 One canonical key per content item — `item_key(node) -> "lemma|reading|POS"` over fugashi +
 UniDic — plus a three-way frame bucket used by the OOV gate. Every module derives identity here;

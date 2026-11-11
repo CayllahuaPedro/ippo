@@ -50,7 +50,7 @@ async function initialSettings(): Promise<Settings> {
   try {
     return await getSettings();
   } catch (error) {
-    console.warn('[yabai-jp] could not read settings, using defaults', error);
+    console.warn('[ippo] could not read settings, using defaults', error);
     return DEFAULT_SETTINGS;
   }
 }
@@ -99,11 +99,11 @@ export default defineContentScript({
 
     ctx.addEventListener(window, 'message', (event) => {
       if (event.source !== window || !isToIsolated(event.data)) return;
-      session.onMessage(event.data).catch((error) => console.warn('[yabai-jp] bridge message failed', error));
+      session.onMessage(event.data).catch((error) => console.warn('[ippo] bridge message failed', error));
     });
     const unwatchSettings = watchSettings((settings) => {
       currentSettings = settings;
-      session.onSettings(settings).catch((error) => console.warn('[yabai-jp] settings update failed', error));
+      session.onSettings(settings).catch((error) => console.warn('[ippo] settings update failed', error));
     });
     const navigate = () => session.onNavigate(watchVideoId(location.href));
     ctx.addEventListener(document, 'yt-navigate-start', () => session.onNavigate(null));

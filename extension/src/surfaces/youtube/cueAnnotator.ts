@@ -84,7 +84,7 @@ export class CueAnnotator implements LineTokens {
   private warnOnce(error: unknown): void {
     if (this.warned) return;
     this.warned = true;
-    console.warn('[yabai-jp] subtitle annotation failed', error);
+    console.warn('[ippo] subtitle annotation failed', error);
   }
 }
 
@@ -100,7 +100,7 @@ export function createEngineReady(
         await initTokenizer();
         return true;
       } catch (error) {
-        console.warn('[yabai-jp] engine unavailable, subtitles stay plain', error);
+        console.warn('[ippo] engine unavailable, subtitles stay plain', error);
         return false;
       }
     })();

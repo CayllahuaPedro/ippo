@@ -10,7 +10,7 @@ import {
 
 describe('isBridgeMessage', () => {
   it('accepts only messages tagged with our source', () => {
-    expect(isBridgeMessage({ source: 'yabai-jp', type: 'tracks' })).toBe(true);
+    expect(isBridgeMessage({ source: 'ippo', type: 'tracks' })).toBe(true);
     expect(isBridgeMessage({ source: 'other' })).toBe(false);
     expect(isBridgeMessage('x')).toBe(false);
     expect(isBridgeMessage(null)).toBe(false);
@@ -22,12 +22,12 @@ describe('isToMain / isToIsolated', () => {
     const toMain = [{ type: 'ensure-captions', track: { languageCode: 'ja' } }, { type: 'restore-captions' }, { type: 'request-state' }];
     const toIsolated = [{ type: 'timedtext-url', videoId: 'a', url: '/api/timedtext' }, { type: 'tracks', videoId: 'a', tracks: [], isLive: false }];
     for (const body of toMain) {
-      expect(isToMain({ source: 'yabai-jp', ...body })).toBe(true);
-      expect(isToIsolated({ source: 'yabai-jp', ...body })).toBe(false);
+      expect(isToMain({ source: 'ippo', ...body })).toBe(true);
+      expect(isToIsolated({ source: 'ippo', ...body })).toBe(false);
     }
     for (const body of toIsolated) {
-      expect(isToIsolated({ source: 'yabai-jp', ...body })).toBe(true);
-      expect(isToMain({ source: 'yabai-jp', ...body })).toBe(false);
+      expect(isToIsolated({ source: 'ippo', ...body })).toBe(true);
+      expect(isToMain({ source: 'ippo', ...body })).toBe(false);
     }
     expect(isToMain({ source: 'other', type: 'request-state' })).toBe(false);
     expect(isToIsolated({ source: 'other', type: 'tracks' })).toBe(false);

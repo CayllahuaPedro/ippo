@@ -1,4 +1,4 @@
-# Nihon AI — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
 """Turns a learner's question into a stream of answer-block events.
 
 The model is asked for JSON Lines — one object per line, one line per block.

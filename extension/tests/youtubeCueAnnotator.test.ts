@@ -130,7 +130,7 @@ describe('CueAnnotator', () => {
     expect(annotator.get('c')).not.toBeNull();
     expect(annotator.get('d')).toBeNull();
     expect(warn).toHaveBeenCalledTimes(1);
-    expect(warn.mock.calls[0][0]).toContain('[yabai-jp]');
+    expect(warn.mock.calls[0][0]).toContain('[ippo]');
   });
 
   it('dispose stops processing and notifications', async () => {
@@ -170,7 +170,7 @@ describe('createEngineReady', () => {
     expect(ensureImported).toHaveBeenCalledTimes(1);
     expect(initTokenizer).not.toHaveBeenCalled();
     expect(warn).toHaveBeenCalledTimes(1);
-    expect(warn.mock.calls[0][0]).toContain('[yabai-jp]');
+    expect(warn.mock.calls[0][0]).toContain('[ippo]');
   });
 
   it('resolves true after importing then initialising the tokenizer', async () => {

@@ -18,7 +18,7 @@ async function findCompoundsSafely(
   try {
     return await deps.findCompounds(candidates);
   } catch (error) {
-    console.warn('[yabai-jp] compound lookup failed, annotating unmerged', error);
+    console.warn('[ippo] compound lookup failed, annotating unmerged', error);
     return {};
   }
 }
