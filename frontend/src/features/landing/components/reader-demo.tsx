@@ -12,7 +12,7 @@ import { DemoPopup } from "./demo-popup";
 type ReaderDemoProps = { locale: Locale; copy: LandingCopy["demo"] };
 
 export function ReaderDemo({ locale, copy }: ReaderDemoProps) {
-  const { paragraphs, pick, select, close, mark, percent } = useReaderDemo();
+  const { paragraphs, pick, state, select, close, mark, percent } = useReaderDemo();
   const paneRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ left: 0, top: 0 });
 
@@ -24,7 +24,6 @@ export function ReaderDemo({ locale, copy }: ReaderDemoProps) {
 
   const entryId = pick?.token.entryId;
   const entry = entryId ? demoGlossary[entryId] : null;
-  const state = pick?.token.state === "learning" ? "learning" : "known";
 
   return (
     <div
@@ -46,11 +45,7 @@ export function ReaderDemo({ locale, copy }: ReaderDemoProps) {
           onSelect={select}
         />
       </div>
-      <p className="m-0 mt-4 text-[14px] text-muted">{copy.hint}</p>
-      <div className="mt-4">
-        <DemoLegend copy={copy} />
-      </div>
-      {entry && (
+      {entry && state && (
         <DemoPopup
           entry={entry}
           state={state}
@@ -61,6 +56,10 @@ export function ReaderDemo({ locale, copy }: ReaderDemoProps) {
           onClose={close}
         />
       )}
+      <p className="m-0 mt-4 text-[14px] text-muted">{copy.hint}</p>
+      <div className="mt-4">
+        <DemoLegend copy={copy} />
+      </div>
     </div>
   );
 }

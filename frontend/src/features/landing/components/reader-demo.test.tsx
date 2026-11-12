@@ -17,7 +17,20 @@ describe("ReaderDemo", () => {
     const word = setup();
     await user.click(word);
     await user.click(screen.getByRole("button", { name: demo.markKnown }));
-    expect(document.body.textContent).toContain("64%");
+    expect(document.querySelector("[aria-live]")?.textContent).toContain("64%");
+  });
+
+  it("reflects the new mark in the popup buttons", async () => {
+    const user = userEvent.setup();
+    const word = setup();
+    await user.click(word);
+    await user.click(screen.getByRole("button", { name: demo.markKnown }));
+    expect(
+      screen.getByRole("button", { name: demo.markKnown }).getAttribute("aria-pressed"),
+    ).toBe("true");
+    expect(
+      screen.getByRole("button", { name: demo.markLearning }).getAttribute("aria-pressed"),
+    ).toBe("false");
   });
 
   it("returns focus to the word on Escape", async () => {

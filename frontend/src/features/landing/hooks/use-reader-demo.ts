@@ -9,16 +9,24 @@ export function useReaderDemo() {
 
   const percent = useMemo(() => comprehension(paragraphs), [paragraphs]);
 
+  const entryId = pick?.token.entryId;
+  const state = useMemo<"known" | "learning" | null>(() => {
+    if (!entryId) return null;
+    const live = paragraphs
+      .flatMap((paragraph) => paragraph.tokens)
+      .find((token) => token.entryId === entryId);
+    return live?.state === "learning" ? "learning" : "known";
+  }, [paragraphs, entryId]);
+
   const close = useCallback(() => setPick(null), []);
 
   const mark = useCallback(
-    (state: "known" | "learning") => {
-      const entryId = pick?.token.entryId;
+    (next: "known" | "learning") => {
       if (!entryId) return;
-      setParagraphs((current) => setWordState(current, entryId, state));
+      setParagraphs((current) => setWordState(current, entryId, next));
     },
-    [pick],
+    [entryId],
   );
 
-  return { paragraphs, pick, select: setPick, close, mark, percent };
+  return { paragraphs, pick, state, select: setPick, close, mark, percent };
 }
