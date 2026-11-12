@@ -14,6 +14,7 @@ const en: LandingCopy = {
     lede: "Ippo forecasts how much of every text you'll understand, so each thing you read is one step past your level.",
   },
   waitlist: {
+    label: "Email",
     placeholder: "you@example.com",
     button: "Join the waitlist",
     finePrint: "One email when it opens. Nothing else.",
@@ -79,7 +80,7 @@ const en: LandingCopy = {
   },
   closing: { title: "Take the first step." },
   footer: { openSource: "open source (AGPL)", repoUrl },
-  switcher: { label: "Language" },
+  switcher: { label: "Language", footerLabel: "Footer language" },
 };
 
 const es: LandingCopy = {
@@ -94,6 +95,7 @@ const es: LandingCopy = {
     lede: "Ippo calcula cuánto entenderás de cada texto, para que todo lo que leas esté un paso por encima de tu nivel.",
   },
   waitlist: {
+    label: "Correo electrónico",
     placeholder: "tu@correo.com",
     button: "Unirme a la lista de espera",
     finePrint: "Un correo cuando abra. Nada más.",
@@ -159,7 +161,7 @@ const es: LandingCopy = {
   },
   closing: { title: "Da el primer paso." },
   footer: { openSource: "código abierto (AGPL)", repoUrl },
-  switcher: { label: "Idioma" },
+  switcher: { label: "Idioma", footerLabel: "Idioma del pie de página" },
 };
 
 export const copy: Record<Locale, LandingCopy> = { en, es };

@@ -4,6 +4,7 @@ export type LandingCopy = {
   meta: { title: string; description: string };
   hero: { eyebrow: string; title: string; lede: string };
   waitlist: {
+    label: string;
     placeholder: string;
     button: string;
     finePrint: string;
@@ -46,7 +47,7 @@ export type LandingCopy = {
   };
   closing: { title: string };
   footer: { openSource: string; repoUrl: string };
-  switcher: { label: string };
+  switcher: { label: string; footerLabel: string };
 };
 
 export type LandingMetadata = {

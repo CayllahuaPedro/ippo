@@ -12,7 +12,7 @@ export function LandingFooter({ locale, copy }: LandingFooterProps) {
           {copy.footer.openSource}
         </a>
       </p>
-      <LanguageSwitcher locale={locale} label={copy.switcher.label} />
+      <LanguageSwitcher locale={locale} label={copy.switcher.footerLabel} />
     </footer>
   );
 }

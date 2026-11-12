@@ -1,11 +1,13 @@
 "use client";
 
+import { useId } from "react";
 import { useWaitlistForm } from "../hooks/use-waitlist-form";
 import type { LandingCopy, Locale } from "../types";
 
 type Props = { locale: Locale; copy: LandingCopy["waitlist"] };
 
 export function WaitlistForm({ locale, copy }: Props) {
+  const inputId = useId();
   const { email, setEmail, status, submit } = useWaitlistForm(locale);
   const message = {
     invalid: copy.invalid,
@@ -24,10 +26,13 @@ export function WaitlistForm({ locale, copy }: Props) {
       className="flex flex-col gap-3"
     >
       <div className="flex flex-col gap-2 sm:flex-row">
+        <label htmlFor={inputId} className="sr-only">
+          {copy.label}
+        </label>
         <input
           type="email"
           autoComplete="email"
-          aria-label={copy.placeholder}
+          id={inputId}
           placeholder={copy.placeholder}
           value={email}
           onChange={(event) => setEmail(event.target.value)}

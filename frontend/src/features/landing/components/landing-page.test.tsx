@@ -23,6 +23,12 @@ describe("LandingPage", () => {
     expect(screen.getAllByTestId("waitlist-form")).toHaveLength(2);
   });
 
+  it("gives the header and footer navigation distinct names", () => {
+    render(<LandingPage locale="es" />);
+    const names = screen.getAllByRole("navigation").map((nav) => nav.getAttribute("aria-label"));
+    expect(new Set(names).size).toBe(names.length);
+  });
+
   it("links the footer to the repository", () => {
     render(<LandingPage locale="es" />);
     const link = screen.getByRole("link", { name: es.footer.openSource });
