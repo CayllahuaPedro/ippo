@@ -11,8 +11,14 @@ body {
   font: 400 14px/1.5 var(--mjp-font-body);
 }
 .panel { display: flex; flex-direction: column; padding: 20px 20px 16px; }
-.brand { margin: 0 0 18px; line-height: 0; }
-.brand img { height: 36px; }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  font: 700 22px/1 var(--mjp-font-display);
+}
+.brand img { height: 28px; }
 button {
   border: 0;
   color: var(--mjp-text);
