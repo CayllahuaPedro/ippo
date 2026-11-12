@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IppoMark } from "@/components/ui/ippo-mark";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/cn";
 import { learner } from "@/lib/fixtures";
@@ -28,8 +29,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <Link
           href="/reader"
           aria-label="Ippo"
-          className="flex-none text-[19px] font-medium text-ink no-underline"
+          className="flex flex-none items-center gap-2 text-[19px] font-medium text-ink no-underline"
         >
+          <IppoMark className="size-6" />
           Ippo
         </Link>
 

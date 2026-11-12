@@ -27,13 +27,13 @@ mora count `M` of its reading:
 
 | Pattern   | Rule          | Colour              |
 |-----------|---------------|---------------------|
-| Heiban    | `N = 0`       | blue `#2b77c9`      |
-| Atamadaka | `N = 1`       | red `#d13b3b`       |
-| Nakadaka  | `1 < N < M`   | orange `#a86400`    |
-| Odaka     | `N = M`       | green `#23804a`     |
+| Heiban    | `N = 0`       | blue `#053fb3` (dark `#6f9bff`)   |
+| Atamadaka | `N = 1`       | brown-red `#87371d` (dark `#ff8a66`) |
+| Nakadaka  | `1 < N < M`   | ochre `#9f8504` (dark `#e0c040`)  |
+| Odaka     | `N = M`       | teal `#0c9780` (dark `#3fd0b0`)   |
 | Unknown   | no data       | inherits page colour |
 
-All four colours meet WCAG AA (4.5:1) against a white page.
+Each colour has a light and a dark value (following the system scheme) and meets 3:1 against white or the dark indigo ground; they stay distinguishable under protan, deutan and tritan simulation.
 
 Mora segmentation collapses youon (きゃ, しゅ, …) into a single mora, which is what makes
 `M` — and therefore the pattern — correct.
