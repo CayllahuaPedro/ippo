@@ -1,4 +1,4 @@
-# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Cayllahua. Licensed under AGPL-3.0.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 

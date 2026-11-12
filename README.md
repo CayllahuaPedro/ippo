@@ -257,4 +257,4 @@ handing that problem to a model — the same problem I had myself.
 AGPL-3.0 — see [LICENSE](LICENSE). You're free to use, study and modify this code, but any
 derivative — including a hosted/SaaS version — must be released under the same license.
 
-**Built by Pedro Villanueva** · ML Engineer
+**Built by Pedro Cayllahua** · ML Engineer

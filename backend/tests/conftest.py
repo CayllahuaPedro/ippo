@@ -1,4 +1,4 @@
-# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Cayllahua. Licensed under AGPL-3.0.
 """Test doubles for the Anthropic streaming client.
 
 The tutor talks to Claude through `client.messages.stream(...)`, an async

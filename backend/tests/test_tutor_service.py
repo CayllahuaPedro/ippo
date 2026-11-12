@@ -1,4 +1,4 @@
-# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Cayllahua. Licensed under AGPL-3.0.
 """What the tutor asks the model, and on whose behalf.
 
 Parsing of the answer lives in test_tutor_stream.py; the schema it is held to
