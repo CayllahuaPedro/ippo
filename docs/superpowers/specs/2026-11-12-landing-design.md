@@ -93,9 +93,8 @@ draft English; final EN and ES copy is written during the build and reviewed by 
    "Example: a learner around N4". These values are illustrative and labelled as such.
 4. **How Ippo helps.** Heading (draft): "Less hunting, more reading." Three columns, each a real
    product snippet (no icons) plus a heading and one sentence. Snippets are live, static
-   (non-interactive) renders of the real feature components fed by their existing fixtures,
-   not screenshots, so they follow dark mode for free. Product UI text inside a snippet stays
-   in English on `/es`, because the app itself is English-only today. The Chrome column shows
+   (non-interactive) renders of the real feature components fed by fixtures,
+   not screenshots, so they follow dark mode for free. Snippets render in the page's language: the shared components take optional labels (English by default) and the landing passes localized labels and fixture data. The Chrome column shows
    the reader's word popup over a plain simulated web page, since the extension's popup has no
    in-app component. If a component needs `ReaderSettingsProvider`, the marketing layout
    provides it too.
@@ -160,8 +159,8 @@ draft English; final EN and ES copy is written during the build and reviewed by 
 
 - The demo uses the real reader's marks and states (known / learning) instead of the mockup's
   known / learning / new.
-- Product snippets are live components from fixtures, not screenshots; their UI text stays in
-  English on `/es`.
+- Product snippets are live components from fixtures, not screenshots; they render in the page's language through optional labels and
+  localized fixtures.
 - In production, the waitlist stub refuses honestly ("The waitlist isn't open yet.") until
   storage exists.
 - Footer, structure and draft copy as listed above.
