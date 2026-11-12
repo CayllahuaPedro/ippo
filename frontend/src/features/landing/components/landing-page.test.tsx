@@ -86,3 +86,12 @@ describe("LandingPage snippets", () => {
     expect(text).toContain("Comfortable");
   });
 });
+
+describe("LandingPage wordmark", () => {
+  it("shows the decorative mark before the Ippo name in the header", () => {
+    render(<LandingPage locale="es" />);
+    const header = screen.getAllByRole("banner")[0];
+    expect(header.querySelector('svg[aria-hidden="true"]')).not.toBeNull();
+    expect(header.textContent).toContain("Ippo");
+  });
+});
