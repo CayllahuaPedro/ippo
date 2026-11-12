@@ -48,3 +48,14 @@ export type LandingCopy = {
   footer: { openSource: string; repoUrl: string };
   switcher: { label: string };
 };
+
+export type LandingMetadata = {
+  title: string;
+  description: string;
+  metadataBase: URL;
+  alternates: {
+    canonical: string;
+    languages: Record<"en" | "es" | "x-default", string>;
+  };
+  openGraph: { title: string; description: string; locale: string };
+};

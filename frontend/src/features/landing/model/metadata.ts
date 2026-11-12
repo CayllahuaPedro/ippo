@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
-
-import type { Locale } from "../types";
+import type { LandingMetadata, Locale } from "../types";
 import { copy } from "./copy";
 
 const openGraphLocale: Record<Locale, string> = {
@@ -8,7 +6,7 @@ const openGraphLocale: Record<Locale, string> = {
   es: "es_ES",
 };
 
-export function landingMetadata(locale: Locale): Metadata {
+export function landingMetadata(locale: Locale): LandingMetadata {
   const { title, description } = copy[locale].meta;
   return {
     title,

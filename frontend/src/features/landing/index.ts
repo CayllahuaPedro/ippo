@@ -2,4 +2,4 @@
 
 export { copy } from "./model/copy";
 export { landingMetadata } from "./model/metadata";
-export type { LandingCopy, Locale } from "./types";
+export type { LandingCopy, LandingMetadata, Locale } from "./types";
