@@ -1,4 +1,4 @@
-# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Cayllahua. Licensed under AGPL-3.0.
 """The schema the model's output is held to."""
 
 import pytest

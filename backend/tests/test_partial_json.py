@@ -1,4 +1,4 @@
-# Ippo — Copyright (C) 2026 Pedro Villanueva. Licensed under AGPL-3.0.
+# Ippo — Copyright (C) 2026 Pedro Cayllahua. Licensed under AGPL-3.0.
 """Decoding a JSON string value that has not finished arriving.
 
 This is the sharp edge of token streaming: the model's output can stop at any
