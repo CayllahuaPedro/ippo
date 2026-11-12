@@ -66,9 +66,9 @@ const PAGE_CSS = `
 .mjp-token:hover { text-decoration-color: currentColor; }
 ${PITCH_COLOR_CSS}
 .mjp-token rt {
-  font-family: 'Yabai Maru', sans-serif;
+  font-family: 'Ippo Zen Kaku Gothic New', 'Zen Kaku Gothic New', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
   font-size: 0.55em;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.02em;
   opacity: 0.85;
   user-select: none;

@@ -1,15 +1,16 @@
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 
 const OUT = 'public/fonts';
 const SOURCES = [
-  { pkg: 'zen-maru-gothic', family: 'Yabai Maru', files: ['japanese-500', 'japanese-700', 'latin-500', 'latin-700'] },
-  { pkg: 'inter', family: 'Yabai Inter', files: ['latin-400', 'latin-600'] },
+  { pkg: 'zen-kaku-gothic-new', family: 'Ippo Zen Kaku Gothic New', files: ['japanese-400', 'japanese-500', 'latin-400', 'latin-500'] },
+  { pkg: 'figtree', family: 'Ippo Figtree', files: ['latin-400', 'latin-500'] },
 ];
 
-if (!existsSync('node_modules/@fontsource/inter')) {
+if (!existsSync('node_modules/@fontsource/figtree')) {
   console.warn('fontsource packages not found; run npm install first');
   process.exit(0);
 }
+rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 const css = SOURCES.flatMap(({ pkg, family, files }) =>
