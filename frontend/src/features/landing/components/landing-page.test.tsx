@@ -68,14 +68,14 @@ describe("LandingPage snippets", () => {
       "Add to SRS",
       "Ask the tutor",
       "Comfortable",
-      "Format",
-      "Source",
-      "Notes",
       "new words",
       "adds direction",
       "you'll understand",
     ]) {
       expect(text, english).not.toContain(english);
+    }
+    for (const word of [/\bFormat\b/, /\bSource\b/, /\bNotes\b/]) {
+      expect(text, String(word)).not.toMatch(word);
     }
   });
 

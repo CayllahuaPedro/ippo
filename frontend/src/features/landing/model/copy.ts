@@ -172,7 +172,7 @@ const es: LandingCopy = {
       title: "Cómodos",
       band: "90%+ esperado",
       guidance: "lee por placer, casi sin buscar nada",
-      format: "Tipo",
+      format: "Formato",
       source: "Fuente",
       notes: "Notas",
       empty: "Nada de este tipo en este estante.",
