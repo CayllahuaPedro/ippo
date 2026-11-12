@@ -37,7 +37,8 @@ routes are not.
 | Retrieval / embeddings (ChromaDB) | **Not built** — no retrieval code |
 | Learner-model persistence (SQLite) | **Not built** — `DATABASE_URL` is wired, nothing reads it |
 | Fine-tuned JLPT BERT | Roadmap — see [Roadmap](#roadmap) |
-| CI, Docker, deployment | **Not set up** |
+| CI — GitHub Actions, per-unit jobs on pull requests and pushes to `main` | **Working** (see [`ci.yml`](.github/workflows/ci.yml)) |
+| Docker, deployment | **Not set up** |
 
 144 tests pass across the three app units (`53` backend, `25` ML, `66` frontend), and the
 Chrome extension adds `240` more.
@@ -108,8 +109,9 @@ against the learner model (`known` / `learning` / `selected`), and positions wor
 the viewport instead of the page. Display settings persist per learner.
 
 `frontend/src/features/{reader,tutor,discover}/` are self-contained features with an explicit
-public surface (`index.ts`) — and **`dependency-cruiser` enforces the boundaries** in CI-less
-form via `npm run check`. A feature cannot reach into another feature's internals and still pass.
+public surface (`index.ts`) — and **`dependency-cruiser` enforces the boundaries** through
+`npm run check`, which CI runs on every pull request that touches `frontend/`. A feature cannot
+reach into another feature's internals and still pass.
 
 The tutor UI talks to the real backend when `NEXT_PUBLIC_TUTOR_API` is set. Without it, it serves
 canned answers — **and says so on screen** (`tutor-panel.tsx:44`) rather than failing silently,
@@ -238,7 +240,6 @@ Not built. Listed so the gap between this repo and the product is explicit.
   dataset, to generalize past the lookup teacher.
 - **Grammar-point detector** — the second difficulty axis: which Genki/Bunpro points a sentence
   contains.
-- **CI** — pytest + `npm run check` on every push.
 
 ---
 
