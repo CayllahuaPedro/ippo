@@ -33,7 +33,7 @@ export function MethodSection({ copy }: MethodSectionProps) {
         </div>
         <div
           aria-hidden
-          className="h-2.5 rounded-[5px] bg-[linear-gradient(90deg,var(--color-forecast-low)_0_30%,var(--color-forecast-high)_30%_62%,var(--color-forecast-mid)_62%_100%)]"
+          className="h-2.5 rounded-[5px] bg-[linear-gradient(90deg,var(--color-forecast-low)_0_28%,var(--color-forecast-high)_28%_72%,var(--color-forecast-mid)_72%_100%)]"
         />
         <div className="mt-2.5 flex justify-between text-[14px] text-faint">
           <span>{copy.tooEasy}</span>
