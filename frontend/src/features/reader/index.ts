@@ -1,10 +1,21 @@
 /** Public surface of the reader feature. */
 
 export { DisplaySettings } from "./components/display-settings";
-export { PassageText, type TokenPick } from "./components/passage-text";
+export {
+  PassageText,
+  passageTextLabels,
+  type PassageTextLabels,
+  type TokenPick,
+} from "./components/passage-text";
 export { ReaderSettingsProvider } from "./components/reader-settings-provider";
-export { WordEntry, WordPopup } from "./components/word-popup";
+export {
+  WordEntry,
+  WordPopup,
+  wordEntryLabels,
+  type WordEntryLabels,
+} from "./components/word-popup";
 export { WordLegend } from "./components/word-legend";
+export { wordMark } from "./components/word-marks";
 export { type ReaderSettings, useReaderSettings } from "./hooks/use-reader-settings";
 export { POPUP_WIDTH, popupPosition } from "./model/popup-position";
 export { parseTokens } from "./model/tokenize";

@@ -20,11 +20,20 @@ export type TokenPick = {
   rect: DOMRect;
 };
 
+export type PassageTextLabels = {
+  lookUp: (word: string) => string;
+};
+
+export const passageTextLabels: PassageTextLabels = {
+  lookUp: (word) => `Look up ${word}`,
+};
+
 type PassageTextProps = {
   paragraphs: Paragraph[];
   mode: ReaderMode;
   selectedTokenId: string | null;
   onSelect: (pick: TokenPick) => void;
+  labels?: Partial<PassageTextLabels>;
 };
 
 export function PassageText({
@@ -32,7 +41,10 @@ export function PassageText({
   mode,
   selectedTokenId,
   onSelect,
+  labels,
 }: PassageTextProps) {
+  const text = { ...passageTextLabels, ...labels };
+
   return (
     <div lang="ja" className={cn("flex flex-col gap-[1.1em] font-jp", modeClass[mode])}>
       {paragraphs.map((paragraph) => (
@@ -46,6 +58,7 @@ export function PassageText({
                 token={token}
                 selected={key === selectedTokenId}
                 onSelect={onSelect}
+                lookUp={text.lookUp}
               />
             );
           })}
@@ -60,11 +73,13 @@ function TokenSpan({
   token,
   selected,
   onSelect,
+  lookUp,
 }: {
   tokenKey: string;
   token: Token;
   selected: boolean;
   onSelect: (pick: TokenPick) => void;
+  lookUp: PassageTextLabels["lookUp"];
 }) {
   const body = token.segments.map((segment, index) =>
     segment.reading ? (
@@ -95,7 +110,7 @@ function TokenSpan({
         })
       }
       aria-pressed={selected}
-      aria-label={`Look up ${plain}`}
+      aria-label={lookUp(plain)}
       className={cn(
         "cursor-pointer rounded-[3px] transition-colors hover:bg-tint",
         wordMark[state],

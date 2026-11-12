@@ -4,14 +4,37 @@ import { useEffect, useRef } from "react";
 import { IconClose } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 import { POPUP_WIDTH } from "../model/popup-position";
-import type { DictionaryEntry } from "../types";
+import type { DictionaryEntry, WordState } from "../types";
 import { wordMark } from "./word-marks";
+
+export type WordEntryLabels = {
+  derivation: string;
+  cardFront: string;
+  cardBack: string;
+  frequencyRank: string;
+  addToSrs: string;
+  inSrs: string;
+  askTutor: string;
+  states: Record<WordState, string>;
+};
+
+export const wordEntryLabels: WordEntryLabels = {
+  derivation: "From the form in the text to the dictionary form",
+  cardFront: "Card front",
+  cardBack: "back: gloss and this sentence",
+  frequencyRank: "frequency rank",
+  addToSrs: "Add to SRS",
+  inSrs: "In your SRS",
+  askTutor: "Ask the tutor",
+  states: { known: "known", learning: "learning", selected: "selected" },
+};
 
 type WordEntryProps = {
   entry: DictionaryEntry;
   onAddToSrs: (entry: DictionaryEntry) => void;
   onAskTutor: (entry: DictionaryEntry) => void;
   added: boolean;
+  labels?: Partial<WordEntryLabels>;
 };
 
 /** The dictionary entry itself. It is placed by a popup beside the word on a
@@ -21,7 +44,10 @@ export function WordEntry({
   onAddToSrs,
   onAskTutor,
   added,
+  labels,
 }: WordEntryProps) {
+  const text = { ...wordEntryLabels, ...labels };
+
   return (
     <>
       <div className="pr-8">
@@ -33,7 +59,7 @@ export function WordEntry({
           <span aria-hidden>·</span>
           <span>{entry.pitchLabel}</span>
           <span aria-hidden>·</span>
-          <span className={cn("text-ink", wordMark[entry.state])}>{entry.state}</span>
+          <span className={cn("text-ink", wordMark[entry.state])}>{text.states[entry.state]}</span>
         </p>
       </div>
 
@@ -42,7 +68,7 @@ export function WordEntry({
       {entry.derivation.length > 1 ? (
         <ol
           lang="ja"
-          aria-label="From the form in the text to the dictionary form"
+          aria-label={text.derivation}
           className="m-0 flex list-none flex-wrap items-center gap-x-2 gap-y-1 p-0 font-jp text-[16px] text-muted"
         >
           {entry.derivation.map((step, index) => {
@@ -89,11 +115,11 @@ export function WordEntry({
 
       <div className="flex flex-col gap-3 border-t border-hairline pt-4">
         <p className="text-[14px] text-muted">
-          Card front{" "}
+          {text.cardFront}{" "}
           <span lang="ja" className="font-jp text-ink">
             {entry.lemma}
           </span>{" "}
-          · back: gloss and this sentence · frequency rank{" "}
+          · {text.cardBack} · {text.frequencyRank}{" "}
           <span className="tabular-nums">{entry.frequencyRank.toLocaleString()}</span>
         </p>
 
@@ -104,14 +130,14 @@ export function WordEntry({
             disabled={added}
             className="flex-1 cursor-pointer rounded-[var(--radius-control)] border border-accent bg-accent px-5 py-2.5 text-center text-[15px] whitespace-nowrap text-on-accent transition-colors hover:bg-accent-hover disabled:cursor-default disabled:border-hairline disabled:bg-wash disabled:text-muted"
           >
-            {added ? "In your SRS" : "Add to SRS"}
+            {added ? text.inSrs : text.addToSrs}
           </button>
           <button
             type="button"
             onClick={() => onAskTutor(entry)}
             className="cursor-pointer rounded-[var(--radius-control)] border border-accent bg-ground px-5 py-2.5 text-[15px] whitespace-nowrap text-accent transition-colors hover:bg-tint"
           >
-            Ask the tutor
+            {text.askTutor}
           </button>
         </div>
       </div>
