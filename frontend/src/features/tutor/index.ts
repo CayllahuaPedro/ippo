@@ -4,6 +4,7 @@
 export { TutorPanel } from "./components/tutor-panel";
 export { TutorRail } from "./components/tutor-rail";
 export { type TutorChat, useTutorChat } from "./hooks/use-tutor-chat";
+export { TutorTurn as TutorTurnView } from "./components/tutor-turn";
 export { tutorSource } from "./model/stream";
 export { tutorSuggestions, tutorThread } from "./fixtures";
 export type {
