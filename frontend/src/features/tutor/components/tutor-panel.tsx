@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/cn";
 import type { TutorChat } from "../hooks/use-tutor-chat";
 import { tutorSuggestions } from "../fixtures";
 import { tutorSource } from "../model/stream";
@@ -13,13 +14,15 @@ type TutorPanelProps = {
   className?: string;
 };
 
-export function TutorPanel({ chat, focusWord, className = "" }: TutorPanelProps) {
+export function TutorPanel({ chat, focusWord, className }: TutorPanelProps) {
   return (
-    <div className={`flex min-h-0 flex-1 flex-col gap-[18px] ${className}`}>
+    <div className={cn("flex min-h-0 flex-1 flex-col gap-5", className)}>
       {focusWord ? (
-        <p className="flex-none self-start rounded-full bg-[var(--color-inset)] px-3.5 py-1.5 text-[13px] text-[var(--color-muted)]">
+        <p className="flex-none border-b border-hairline pb-3 text-[15px] text-muted">
           Answering about{" "}
-          <span className="font-jp text-[15px] text-[var(--color-ink)]">{focusWord}</span>
+          <span lang="ja" className="font-jp text-[17px] text-ink">
+            {focusWord}
+          </span>
         </p>
       ) : null}
 
@@ -29,7 +32,7 @@ export function TutorPanel({ chat, focusWord, className = "" }: TutorPanelProps)
         waiting={chat.waiting}
         error={chat.error}
         onRetry={chat.retry}
-        emptyHint="Ask about anything on this page — a grammar shape, a word you tapped, or a quick drill."
+        emptyHint="Nothing asked yet. A word tapped in the reader comes along as the subject of your question, so “why this form?” is enough."
       />
 
       <TutorComposer
@@ -40,7 +43,7 @@ export function TutorPanel({ chat, focusWord, className = "" }: TutorPanelProps)
       />
 
       {tutorSource === "mock" ? (
-        <p className="flex-none text-center text-[11px] text-[var(--color-muted)]">
+        <p className="flex-none text-center text-[14px] text-muted">
           Canned answers — set NEXT_PUBLIC_TUTOR_API to reach the real tutor.
         </p>
       ) : null}

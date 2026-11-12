@@ -1,21 +1,16 @@
 "use client";
 
+import { cn } from "@/lib/cn";
 import type { Paragraph, ReaderMode, Token, WordState } from "../types";
+import { wordMark } from "./word-marks";
 
-const stateClass: Record<WordState, string> = {
-  known: "shadow-[0_2px_0_var(--color-accent-2-400)]",
-  learning: "rounded-[6px] bg-accent-200 px-[3px]",
-  selected:
-    "rounded-[8px] bg-[var(--color-voice)] px-[5px] py-0.5 text-[var(--color-voice-contrast)]",
-};
-
-/* Japanese needs more type size than Latin text to keep kanji legible, so the
-   phone step down is gentler than it would be for English. Dense mode gives up
-   its second column outright — 375px cannot carry two. */
+/* The reading column holds about 36 full-width characters. Dense mode gives up
+   its second column below the desktop breakpoint — a phone cannot carry two. */
 const modeClass: Record<ReaderMode, string> = {
-  learn: "max-w-[700px] text-[25px] leading-[1.95] tracking-[0.01em] sm:text-[34px] sm:leading-[2.05]",
-  book: "max-w-[660px] text-[22px] leading-[2.05] sm:text-justify sm:text-[27px] sm:leading-[2.25]",
-  dense: "text-[17px] leading-[1.9] sm:columns-2 sm:gap-10 sm:text-[19px] sm:leading-[1.95] sm:[column-rule:1px_solid_var(--color-neutral-300)]",
+  learn: "max-w-[36em] text-[20px] leading-[2.3] sm:text-[23px]",
+  book: "max-w-[36em] text-[19px] leading-[2.2] sm:text-justify sm:text-[23px]",
+  dense:
+    "text-[17px] leading-[2] sm:text-[19px] lg:columns-2 lg:gap-12 lg:[column-rule:1px_solid_var(--color-hairline)]",
 };
 
 export type TokenPick = {
@@ -39,9 +34,9 @@ export function PassageText({
   onSelect,
 }: PassageTextProps) {
   return (
-    <div className={`font-jp ${modeClass[mode]}`}>
+    <div lang="ja" className={cn("flex flex-col gap-[1.1em] font-jp", modeClass[mode])}>
       {paragraphs.map((paragraph) => (
-        <p key={paragraph.id} className="mb-0">
+        <p key={paragraph.id} className="m-0">
           {paragraph.tokens.map((token) => {
             const key = `${paragraph.id}-${token.id}`;
             return (
@@ -101,7 +96,10 @@ function TokenSpan({
       }
       aria-pressed={selected}
       aria-label={`Look up ${plain}`}
-      className={`cursor-pointer ${stateClass[state]}`}
+      className={cn(
+        "cursor-pointer rounded-[3px] transition-colors hover:bg-tint",
+        wordMark[state],
+      )}
     >
       {body}
     </button>

@@ -50,3 +50,11 @@ out/
 # Local tool indexes
 .codegraph/
 .atl/
+
+# Impeccable working files
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/review/
+
+# Locally installed agent tooling
+.claude/

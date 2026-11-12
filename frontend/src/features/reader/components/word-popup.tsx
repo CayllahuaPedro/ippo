@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { IconClose } from "@/components/ui/icons";
+import { cn } from "@/lib/cn";
 import { POPUP_WIDTH } from "../model/popup-position";
 import type { DictionaryEntry } from "../types";
+import { wordMark } from "./word-marks";
 
 type WordEntryProps = {
   entry: DictionaryEntry;
@@ -11,7 +14,7 @@ type WordEntryProps = {
   added: boolean;
 };
 
-/** The dictionary card itself. It is placed by a popup beside the word on a
+/** The dictionary entry itself. It is placed by a popup beside the word on a
  *  desktop and by a sheet on a phone, but reads the same in both. */
 export function WordEntry({
   entry,
@@ -21,48 +24,33 @@ export function WordEntry({
 }: WordEntryProps) {
   return (
     <>
-      <div className="flex items-start gap-3">
-        <div className="flex-1">
-          <h2 className="font-jp text-[30px] leading-[1.1]">{entry.lemma}</h2>
-          <p className="mt-1.5 flex flex-wrap items-center gap-2">
-            <PitchReading kana={entry.kana} drop={entry.pitchDrop} />
-            <span className="rounded-full bg-accent-2-200 px-[9px] py-[3px] text-[11px] font-semibold tracking-[0.06em] text-accent-2-800 uppercase">
-              {entry.pitchLabel}
-            </span>
-          </p>
-        </div>
-        <div className="flex flex-col items-end gap-1.5">
-          <span className="rounded-full bg-accent-200 px-2.5 py-1 text-[11px] font-bold text-accent-800 uppercase">
-            {entry.state}
-          </span>
-          <span className="text-xs text-[var(--color-muted)]">
-            freq #{entry.frequencyRank.toLocaleString()}
-          </span>
-        </div>
+      <div className="pr-8">
+        <h2 lang="ja" className="font-jp text-[34px] leading-[1.15] font-medium">
+          {entry.lemma}
+        </h2>
+        <p className="mt-1.5 flex flex-wrap items-baseline gap-x-2 text-[15px] text-muted">
+          <PitchReading kana={entry.kana} drop={entry.pitchDrop} />
+          <span aria-hidden>·</span>
+          <span>{entry.pitchLabel}</span>
+          <span aria-hidden>·</span>
+          <span className={cn("text-ink", wordMark[entry.state])}>{entry.state}</span>
+        </p>
       </div>
 
-      <p className="text-base leading-[1.45]">{entry.glosses.join(" · ")}</p>
+      <p className="text-[17px] leading-[1.5]">{entry.glosses.join("; ")}</p>
 
       {entry.derivation.length > 1 ? (
-        <ol className="m-0 flex list-none flex-wrap items-center gap-[7px] p-0 font-jp text-[15px]">
+        <ol
+          lang="ja"
+          aria-label="From the form in the text to the dictionary form"
+          className="m-0 flex list-none flex-wrap items-center gap-x-2 gap-y-1 p-0 font-jp text-[16px] text-muted"
+        >
           {entry.derivation.map((step, index) => {
             const isLemma = index === entry.derivation.length - 1;
             return (
-              <li key={step} className="flex items-center gap-[7px]">
-                <span
-                  className={`rounded-full px-[11px] py-[5px] ${
-                    isLemma
-                      ? "bg-accent-200 font-medium text-accent-800"
-                      : "bg-[var(--color-inset)]"
-                  }`}
-                >
-                  {step}
-                </span>
-                {isLemma ? null : (
-                  <span aria-hidden className="text-[var(--color-voice)]">
-                    →
-                  </span>
-                )}
+              <li key={step} className="flex items-center gap-2">
+                <span className={cn(isLemma && "font-medium text-ink")}>{step}</span>
+                {isLemma ? null : <span aria-hidden>→</span>}
               </li>
             );
           })}
@@ -70,50 +58,62 @@ export function WordEntry({
       ) : null}
 
       {entry.kanji ? (
-        <div className="flex items-center gap-3.5 rounded-md bg-[var(--color-inset)] p-3.5">
-          <span className="flex h-[60px] w-[60px] flex-none items-center justify-center rounded-md bg-[var(--color-inset-deep)] font-jp text-[34px]">
+        <div className="flex items-center gap-4 border-t border-hairline pt-4">
+          <span lang="ja" className="flex-none font-jp text-[40px] leading-none">
             {entry.kanji.character}
           </span>
-          <div className="flex min-w-0 flex-col gap-[5px] text-[13px]">
-            <p className="flex flex-wrap items-center gap-1.5 font-jp text-[15px]">
+          <div className="flex min-w-0 flex-col gap-1">
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px]">
               {entry.kanji.components.map((component, index) => (
-                <span key={component.glyph} className="flex items-center gap-1.5">
+                <span key={component.glyph} className="flex items-center gap-2">
                   {index > 0 ? (
-                    <span aria-hidden className="text-neutral-500">
+                    <span aria-hidden className="text-muted">
                       +
                     </span>
                   ) : null}
-                  <span className="rounded-lg bg-[var(--color-inset-deep)] px-[9px] py-0.5">
-                    {component.glyph} {component.meaning}
+                  <span>
+                    <span lang="ja" className="font-jp">
+                      {component.glyph}
+                    </span>{" "}
+                    <span className="text-muted">{component.meaning}</span>
                   </span>
                 </span>
               ))}
             </p>
-            <p className="text-[var(--color-muted)]">{entry.kanji.readings}</p>
+            <p lang="ja" className="font-jp text-[14px] text-muted">
+              {entry.kanji.readings}
+            </p>
           </div>
         </div>
       ) : null}
 
-      <p className="rounded-md bg-accent-2-100 px-3.5 py-2.5 text-xs leading-[1.4] text-accent-2-800">
-        Card front <b>{entry.lemma}</b> · back gloss + this sentence
-      </p>
+      <div className="flex flex-col gap-3 border-t border-hairline pt-4">
+        <p className="text-[14px] text-muted">
+          Card front{" "}
+          <span lang="ja" className="font-jp text-ink">
+            {entry.lemma}
+          </span>{" "}
+          · back: gloss and this sentence · frequency rank{" "}
+          <span className="tabular-nums">{entry.frequencyRank.toLocaleString()}</span>
+        </p>
 
-      <div className="flex flex-wrap items-center gap-2.5">
-        <button
-          type="button"
-          onClick={() => onAddToSrs(entry)}
-          disabled={added}
-          className="flex-1 cursor-pointer rounded-full bg-[var(--color-voice)] px-5 py-3 text-center font-heading text-sm text-[var(--color-voice-contrast)] disabled:cursor-default disabled:opacity-60"
-        >
-          {added ? "In your SRS" : "+ Add to SRS"}
-        </button>
-        <button
-          type="button"
-          onClick={() => onAskTutor(entry)}
-          className="cursor-pointer rounded-full bg-[var(--color-inset)] px-5 py-3 text-sm font-semibold text-[var(--color-raised-ink)] hover:bg-[var(--color-inset-deep)]"
-        >
-          Ask the tutor
-        </button>
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => onAddToSrs(entry)}
+            disabled={added}
+            className="flex-1 cursor-pointer rounded-[var(--radius-control)] border border-accent bg-accent px-5 py-2.5 text-center text-[15px] whitespace-nowrap text-on-accent transition-colors hover:bg-accent-hover disabled:cursor-default disabled:border-hairline disabled:bg-wash disabled:text-muted"
+          >
+            {added ? "In your SRS" : "Add to SRS"}
+          </button>
+          <button
+            type="button"
+            onClick={() => onAskTutor(entry)}
+            className="cursor-pointer rounded-[var(--radius-control)] border border-accent bg-ground px-5 py-2.5 text-[15px] whitespace-nowrap text-accent transition-colors hover:bg-tint"
+          >
+            Ask the tutor
+          </button>
+        </div>
       </div>
     </>
   );
@@ -147,7 +147,7 @@ export function WordPopup({ position, onClose, ...entryProps }: WordPopupProps) 
       aria-label={`${entryProps.entry.lemma} — dictionary entry`}
       tabIndex={-1}
       style={{ left: position.left, top: position.top, width: POPUP_WIDTH }}
-      className="absolute z-20 hidden flex-col gap-4 rounded-lg bg-[var(--color-raised)] px-6 py-[22px] text-[var(--color-raised-ink)] shadow-lg focus:outline-none lg:flex"
+      className="absolute z-20 hidden flex-col gap-4 rounded-[var(--radius-panel)] border border-hairline bg-ground p-[22px] text-ink shadow-[var(--shadow-float)] focus:outline-none lg:flex"
     >
       <WordEntry {...entryProps} />
 
@@ -155,9 +155,9 @@ export function WordPopup({ position, onClose, ...entryProps }: WordPopupProps) 
         type="button"
         onClick={onClose}
         aria-label="Close dictionary entry"
-        className="absolute top-3 right-3 cursor-pointer rounded-full px-2 py-1 text-[var(--color-muted)] hover:text-[var(--color-raised-ink)]"
+        className="absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-[var(--radius-control)] text-muted transition-colors hover:bg-wash hover:text-ink"
       >
-        ✕
+        <IconClose className="h-[18px] w-[18px]" />
       </button>
     </div>
   );
@@ -168,15 +168,11 @@ function PitchReading({ kana, drop }: { kana: string; drop: number | null }) {
   const mora = Array.from(kana);
 
   return (
-    <span className="font-jp text-base text-[var(--color-muted)]">
+    <span lang="ja" className="font-jp text-[16px] text-ink">
       {mora.map((character, index) => (
         <span
           key={index}
-          className={
-            drop !== null && index === drop
-              ? "border-t-2 border-[var(--color-voice)] pt-px"
-              : undefined
-          }
+          className={drop !== null && index === drop ? "border-t-2 border-ink pt-px" : undefined}
         >
           {character}
         </span>
