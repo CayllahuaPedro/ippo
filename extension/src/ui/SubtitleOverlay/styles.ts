@@ -1,4 +1,4 @@
-import { PITCH_COLORS_ON_DARK, THEME_VARS } from '../theme';
+import { DARK_THEME_VARS, PITCH_COLORS_ON_DARK } from '../theme';
 
 const PITCH_COLOR_ON_DARK_CSS = Object.entries(PITCH_COLORS_ON_DARK)
   .map(([pattern, color]) => `.mjp-${pattern} { color: ${color}; }`)
@@ -6,7 +6,7 @@ const PITCH_COLOR_ON_DARK_CSS = Object.entries(PITCH_COLORS_ON_DARK)
 
 export const OVERLAY_CSS = `
   :host {
-    ${THEME_VARS}
+    ${DARK_THEME_VARS}
     --mjp-overlay-bottom: 12%;
     position: absolute;
     inset: auto 0 var(--mjp-overlay-bottom) 0;
@@ -34,30 +34,30 @@ export const OVERLAY_CSS = `
   .mjp-sub-line {
     margin: 0;
     padding: 0.4em 0.8em;
-    border-radius: 0.5em;
-    background: rgba(8, 12, 32, 0.78);
-    color: var(--mjp-text);
+    border-radius: var(--mjp-radius-control);
+    background: rgb(20 18 43 / 0.88);
+    color: var(--mjp-ink);
     line-height: 1.35;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
     overflow-wrap: anywhere;
   }
   .mjp-sub-primary {
-    font-family: var(--mjp-font-display);
+    font-family: var(--mjp-font-jp);
     font-size: clamp(16px, 3.2cqw, 48px);
-    font-weight: 700;
+    font-weight: 500;
   }
   .mjp-sub-secondary {
-    font-family: var(--mjp-font-body);
+    font-family: var(--mjp-font-ui);
     font-size: clamp(13px, 2.2cqw, 34px);
+    font-weight: 400;
     color: var(--mjp-muted);
   }
   .mjp-token {
     pointer-events: auto;
     cursor: pointer;
-    border-radius: 0.2em;
+    border-radius: 3px;
   }
   .mjp-token:hover {
-    background: rgba(255, 255, 255, 0.16);
+    background: var(--mjp-tint);
   }
   ${PITCH_COLOR_ON_DARK_CSS}
 `;

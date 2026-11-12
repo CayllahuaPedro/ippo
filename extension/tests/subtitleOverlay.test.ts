@@ -401,9 +401,9 @@ describe('SubtitleOverlay interactive primary line', () => {
     }
   });
 
-  it('dark pitch colours reach 4.5:1 against the line background #080c20', () => {
+  it('dark pitch colours reach 4.5:1 against the ground #14122b', () => {
     for (const color of Object.values(PITCH_COLORS_ON_DARK)) {
-      expect(contrast(color, '#080c20')).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(color, '#14122b')).toBeGreaterThanOrEqual(4.5);
     }
   });
 });

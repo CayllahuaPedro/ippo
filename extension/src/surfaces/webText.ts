@@ -1,6 +1,7 @@
 import type { RenderToken } from '../core/annotate';
 import { renderTokens } from '../core/render';
-import { PITCH_COLOR_CSS } from '../ui/theme';
+import { PITCH_PAGE_CSS } from '../ui/theme';
+import { hostGroundIsLight } from '../ui/hostGround';
 import { linkFontStylesheet } from '../ui/fonts';
 import { hasJapanese } from '../core/kana';
 
@@ -45,6 +46,7 @@ export async function parseTextNode(
   const wrapper = document.createElement('span');
   wrapper.className = 'mjp-parsed';
   wrapper.dataset.mjpOriginal = text;
+  if (node.parentElement && !hostGroundIsLight(node.parentElement)) wrapper.dataset.mjpGround = 'dark';
   wrapper.append(renderTokens(tokens));
   node.replaceWith(wrapper);
 }
@@ -64,11 +66,11 @@ const PAGE_CSS = `
   transition: text-decoration-color 0.12s;
 }
 .mjp-token:hover { text-decoration-color: currentColor; }
-${PITCH_COLOR_CSS}
+${PITCH_PAGE_CSS}
 .mjp-token rt {
-  font-family: 'Yabai Maru', sans-serif;
+  font-family: 'Ippo Zen Kaku Gothic New', 'Zen Kaku Gothic New', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
   font-size: 0.55em;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.02em;
   opacity: 0.85;
   user-select: none;
