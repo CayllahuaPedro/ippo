@@ -128,17 +128,21 @@ kept the real player, navigation and caption state.
 npm install
 ```
 
-The dictionary data is not committed. Place the raw sources in `data/raw/`:
+The dictionary data is not committed: both `data/raw/` and `public/dict/` are gitignored, so a
+fresh clone has neither. Place the raw sources in `data/raw/`:
 
 - `jmdict-eng.json` — from [jmdict-simplified](https://github.com/scriptin/jmdict-simplified)
 - `accents.txt` — Kanjium pitch-accent dataset
 
-Then build the packaged assets and the extension:
+Then build the packaged assets and the extension, in this order:
 
 ```bash
-npm run build:dict   # → public/dict/{jmdict.min.json,pitch.json}
+npm run build:dict   # → public/dict/{jmdict.min.json,pitch.json,pos-tags.json}
 npm run build        # → .output/
 ```
+
+Skipping `build:dict` still produces a build, but it ships without a dictionary: **Anotar página**
+fails with "No se pudo cargar el diccionario" and words in subtitles can't be looked up.
 
 Load `.output/chrome-mv3` as an unpacked extension at `chrome://extensions`.
 
