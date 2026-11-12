@@ -18,7 +18,7 @@ The machine-learning story lives in the README and demos.
 
 ## Product Purpose
 
-Nihon AI is a comprehensible-input reading app. It models what the learner knows and uses that
+Ippo is a comprehensible-input reading app. It models what the learner knows and uses that
 model to decide what they read, which words are worth mining, and how the AI tutor explains
 things to them. Success means the learner spends their time on text slightly above their level
 and leaves each session understanding more than they did going in.
@@ -26,7 +26,7 @@ and leaves each session understanding more than they did going in.
 ## Positioning
 
 Difficulty is a function of learner × text, not a property of the text. Other tools label a
-passage "N3"; Nihon AI estimates how much of it *this* learner will understand. Two notions are
+passage "N3"; Ippo estimates how much of it *this* learner will understand. Two notions are
 kept separate and never fused: absolute difficulty (JLPT level, gated by OOV, plus frequency)
 and personal difficulty (expected comprehension from the learner model). When a passage falls
 outside what the classifier can judge, it abstains and says so instead of guessing.
@@ -54,7 +54,8 @@ outside what the classifier can judge, it abstains and says so instead of guessi
 
 ## Brand Commitments
 
-- Name: **Nihon AI**, everywhere (UI, repo, README). The earlier "Yabai" name is retired.
+- Name: **Ippo** (一歩, "one step") for the app and **Ippo for Chrome** for the extension, everywhere
+  (UI, repo, README). The earlier "Nihon AI", "Yabai" and "Yabai-JP" names are retired.
 - Honesty is part of the voice: the product states when data is a fixture, when the tutor is
   offline and when the classifier abstains. It never presents a guess as an answer.
 

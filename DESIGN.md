@@ -1,5 +1,5 @@
 ---
-name: Nihon AI
+name: Ippo
 description: A Japanese reader that forecasts how much of every text you will understand.
 colors:
   ground: "#ffffff"
@@ -134,7 +134,7 @@ components:
     width: "320px"
 ---
 
-# Design System: Nihon AI
+# Design System: Ippo
 
 ## Overview
 
