@@ -110,7 +110,8 @@ the viewport instead of the page. Display settings persist per learner.
 
 `frontend/src/features/{reader,tutor,discover}/` are self-contained features with an explicit
 public surface (`index.ts`) — and **`dependency-cruiser` enforces the boundaries** through
-`npm run check`, which CI runs on every pull request that touches `frontend/`. A feature cannot reach into another feature's internals and still pass.
+`npm run check`, which CI runs on every pull request that touches `frontend/`. A feature cannot
+reach into another feature's internals and still pass.
 
 The tutor UI talks to the real backend when `NEXT_PUBLIC_TUTOR_API` is set. Without it, it serves
 canned answers — **and says so on screen** (`tutor-panel.tsx:44`) rather than failing silently,
