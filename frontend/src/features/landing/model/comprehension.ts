@@ -1,4 +1,4 @@
-import type { Paragraph, WordState } from "@/features/reader";
+import type { Paragraph } from "@/features/reader";
 
 export function comprehension(paragraphs: Paragraph[]): number {
   const words = paragraphs
@@ -13,7 +13,7 @@ export function comprehension(paragraphs: Paragraph[]): number {
 export function setWordState(
   paragraphs: Paragraph[],
   entryId: string,
-  state: WordState,
+  state: "known" | "learning",
 ): Paragraph[] {
   return paragraphs.map((paragraph) => ({
     ...paragraph,

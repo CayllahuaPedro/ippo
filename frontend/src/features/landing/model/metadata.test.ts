@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { copy } from "./copy";
 import { landingMetadata } from "./metadata";
@@ -27,6 +27,15 @@ describe("landingMetadata", () => {
   it("sets the open graph locale", () => {
     expect(landingMetadata("en").openGraph?.locale).toBe("en_US");
     expect(landingMetadata("es").openGraph?.locale).toBe("es_ES");
+  });
+});
+
+describe("landingMetadata site url", () => {
+  afterEach(() => vi.unstubAllEnvs());
+
+  it("falls back to localhost when the env var is empty", () => {
+    vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
+    expect(landingMetadata("en").metadataBase?.href).toBe("http://localhost:3000/");
   });
 });
 
