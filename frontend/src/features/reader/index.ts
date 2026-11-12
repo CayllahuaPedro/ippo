@@ -5,6 +5,7 @@ export { PassageText, type TokenPick } from "./components/passage-text";
 export { ReaderSettingsProvider } from "./components/reader-settings-provider";
 export { WordEntry, WordPopup } from "./components/word-popup";
 export { WordLegend } from "./components/word-legend";
+export { wordMark } from "./components/word-marks";
 export { type ReaderSettings, useReaderSettings } from "./hooks/use-reader-settings";
 export { POPUP_WIDTH, popupPosition } from "./model/popup-position";
 export { parseTokens } from "./model/tokenize";
