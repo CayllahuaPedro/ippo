@@ -1,4 +1,5 @@
 import { ForecastBlock } from "@/components/ui/forecast-block";
+import { cn } from "@/lib/cn";
 import type { Recommendation } from "../types";
 
 type ShelfProps = {
@@ -7,9 +8,10 @@ type ShelfProps = {
   guidance: string;
   tone: "comfortable" | "stretch";
   items: Recommendation[];
+  stacked?: boolean;
 };
 
-export function Shelf({ title, band, guidance, items }: ShelfProps) {
+export function Shelf({ title, band, guidance, items, stacked = false }: ShelfProps) {
   return (
     <section className="flex flex-col gap-6">
       <header className="flex flex-col gap-1">
@@ -22,7 +24,12 @@ export function Shelf({ title, band, guidance, items }: ShelfProps) {
       {items.length === 0 ? (
         <p className="text-[15px] text-faint">Nothing of this type on this shelf.</p>
       ) : (
-        <ul className="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 lg:grid-cols-3">
+        <ul
+          className={cn(
+            "m-0 grid list-none grid-cols-1 gap-6 p-0",
+            !stacked && "md:grid-cols-2 lg:grid-cols-3",
+          )}
+        >
           {items.map((item) => (
             <RecommendationCard key={item.id} item={item} />
           ))}

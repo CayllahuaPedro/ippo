@@ -14,7 +14,8 @@ export function HelpsSection({ copy }: HelpsSectionProps) {
       band="90%+ expected"
       guidance="read for pleasure, look up almost nothing"
       tone="comfortable"
-      items={comfortable.slice(0, 2)}
+      items={comfortable.slice(0, 1)}
+      stacked
     />,
     <ChromeSnippet key="chrome" />,
     <TutorTurnView key="tutor" turn={tutorThread[1]} />,
