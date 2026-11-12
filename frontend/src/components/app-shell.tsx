@@ -2,36 +2,38 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { cn } from "@/lib/cn";
 import { learner } from "@/lib/fixtures";
-import { useReaderSettings } from "@/features/reader";
 
-/** SRS is drawn in the design but has no route yet, so it renders as
- *  present-but-inert rather than as a link that goes nowhere. */
+/** SRS is planned but not built, so it shows as a future section rather than
+ *  as a link that goes nowhere. */
 const nav = [
-  { label: "SRS", glyph: "札", badge: String(learner.srsDue), href: null },
-  { label: "Reader", glyph: "読", badge: null, href: "/reader" },
-  { label: "Discover", glyph: "探", badge: null, href: "/discover" },
-  { label: "Tutor", glyph: "話", badge: null, href: "/tutor" },
+  { label: "SRS", href: null },
+  { label: "Reader", href: "/reader" },
+  { label: "Discover", href: "/discover" },
+  { label: "Tutor", href: "/tutor" },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const { pairing } = useReaderSettings();
   const pathname = usePathname();
+  const action =
+    pathname === "/reader"
+      ? { label: "Find your next read", href: "/discover" }
+      : { label: "Continue reading", href: "/reader" };
 
   return (
-    <div
-      data-pairing={pairing}
-      className="flex min-h-svh flex-col bg-[var(--color-ground)] text-[var(--color-ink)]"
-    >
-      <header className="flex h-[60px] flex-none items-center gap-4 bg-[var(--color-ground-raised)] px-5 lg:h-[68px] lg:gap-[26px] lg:px-7">
-        <Link href="/reader" className="flex items-center gap-2.5 no-underline">
-          <span className="flex h-[34px] w-[34px] flex-none items-center justify-center rounded-full bg-[var(--color-voice)] font-heading text-[17px] text-[var(--color-voice-contrast)]">
-            読
-          </span>
-          <span className="font-heading text-[19px] text-[var(--color-ink)]">Ippo</span>
+    <div className="flex min-h-svh flex-col bg-ground text-ink">
+      <header className="sticky top-0 z-40 flex h-[var(--header-h)] flex-none items-center gap-6 border-b border-hairline bg-ground px-4 sm:px-8 lg:gap-10 lg:px-12">
+        <Link
+          href="/reader"
+          aria-label="Ippo"
+          className="flex-none text-[19px] font-medium text-ink no-underline"
+        >
+          Ippo
         </Link>
 
-        <nav aria-label="Sections" className="ml-2.5 hidden gap-1 lg:flex">
+        <nav aria-label="Sections" className="hidden items-stretch gap-7 self-stretch lg:flex">
           {nav.map((item) => (
             <DeskLink key={item.label} item={item} pathname={pathname} />
           ))}
@@ -39,19 +41,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
         <div className="flex-1" />
 
-        <p className="flex items-center gap-2 text-[13px] text-neutral-700">
-          <span className="h-[9px] w-[9px] flex-none rounded-full bg-accent-2-500" />
-          <span className="hidden sm:inline">
-            {learner.knownWords.toLocaleString()} words known · {learner.level}
-          </span>
-          <span className="sm:hidden">
-            {learner.knownWords.toLocaleString()} · {learner.level}
-          </span>
+        <p className="hidden text-[14px] text-muted tabular-nums xl:block">
+          {learner.knownWords.toLocaleString()} words known
         </p>
-        <span
-          aria-hidden
-          className="hidden h-[34px] w-[34px] rounded-full bg-accent-2-300 sm:block"
-        />
+        <ThemeToggle />
+        <Link
+          href={action.href}
+          className="flex-none rounded-[var(--radius-control)] bg-accent px-3.5 py-2 text-[15px] text-on-accent no-underline transition-colors hover:bg-accent-hover sm:px-[18px] sm:py-2.5"
+        >
+          {action.label}
+        </Link>
       </header>
 
       {/* Grows with its content, so a long passage scrolls the page. Panels
@@ -63,7 +62,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           row that would have to shrink past the point of being tappable. */}
       <nav
         aria-label="Sections"
-        className="fixed inset-x-0 bottom-0 z-30 flex flex-none border-t border-[var(--color-inset)] bg-[var(--color-ground-raised)] pb-[env(safe-area-inset-bottom)] lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 flex flex-none border-t border-hairline bg-ground pb-[env(safe-area-inset-bottom)] lg:hidden"
       >
         {nav.map((item) => (
           <TabLink key={item.label} item={item} pathname={pathname} />
@@ -75,18 +74,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
 type NavItem = (typeof nav)[number];
 
-function DeskLink({ item, pathname }: { item: NavItem; pathname: string }) {
-  const shared = "rounded-full px-4 py-2 text-sm font-semibold transition-colors";
+function Soon() {
+  return (
+    <span className="rounded-[4px] border border-hairline px-1 text-[12px] leading-[1.4] text-faint">
+      soon
+    </span>
+  );
+}
 
+function DeskLink({ item, pathname }: { item: NavItem; pathname: string }) {
   if (!item.href) {
     return (
       <span
         aria-disabled="true"
-        title="Not built yet"
-        className={`${shared} cursor-default text-neutral-700 opacity-55`}
+        title="Planned, not built yet"
+        className="flex cursor-default items-center gap-1.5 text-[15px] text-faint"
       >
         {item.label}
-        {item.badge ? <span className="opacity-65"> {item.badge}</span> : null}
+        <Soon />
       </span>
     );
   }
@@ -96,11 +101,12 @@ function DeskLink({ item, pathname }: { item: NavItem; pathname: string }) {
     <Link
       href={item.href}
       aria-current={current ? "page" : undefined}
-      className={`${shared} no-underline ${
+      className={cn(
+        "relative flex items-center text-[15px] no-underline transition-colors",
         current
-          ? "bg-accent-2-200 text-accent-2-800"
-          : "text-neutral-700 hover:text-neutral-900"
-      }`}
+          ? "font-medium text-ink after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:bg-accent"
+          : "text-muted hover:text-ink",
+      )}
     >
       {item.label}
     </Link>
@@ -109,25 +115,13 @@ function DeskLink({ item, pathname }: { item: NavItem; pathname: string }) {
 
 function TabLink({ item, pathname }: { item: NavItem; pathname: string }) {
   const shared =
-    "relative flex flex-1 flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold no-underline";
-
-  const badge = item.badge ? (
-    <span className="absolute top-1.5 right-[calc(50%-22px)] rounded-full bg-[var(--color-voice)] px-1.5 py-px text-[10px] text-[var(--color-voice-contrast)]">
-      {item.badge}
-    </span>
-  ) : null;
+    "relative flex h-[var(--tabbar-h)] flex-1 items-center justify-center gap-1.5 text-[14px] no-underline";
 
   if (!item.href) {
     return (
-      <span
-        aria-disabled="true"
-        className={`${shared} cursor-default text-neutral-600 opacity-50`}
-      >
-        <span aria-hidden className="font-jp text-[19px] leading-none">
-          {item.glyph}
-        </span>
+      <span aria-disabled="true" className={cn(shared, "cursor-default text-faint")}>
         {item.label}
-        {badge}
+        <Soon />
       </span>
     );
   }
@@ -137,15 +131,14 @@ function TabLink({ item, pathname }: { item: NavItem; pathname: string }) {
     <Link
       href={item.href}
       aria-current={current ? "page" : undefined}
-      className={`${shared} ${
-        current ? "text-[var(--color-voice)]" : "text-neutral-600"
-      }`}
+      className={cn(
+        shared,
+        current
+          ? "font-medium text-ink before:absolute before:inset-x-5 before:-top-px before:h-0.5 before:bg-accent"
+          : "text-muted",
+      )}
     >
-      <span aria-hidden className="font-jp text-[19px] leading-none">
-        {item.glyph}
-      </span>
       {item.label}
-      {badge}
     </Link>
   );
 }

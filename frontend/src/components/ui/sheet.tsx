@@ -59,15 +59,15 @@ export function Sheet({ open, onClose, label, height = "78svh", children }: Shee
       onClick={(event) => {
         if (event.target === ref.current) close();
       }}
-      className="m-0 max-h-none w-full max-w-none border-0 bg-transparent p-0 backdrop:animate-[veil-in_0.18s_ease-out] backdrop:bg-neutral-900/45 open:fixed open:inset-0 open:flex open:flex-col open:justify-end"
+      className="m-0 max-h-none w-full max-w-none border-0 bg-transparent p-0 backdrop:animate-[veil-in_0.18s_ease-out] backdrop:bg-scrim/50 open:fixed open:inset-0 open:flex open:flex-col open:justify-end"
     >
       <div
         style={{ height }}
-        className="flex animate-[sheet-rise_0.22s_ease-out] flex-col rounded-t-[var(--radius-lg)] bg-[var(--color-ground-raised)] pt-2.5 text-[var(--color-ink)] shadow-lg"
+        className="flex animate-[sheet-rise_0.22s_ease-out] flex-col rounded-t-[var(--radius-panel)] border-t border-hairline bg-ground pt-2.5 text-ink"
       >
         <span
           aria-hidden
-          className="mx-auto mb-1 h-1 w-10 flex-none rounded-full bg-[var(--color-neutral-400)]"
+          className="mx-auto mb-1 h-1 w-10 flex-none rounded-full bg-handle"
         />
         {children}
       </div>

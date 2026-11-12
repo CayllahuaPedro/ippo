@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { LEGACY_SETTINGS_KEY } from "@/lib/theme";
 import {
   defaultSettings,
   parseSettings,
@@ -17,30 +18,31 @@ describe("parseSettings", () => {
   });
 
   it("falls back on json that is not an object", () => {
-    expect(parseSettings('"kohi"')).toEqual(defaultSettings);
+    expect(parseSettings('"dark"')).toEqual(defaultSettings);
   });
 
   it("reads a complete set of settings", () => {
-    const raw = JSON.stringify({ pairing: "sumi", furigana: "off", mode: "dense" });
+    const raw = JSON.stringify({ furigana: "off", mode: "dense" });
 
-    expect(parseSettings(raw)).toEqual({
-      pairing: "sumi",
-      furigana: "off",
-      mode: "dense",
-    });
+    expect(parseSettings(raw)).toEqual({ furigana: "off", mode: "dense" });
   });
 
   it("keeps the values it recognises and defaults the rest", () => {
-    const raw = JSON.stringify({ pairing: "washi" });
+    const raw = JSON.stringify({ furigana: "always" });
 
-    expect(parseSettings(raw)).toEqual({ ...defaultSettings, pairing: "washi" });
+    expect(parseSettings(raw)).toEqual({ ...defaultSettings, furigana: "always" });
+  });
+
+  it("drops the theme, which is no longer a reader setting", () => {
+    const raw = JSON.stringify({ theme: "dark", pairing: "sumi", mode: "book" });
+
+    expect(parseSettings(raw)).toEqual({ ...defaultSettings, mode: "book" });
   });
 
   it("rejects a value outside the allowed set", () => {
-    // Anyone can edit localStorage; an unknown pairing must not reach the DOM.
-    const raw = JSON.stringify({ pairing: "neon", mode: "dense" });
+    const raw = JSON.stringify({ furigana: "neon", mode: "dense" });
 
-    expect(parseSettings(raw).pairing).toBe(defaultSettings.pairing);
+    expect(parseSettings(raw).furigana).toBe(defaultSettings.furigana);
   });
 
   it("rejects a value of the wrong type", () => {
@@ -54,19 +56,19 @@ describe("readSettings / writeSettings", () => {
   beforeEach(() => window.localStorage.clear());
 
   it("round-trips through storage", () => {
-    writeSettings({ pairing: "washi", furigana: "always", mode: "book" });
+    writeSettings({ furigana: "always", mode: "book" });
 
-    expect(readSettings()).toEqual({
-      pairing: "washi",
-      furigana: "always",
-      mode: "book",
-    });
+    expect(readSettings()).toEqual({ furigana: "always", mode: "book" });
   });
 
   it("writes under the documented key", () => {
     writeSettings(defaultSettings);
 
     expect(window.localStorage.getItem(STORAGE_KEY)).not.toBeNull();
+  });
+
+  it("is the key the theme migrates its legacy choice from", () => {
+    expect(STORAGE_KEY).toBe(LEGACY_SETTINGS_KEY);
   });
 
   it("returns defaults when storage throws", () => {

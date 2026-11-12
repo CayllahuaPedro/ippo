@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
+import { cn } from "@/lib/cn";
 import type { TutorTurn as Turn } from "../types";
 import { ThinkingDots } from "./thinking-dots";
 import { TutorTurn } from "./tutor-turn";
@@ -29,6 +30,8 @@ export function TutorThread({
   // Whether the reader is following the newest text. Scrolling up to re-read
   // an earlier answer is a decision, and the thread must not drag them back.
   const following = useRef(true);
+
+  const empty = turns.length === 0 && !thinking;
 
   const onScroll = useCallback(() => {
     const el = pane.current;
@@ -59,10 +62,13 @@ export function TutorThread({
       role="log"
       aria-live="polite"
       aria-label="Tutor conversation"
-      className="flex min-h-0 flex-1 flex-col gap-[18px] overflow-y-auto overscroll-contain"
+      className={cn(
+        "flex min-h-0 flex-col gap-[18px] overflow-y-auto overscroll-contain",
+        empty ? "flex-none" : "flex-1",
+      )}
     >
-      {turns.length === 0 && !thinking ? (
-        <p className="mt-auto mb-1 max-w-[38ch] self-center text-center text-sm text-balance text-[var(--color-muted)]">
+      {empty ? (
+        <p className="max-w-[52ch] text-[15px] text-muted">
           {emptyHint}
         </p>
       ) : null}
@@ -74,12 +80,15 @@ export function TutorThread({
       {waiting ? <ThinkingDots /> : null}
 
       {error ? (
-        <p className="flex flex-wrap items-center gap-2.5 self-start rounded-md bg-accent-200 px-4 py-3 text-sm text-accent-900">
+        <p
+          role="alert"
+          className="flex flex-wrap items-center gap-3 self-start rounded-[var(--radius-panel)] border border-hairline px-4 py-3 text-[15px]"
+        >
           {error}
           <button
             type="button"
             onClick={onRetry}
-            className="cursor-pointer rounded-full bg-accent-800 px-3.5 py-1.5 text-[13px] font-semibold text-accent-100"
+            className="cursor-pointer rounded-[var(--radius-control)] border border-accent bg-ground px-3.5 py-1.5 text-[15px] text-accent transition-colors hover:bg-tint"
           >
             Try again
           </button>

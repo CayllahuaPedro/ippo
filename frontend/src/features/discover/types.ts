@@ -1,3 +1,5 @@
+import type { Forecast } from "@/lib/types";
+
 /** What Discover ranks and shelves. */
 
 export type ContentKind = "video" | "article" | "book";
@@ -9,8 +11,8 @@ export type Recommendation = {
   extent: string;
   japaneseTitle: string;
   source: string;
-  /** Share of tokens the learner model expects you to already know, 0–100. */
-  expectedComprehension: number;
+  /** Expected personal comprehension; `null` when the model abstains. */
+  forecast: Forecast | null;
   note: string;
   imageDescription: string;
 };

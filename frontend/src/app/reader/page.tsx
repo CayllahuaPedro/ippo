@@ -11,6 +11,7 @@ import {
   passage,
   useReaderSettings,
   WordEntry,
+  WordLegend,
   WordPopup,
 } from "@/features/reader";
 import {
@@ -19,13 +20,14 @@ import {
   tutorThread,
   useTutorChat,
 } from "@/features/tutor";
+import { ForecastBlock } from "@/components/ui/forecast-block";
+import { IconChat } from "@/components/ui/icons";
 import { Segmented } from "@/components/ui/segmented";
 import { Sheet } from "@/components/ui/sheet";
 import { learner } from "@/lib/fixtures";
 import type {
   DictionaryEntry,
   FuriganaMode,
-  Pairing,
   ReaderMode,
 } from "@/features/reader";
 
@@ -44,15 +46,8 @@ const furiganaOptions: { value: FuriganaMode; label: string }[] = [
   { value: "off", label: "Off" },
 ];
 
-const pairingOptions: { value: Pairing; label: string }[] = [
-  { value: "kohi", label: "Kōhi" },
-  { value: "washi", label: "Washi" },
-  { value: "sumi", label: "Sumi" },
-];
-
 export default function ReaderPage() {
-  const { furigana, setFurigana, mode, setMode, pairing, setPairing } =
-    useReaderSettings();
+  const { furigana, setFurigana, mode, setMode } = useReaderSettings();
   // The sheets open a real modal dialog, which must never happen on a desktop
   // where the rail and the popup already carry the same content.
   const isDesktop = useMediaQuery(DESKTOP);
@@ -113,79 +108,90 @@ export default function ReaderPage() {
     : null;
 
   return (
-    <div className="grid flex-1 grid-cols-1 lg:grid-cols-[1fr_356px] lg:items-start">
+    <div className="grid flex-1 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
       <div
         ref={paneRef}
         data-furi={furigana}
-        className="relative flex min-w-0 flex-col gap-6 px-5 pt-6 pb-28 sm:px-8 lg:gap-[30px] lg:px-[52px] lg:py-10"
+        className="relative flex min-w-0 flex-col px-4 pt-8 pb-28 sm:px-8 lg:px-12 lg:pt-10 lg:pb-14"
       >
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-5">
-          <div className="min-w-0 flex-1">
-            <p className="mb-1.5 text-xs tracking-[0.1em] text-[var(--color-muted)] uppercase">
-              {passage.kicker}
-            </p>
-            <h1 className="font-heading text-[26px] leading-tight sm:text-[32px]">
+        <header className="flex flex-col gap-8 pb-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12 lg:pb-10">
+          <h1
+            lang="ja"
+            className="min-w-0 font-jp text-[40px] leading-[1.1] font-medium tracking-[0.01em] sm:text-[56px]"
+          >
+            {passage.japaneseTitle}
+            <span
+              lang="en"
+              className="mt-3 block font-sans text-[20px] leading-snug font-normal tracking-normal text-muted sm:text-[24px]"
+            >
               {passage.title}
-            </h1>
-          </div>
-          <Segmented
-            label="Reading mode"
-            value={mode}
-            options={modeOptions}
-            onChange={setMode}
+            </span>
+          </h1>
+          <ForecastBlock
+            forecast={passage.forecast}
+            size="lg"
+            align="end"
+            className="flex-none lg:w-[320px]"
           />
-        </div>
+        </header>
 
-        <PassageText
-          paragraphs={paragraphs}
-          mode={mode}
-          selectedTokenId={pick?.key ?? null}
-          onSelect={selectToken}
-        />
+        <div className="grid grid-cols-1 gap-6 border-t border-hairline pt-6 xl:grid-cols-[140px_minmax(0,1fr)] xl:gap-10 xl:pt-9">
+          <aside
+            aria-label="About this text"
+            className="flex flex-wrap gap-x-4 gap-y-1 text-[14px] leading-[1.9] text-muted xl:flex-col xl:gap-0"
+          >
+            <span>{passage.kicker}</span>
+            <span>Text level {passage.textLevel}</span>
+            <span className="tabular-nums">{passage.unknownOnPage} unknown on page</span>
+            <span className="tabular-nums">
+              Page {passage.page} of {passage.pageCount}
+            </span>
+            {srsAdditions.length > 0 ? (
+              <span className="tabular-nums">
+                {srsAdditions.length} added to SRS this session
+              </span>
+            ) : null}
+            <span className="basis-full text-faint xl:mt-4 xl:basis-auto xl:leading-[1.6]">
+              Sample passage and forecasts: fixtures until the learner model is
+              connected.
+            </span>
+          </aside>
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5 text-[13px] text-[var(--color-muted)]">
-          <Swatch className="h-[3px] w-5 rounded-sm bg-accent-2-400" label="known" />
-          <Swatch className="h-3 w-5 rounded bg-accent-200" label="learning" />
-          <Swatch
-            className="h-3 w-5 rounded bg-[var(--color-voice)]"
-            label="selected"
-          />
-          <span className="flex-1" />
-          <DisplaySettings />
-          <div className="hidden lg:block">
-            <Segmented
-              label="Furigana"
-              size="sm"
-              value={furigana}
-              options={furiganaOptions}
-              onChange={setFurigana}
+          <div className="flex min-w-0 flex-col gap-8">
+            <div className="flex flex-wrap items-center gap-3">
+              <Segmented
+                label="Reading mode"
+                size="sm"
+                value={mode}
+                options={modeOptions}
+                onChange={setMode}
+              />
+              <span className="flex-1" />
+              <DisplaySettings />
+              <div className="hidden items-center gap-3 lg:flex">
+                <span aria-hidden className="text-[14px] text-muted">
+                  Furigana
+                </span>
+                <Segmented
+                  label="Furigana"
+                  size="sm"
+                  value={furigana}
+                  options={furiganaOptions}
+                  onChange={setFurigana}
+                />
+              </div>
+            </div>
+
+            <PassageText
+              paragraphs={paragraphs}
+              mode={mode}
+              selectedTokenId={pick?.key ?? null}
+              onSelect={selectToken}
             />
-          </div>
-        </div>
 
-        <div className="hidden flex-1 lg:block" />
-
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-3 text-[13px] text-[var(--color-muted)]">
-          <span>
-            Page {passage.page} of {passage.pageCount}
-          </span>
-          <span aria-hidden>·</span>
-          <span>{passage.unknownOnPage} unknown</span>
-          {srsAdditions.length > 0 ? (
-            <>
-              <span aria-hidden>·</span>
-              <span>{srsAdditions.length} added to SRS this session</span>
-            </>
-          ) : null}
-          <span className="hidden flex-1 sm:block" />
-          <div className="hidden lg:block">
-            <Segmented
-              label="Pairing"
-              size="sm"
-              value={pairing}
-              options={pairingOptions}
-              onChange={setPairing}
-            />
+            <div className="border-t border-hairline pt-5">
+              <WordLegend />
+            </div>
           </div>
         </div>
 
@@ -205,11 +211,9 @@ export default function ReaderPage() {
           <button
             type="button"
             onClick={() => setTutorOpen(true)}
-            className="fixed right-5 bottom-[86px] z-30 flex cursor-pointer items-center gap-2 rounded-full bg-[var(--color-voice)] px-5 py-3.5 font-heading text-sm text-[var(--color-voice-contrast)] shadow-lg"
+            className="fixed right-4 bottom-[calc(var(--tabbar-h)+16px+env(safe-area-inset-bottom))] z-30 flex cursor-pointer items-center gap-2 rounded-[var(--radius-control)] bg-accent px-[18px] py-3 text-[15px] text-on-accent shadow-[var(--shadow-float)] transition-colors hover:bg-accent-hover"
           >
-            <span aria-hidden className="font-jp">
-              話
-            </span>
+            <IconChat className="h-[18px] w-[18px]" />
             Ask the tutor
           </button>
 
@@ -222,7 +226,7 @@ export default function ReaderPage() {
             <TutorPanel
               chat={chat}
               focusWord={focusWord}
-              className="px-5 pt-2 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+              className="px-4 pt-2 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
             />
           </Sheet>
 
@@ -233,7 +237,7 @@ export default function ReaderPage() {
             height="auto"
           >
             {entryProps ? (
-              <div className="flex flex-col gap-4 overflow-y-auto px-5 pt-3 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+              <div className="flex flex-col gap-4 overflow-y-auto px-4 pt-3 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
                 <WordEntry {...entryProps} />
               </div>
             ) : null}
@@ -241,14 +245,5 @@ export default function ReaderPage() {
         </>
       ) : null}
     </div>
-  );
-}
-
-function Swatch({ className, label }: { className: string; label: string }) {
-  return (
-    <span className="flex items-center gap-1.5">
-      <span aria-hidden className={className} />
-      {label}
-    </span>
   );
 }

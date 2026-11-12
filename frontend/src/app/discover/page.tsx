@@ -25,16 +25,22 @@ export default function DiscoverPage() {
   const keep = (kind: ContentKind) => matchesFilter(kind, filter);
 
   return (
-    <div className="flex flex-col gap-[22px] px-5 pt-6 pb-28 sm:px-8 lg:px-11 lg:pt-8 lg:pb-9">
-      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:gap-6">
+    <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 px-4 pt-8 pb-28 sm:px-8 lg:px-12 lg:pt-12 lg:pb-16">
+      <div className="flex flex-col gap-5 border-b border-hairline pb-8 sm:flex-row sm:flex-wrap sm:items-end sm:gap-8">
         <div className="min-w-0 flex-1">
-          <h1 className="font-heading text-[26px] leading-tight sm:text-[30px]">
+          <h1 className="text-[32px] leading-tight font-medium tracking-[-0.01em] sm:text-[40px]">
             Ready for you this week
           </h1>
-          <p className="mt-1 text-sm text-[var(--color-muted)]">
+          <p className="mt-3 max-w-[60ch] text-[16px] text-muted">
             From your {learner.knownWords.toLocaleString()} known words and{" "}
-            {learner.finishedTexts} finished texts. You keep looking up 〜ていく
+            {learner.finishedTexts} finished texts. You keep looking up{" "}
+            <span lang="ja" className="font-jp text-ink">
+              〜ていく
+            </span>{" "}
             forms, so three of these lean on them.
+          </p>
+          <p className="mt-2 text-[14px] text-faint">
+            Sample shelves and forecasts: fixtures until the learner model is connected.
           </p>
         </div>
         <Segmented
@@ -49,7 +55,7 @@ export default function DiscoverPage() {
       <Shelf
         title="Comfortable"
         band="90%+ expected"
-        guidance="read for pleasure — look up almost nothing"
+        guidance="read for pleasure, look up almost nothing"
         tone="comfortable"
         items={comfortable.filter((item) => keep(item.kind))}
       />
@@ -57,7 +63,7 @@ export default function DiscoverPage() {
       <Shelf
         title="A stretch"
         band="75–89% expected"
-        guidance="where the SRS gets fed — expect the popup open often"
+        guidance="where the SRS gets fed, so expect the popup open often"
         tone="stretch"
         items={stretch.filter((item) => keep(item.kind))}
       />

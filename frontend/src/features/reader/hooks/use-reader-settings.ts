@@ -1,13 +1,11 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import type { FuriganaMode, Pairing, ReaderMode } from "../types";
+import type { FuriganaMode, ReaderMode } from "../types";
 
 export type ReaderSettings = {
-  pairing: Pairing;
   furigana: FuriganaMode;
   mode: ReaderMode;
-  setPairing: (value: Pairing) => void;
   setFurigana: (value: FuriganaMode) => void;
   setMode: (value: ReaderMode) => void;
 };

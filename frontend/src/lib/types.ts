@@ -10,3 +10,12 @@ export type LearnerSummary = {
   /** Known-word count the locked shelf unlocks at. */
   nextShelfAt: number;
 };
+
+/** Expected personal comprehension of a text, in percent, with the range the
+ *  learner model considers likely. `null` where it is used means the model
+ *  abstains. */
+export type Forecast = {
+  expected: number;
+  low: number;
+  high: number;
+};
