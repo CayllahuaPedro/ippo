@@ -21,7 +21,13 @@ export function LanguageSwitcher({ locale, label }: LanguageSwitcherProps) {
           hrefLang={option.locale}
           aria-current={option.locale === locale ? "true" : undefined}
           onClick={(event) => {
-            if (!window.location.hash) return;
+            const plainClick =
+              event.button === 0 &&
+              !event.metaKey &&
+              !event.ctrlKey &&
+              !event.shiftKey &&
+              !event.altKey;
+            if (!plainClick || !window.location.hash) return;
             event.preventDefault();
             window.location.assign(option.href + window.location.hash);
           }}
