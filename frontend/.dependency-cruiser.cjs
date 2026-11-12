@@ -63,7 +63,10 @@ module.exports = {
       from: { path: "^src/features/[^/]+/model/", pathNot: "\\.test\\.ts$" },
       // Resolved npm paths look like `node_modules/react/index.js`; matching on
       // the bare package name silently matches nothing.
-      to: { path: "^node_modules/(react|react-dom|next)(/|$)" },
+      to: {
+        path: "^node_modules/(react|react-dom|next)(/|$)",
+        dependencyTypesNot: ["type-only"],
+      },
     },
     {
       name: "hooks-render-nothing",

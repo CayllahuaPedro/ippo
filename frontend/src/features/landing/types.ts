@@ -1,0 +1,50 @@
+export type Locale = "en" | "es";
+
+export type LandingCopy = {
+  meta: { title: string; description: string };
+  hero: { eyebrow: string; title: string; lede: string };
+  waitlist: {
+    placeholder: string;
+    button: string;
+    finePrint: string;
+    invalid: string;
+    success: string;
+    closed: string;
+    error: string;
+  };
+  demo: {
+    forecast: string;
+    hint: string;
+    known: string;
+    learning: string;
+    markKnown: string;
+    markLearning: string;
+    close: string;
+  };
+  method: {
+    label: string;
+    title: string;
+    body: string;
+    tooEasy: string;
+    nextStep: string;
+    tooHard: string;
+    caption: string;
+  };
+  helps: {
+    label: string;
+    title: string;
+    items: { title: string; body: string }[];
+  };
+  status: {
+    label: string;
+    title: string;
+    todayTitle: string;
+    today: string[];
+    nextTitle: string;
+    next: string[];
+    preview: string;
+  };
+  closing: { title: string };
+  footer: { openSource: string; repoUrl: string };
+  switcher: { label: string };
+};
