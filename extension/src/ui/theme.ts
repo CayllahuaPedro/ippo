@@ -72,3 +72,10 @@ ${selector} {${LIGHT_VARS}${SHAPE_AND_TYPE_VARS}}
 }`;
 
 export const DARK_THEME_VARS = `${DARK_VARS}${SHAPE_AND_TYPE_VARS}`;
+
+export const PITCH_PAGE_CSS = `${Object.entries(PITCH_COLORS)
+  .map(([pattern, color]) => `.mjp-parsed .mjp-${pattern} { color: ${color}; }`)
+  .join('\n')}
+${Object.entries(PITCH_COLORS_ON_DARK)
+  .map(([pattern, color]) => `.mjp-parsed[data-mjp-ground='dark'] .mjp-${pattern} { color: ${color}; }`)
+  .join('\n')}`;
