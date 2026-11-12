@@ -42,6 +42,16 @@ describe("LandingPage", () => {
     expect(screen.getAllByRole("link", { name: "EN" })[0].getAttribute("aria-current")).toBeNull();
   });
 
+  it("marks only Japanese example titles as Japanese", () => {
+    render(<LandingPage locale="en" />);
+    for (const element of screen.getAllByText("NHK Easy")) {
+      expect(element.getAttribute("lang")).toBeNull();
+    }
+    for (const element of screen.getAllByText("よつばと!")) {
+      expect(element.getAttribute("lang")).toBe("ja");
+    }
+  });
+
   it("exposes the section anchors", () => {
     const { container } = render(<LandingPage locale="en" />);
     for (const id of ["method", "helps", "status", "join"]) {

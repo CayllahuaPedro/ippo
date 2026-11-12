@@ -1,12 +1,13 @@
+import { cn } from "@/lib/cn";
 import type { LandingCopy } from "../types";
 import { SectionHeading } from "./section-heading";
 
 type MethodSectionProps = { copy: LandingCopy["method"] };
 
 const examples = [
-  { title: "NHK Easy", percent: 97, left: "14%" },
-  { title: "よつばと!", percent: 88, left: "46%" },
-  { title: "村上春樹", percent: 61, left: "82%" },
+  { title: "NHK Easy", percent: 97, left: "14%", japanese: false },
+  { title: "よつばと!", percent: 88, left: "46%", japanese: true },
+  { title: "村上春樹", percent: 61, left: "82%", japanese: true },
 ];
 
 export function MethodSection({ copy }: MethodSectionProps) {
@@ -23,7 +24,10 @@ export function MethodSection({ copy }: MethodSectionProps) {
               style={{ left: example.left }}
               className="absolute bottom-0 -translate-x-1/2 text-center text-[14px] text-muted"
             >
-              <div lang="ja" className="font-jp whitespace-nowrap text-ink">
+              <div
+                lang={example.japanese ? "ja" : undefined}
+                className={cn("whitespace-nowrap text-ink", example.japanese && "font-jp")}
+              >
                 {example.title}
               </div>
               {example.percent}%
@@ -43,7 +47,10 @@ export function MethodSection({ copy }: MethodSectionProps) {
         <ul className="mt-5 m-0 flex list-none flex-col gap-2 p-0 text-[14px] text-muted sm:hidden">
           {examples.map((example) => (
             <li key={example.title} className="flex justify-between">
-              <span lang="ja" className="font-jp text-ink">
+              <span
+                lang={example.japanese ? "ja" : undefined}
+                className={cn("text-ink", example.japanese && "font-jp")}
+              >
                 {example.title}
               </span>
               {example.percent}%
