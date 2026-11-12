@@ -265,6 +265,13 @@ The one place the page spends colour. A large tabular percentage in ink; beneath
 ### Word Marks (signature)
 Word state reads from underline style: known carries no mark; learning gets a 2px dotted violet underline; selected gets a 3px solid violet underline over the tint fill. Underline offset is 0.32em so it clears the text. A legend sets the kanji 字 in each style beside its label. Furigana is hidden until hover by default, shown for the selected word on touch, and can be set to always or off.
 
+### Brand Mark
+止, the original drawing of a foot and the root of 歩 (step), whose base line runs on and climbs one step in violet: "one step more" (一歩, i+1). Drawn on a 64 by 64 grid from five round-capped, round-joined 7-unit strokes: four in ink (`M24 10 V50`, `M24 28 H36`, `M10 32 V50`, `M5 50 H34`) and one in violet (`M34 50 H45 V37 H59`). In the interface the ink strokes use `currentColor` and the step uses `--color-accent`, so it follows light and dark. Beside the wordmark it is 24px with an 8px gap.
+
+- **Minimum size:** 16px.
+- **App icons:** the mark sits on a 14px-radius tile (tint fill, #efedfc light and #252050 dark) at 81% scale with 7.5-unit strokes; iOS gets the same on a full-bleed square.
+- **Colour:** never recolour beyond ink and violet (light #1b1547 and #6b5ce7, dark #e8e6f5 and #8b7ff0).
+
 ### Bottom Sheet
 Native dialog rising from the bottom (sheet-rise, 0.22s ease-out) over a 50% scrim (veil-in, 0.18s); 12px top corners, hairline top border, a 40 by 4px handle. Default height 78svh.
 
