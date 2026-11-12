@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { PassageText, popupPosition } from "@/features/reader";
 import { demoGlossary } from "../fixtures";
 import { useReaderDemo } from "../hooks/use-reader-demo";
-import { formatForecast } from "../model/copy";
+import { formatForecast, formatTemplate } from "../model/copy";
 import type { LandingCopy, Locale } from "../types";
 import { DemoLegend } from "./demo-legend";
 import { DemoPopup } from "./demo-popup";
@@ -43,6 +43,7 @@ export function ReaderDemo({ locale, copy }: ReaderDemoProps) {
           mode="learn"
           selectedTokenId={pick?.key ?? null}
           onSelect={select}
+          labels={{ lookUp: (word) => formatTemplate(copy.lookUp, { word }) }}
         />
       </div>
       {entry && state && (

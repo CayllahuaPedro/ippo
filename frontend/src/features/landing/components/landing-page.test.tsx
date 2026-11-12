@@ -59,3 +59,30 @@ describe("LandingPage", () => {
     }
   });
 });
+
+describe("LandingPage snippets", () => {
+  it("renders no English product text on /es", () => {
+    const { container } = render(<LandingPage locale="es" />);
+    const text = container.textContent ?? "";
+    for (const english of [
+      "Add to SRS",
+      "Ask the tutor",
+      "Comfortable",
+      "Format",
+      "Source",
+      "Notes",
+      "new words",
+      "adds direction",
+      "you'll understand",
+    ]) {
+      expect(text, english).not.toContain(english);
+    }
+  });
+
+  it("keeps the English snippets on /en", () => {
+    const { container } = render(<LandingPage locale="en" />);
+    const text = container.textContent ?? "";
+    expect(text).toContain("Add to SRS");
+    expect(text).toContain("Comfortable");
+  });
+});

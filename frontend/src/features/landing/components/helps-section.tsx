@@ -1,24 +1,32 @@
-import { Shelf, comfortable } from "@/features/discover";
-import { TutorTurnView, tutorThread } from "@/features/tutor";
-import type { LandingCopy } from "../types";
+import { Shelf } from "@/features/discover";
+import { TutorTurnView } from "@/features/tutor";
+import { snippetFixtures } from "../fixtures";
+import { shelfLabelsFrom } from "../model/snippet-labels";
+import type { LandingCopy, Locale } from "../types";
 import { ChromeSnippet } from "./chrome-snippet";
 import { SectionHeading } from "./section-heading";
 
-type HelpsSectionProps = { copy: LandingCopy["helps"] };
+type HelpsSectionProps = {
+  locale: Locale;
+  copy: LandingCopy["helps"];
+  snippets: LandingCopy["snippets"];
+};
 
-export function HelpsSection({ copy }: HelpsSectionProps) {
-  const snippets = [
+export function HelpsSection({ locale, copy, snippets }: HelpsSectionProps) {
+  const fixtures = snippetFixtures[locale];
+  const rendered = [
     <Shelf
       key="shelf"
-      title="Comfortable"
-      band="90%+ expected"
-      guidance="read for pleasure, look up almost nothing"
+      title={snippets.shelf.title}
+      band={snippets.shelf.band}
+      guidance={snippets.shelf.guidance}
       tone="comfortable"
-      items={comfortable.slice(0, 1)}
+      items={[fixtures.shelfItem]}
+      labels={shelfLabelsFrom(snippets.shelf)}
       stacked
     />,
-    <ChromeSnippet key="chrome" />,
-    <TutorTurnView key="tutor" turn={tutorThread[1]} />,
+    <ChromeSnippet key="chrome" entry={fixtures.entry} copy={snippets.entry} />,
+    <TutorTurnView key="tutor" turn={fixtures.tutorTurn} />,
   ];
 
   return (
@@ -28,7 +36,7 @@ export function HelpsSection({ copy }: HelpsSectionProps) {
         {copy.items.map((item, index) => (
           <div key={item.title} className="flex min-w-0 flex-col">
             <div inert className="mb-4 flex-1 overflow-hidden" aria-hidden>
-              {snippets[index]}
+              {rendered[index]}
             </div>
             <h3 className="mb-1.5 text-[18px] font-medium">{item.title}</h3>
             <p className="text-[16px] leading-[1.55] text-muted">{item.body}</p>

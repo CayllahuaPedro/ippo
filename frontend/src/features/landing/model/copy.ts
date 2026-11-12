@@ -31,6 +31,7 @@ const en: LandingCopy = {
     markKnown: "I know it",
     markLearning: "Learning",
     close: "Close",
+    lookUp: "Look up {word}",
   },
   method: {
     label: "The method",
@@ -58,6 +59,31 @@ const en: LandingCopy = {
         body: "Ask the tutor about a word, a grammar point or a sentence. It answers at your level.",
       },
     ],
+  },
+  snippets: {
+    shelf: {
+      title: "Comfortable",
+      band: "90%+ expected",
+      guidance: "read for pleasure, look up almost nothing",
+      format: "Format",
+      source: "Source",
+      notes: "Notes",
+      empty: "Nothing of this type on this shelf.",
+      kinds: { video: "video", article: "article", book: "book" },
+      noForecast: "No forecast",
+      abstains: "No forecast · the model abstains on this text",
+      understand: "you'll understand · likely {low}–{high}%",
+    },
+    entry: {
+      derivation: "From the form in the text to the dictionary form",
+      cardFront: "Card front",
+      cardBack: "back: gloss and this sentence",
+      frequencyRank: "frequency rank",
+      addToSrs: "Add to SRS",
+      inSrs: "In your SRS",
+      askTutor: "Ask the tutor",
+      states: { known: "known", learning: "learning", selected: "selected" },
+    },
   },
   status: {
     label: "Where it stands",
@@ -112,6 +138,7 @@ const es: LandingCopy = {
     markKnown: "La conozco",
     markLearning: "Aprendiendo",
     close: "Cerrar",
+    lookUp: "Buscar {word}",
   },
   method: {
     label: "El método",
@@ -140,6 +167,31 @@ const es: LandingCopy = {
       },
     ],
   },
+  snippets: {
+    shelf: {
+      title: "Cómodos",
+      band: "90%+ esperado",
+      guidance: "lee por placer, casi sin buscar nada",
+      format: "Tipo",
+      source: "Fuente",
+      notes: "Notas",
+      empty: "Nada de este tipo en este estante.",
+      kinds: { video: "video", article: "artículo", book: "libro" },
+      noForecast: "Sin pronóstico",
+      abstains: "Sin pronóstico · el modelo se abstiene con este texto",
+      understand: "entenderás · probable {low}–{high}%",
+    },
+    entry: {
+      derivation: "De la forma en el texto a la forma del diccionario",
+      cardFront: "Anverso de la tarjeta",
+      cardBack: "reverso: significado y esta oración",
+      frequencyRank: "rango de frecuencia",
+      addToSrs: "Añadir al SRS",
+      inSrs: "En tu SRS",
+      askTutor: "Preguntar al tutor",
+      states: { known: "conocida", learning: "aprendiendo", selected: "seleccionada" },
+    },
+  },
   status: {
     label: "Dónde estamos",
     title: "Sinceros sobre lo que existe.",
@@ -165,6 +217,15 @@ const es: LandingCopy = {
 };
 
 export const copy: Record<Locale, LandingCopy> = { en, es };
+
+export function formatTemplate(
+  template: string,
+  values: Record<string, string | number>,
+): string {
+  return template.replace(/\{(\w+)\}/g, (match, key: string) =>
+    key in values ? String(values[key]) : match,
+  );
+}
 
 export function formatForecast(template: string, pct: number): string {
   return template.replace("{pct}", String(pct));

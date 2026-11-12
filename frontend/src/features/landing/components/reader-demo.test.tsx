@@ -1,14 +1,14 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
-import { copy } from "../model/copy";
+import { copy, formatTemplate } from "../model/copy";
 import { ReaderDemo } from "./reader-demo";
 
 const demo = copy.en.demo;
 
 function setup() {
   render(<ReaderDemo locale="en" copy={demo} />);
-  return screen.getByRole("button", { name: "Look up 早起き" });
+  return screen.getByRole("button", { name: formatTemplate(demo.lookUp, { word: "早起き" }) });
 }
 
 describe("ReaderDemo", () => {
@@ -91,5 +91,13 @@ describe("ReaderDemo", () => {
     await user.click(words[1]);
     await user.keyboard("{Escape}");
     expect(document.activeElement).toBe(words[1]);
+  });
+});
+
+describe("ReaderDemo in Spanish", () => {
+  it("names the word buttons in the page language", () => {
+    render(<ReaderDemo locale="es" copy={copy.es.demo} />);
+    expect(screen.getByRole("button", { name: "Buscar 早起き" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Look up 早起き" })).toBeNull();
   });
 });

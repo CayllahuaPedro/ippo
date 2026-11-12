@@ -1,10 +1,14 @@
 "use client";
 
-import { WordEntry, dictionary } from "@/features/reader";
+import { WordEntry, type DictionaryEntry } from "@/features/reader";
+import { wordEntryLabelsFrom } from "../model/snippet-labels";
+import type { LandingCopy } from "../types";
 
 const noop = () => {};
 
-export function ChromeSnippet() {
+type ChromeSnippetProps = { entry: DictionaryEntry; copy: LandingCopy["snippets"]["entry"] };
+
+export function ChromeSnippet({ entry, copy }: ChromeSnippetProps) {
   return (
     <div className="flex flex-col gap-3">
       <div className="rounded-[var(--radius-panel)] border border-hairline bg-ground px-4 py-3">
@@ -16,7 +20,13 @@ export function ChromeSnippet() {
         </p>
       </div>
       <div className="rounded-[var(--radius-panel)] border border-hairline bg-ground px-4 py-3">
-        <WordEntry entry={dictionary.yuki} added={false} onAddToSrs={noop} onAskTutor={noop} />
+        <WordEntry
+          entry={entry}
+          labels={wordEntryLabelsFrom(copy)}
+          added={false}
+          onAddToSrs={noop}
+          onAskTutor={noop}
+        />
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ export type LandingCopy = {
     markKnown: string;
     markLearning: string;
     close: string;
+    lookUp: string;
   };
   method: {
     label: string;
@@ -35,6 +36,31 @@ export type LandingCopy = {
     label: string;
     title: string;
     items: { title: string; body: string }[];
+  };
+  snippets: {
+    shelf: {
+      title: string;
+      band: string;
+      guidance: string;
+      format: string;
+      source: string;
+      notes: string;
+      empty: string;
+      kinds: { video: string; article: string; book: string };
+      noForecast: string;
+      abstains: string;
+      understand: string;
+    };
+    entry: {
+      derivation: string;
+      cardFront: string;
+      cardBack: string;
+      frequencyRank: string;
+      addToSrs: string;
+      inSrs: string;
+      askTutor: string;
+      states: { known: string; learning: string; selected: string };
+    };
   };
   status: {
     label: string;

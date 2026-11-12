@@ -1,4 +1,6 @@
-import { parseTokens, type Paragraph } from "@/features/reader";
+import { comfortable, type Recommendation } from "@/features/discover";
+import { dictionary, parseTokens, type DictionaryEntry, type Paragraph } from "@/features/reader";
+import { settled, tutorThread, type TutorTurn } from "@/features/tutor";
 import type { Locale } from "./types";
 
 const lines = [
@@ -28,4 +30,60 @@ export const demoGlossary: Record<string, DemoEntry> = {
   kaori: { lemma: "香り", kana: "かおり", gloss: { en: "scent, aroma", es: "aroma, fragancia" } },
   toori: { lemma: "通り", kana: "とおり", gloss: { en: "street, road", es: "calle" } },
   hirogaru: { lemma: "広がる", kana: "ひろがる", gloss: { en: "to spread, to extend", es: "extenderse, esparcirse" } },
+};
+
+type SnippetFixture = {
+  shelfItem: Recommendation;
+  entry: DictionaryEntry;
+  tutorTurn: TutorTurn;
+};
+
+export const snippetFixtures: Record<Locale, SnippetFixture> = {
+  en: {
+    shelfItem: comfortable[0],
+    entry: dictionary.yuki,
+    tutorTurn: tutorThread[1],
+  },
+  es: {
+    shelfItem: {
+      ...comfortable[0],
+      source: "NHK Easy News · con subtítulos",
+      note: "11 palabras nuevas\n2 ya en tu SRS",
+      imageDescription: "Imagen de NHK: andén nevado por la mañana",
+    },
+    entry: {
+      ...dictionary.yuki,
+      pitchLabel: "Acento 2",
+      glosses: ["nieve"],
+      kanji: {
+        character: "雪",
+        components: [
+          { glyph: "⻗", meaning: "lluvia" },
+          { glyph: "彐", meaning: "mano que barre" },
+        ],
+        readings: "セツ · ゆき",
+      },
+    },
+    tutorTurn: {
+      id: "seed-tutor-1",
+      role: "tutor",
+      blocks: [
+        settled(
+          {
+            kind: "prose",
+            text: "〜ていく añade dirección: el cambio se aleja de ti, con el tiempo. El color no desapareció de golpe, fue desvaneciéndose mientras el tren avanzaba.",
+          },
+          0,
+        ),
+        settled({ kind: "example", japanese: "色が消えていった", gloss: "fue desvaneciéndose" }, 1),
+        settled(
+          {
+            kind: "prose",
+            text: "〜ていた solo informaría de un estado que observaste. Si lo pones en su lugar, la nieve deja de moverse.",
+          },
+          2,
+        ),
+      ],
+    },
+  },
 };

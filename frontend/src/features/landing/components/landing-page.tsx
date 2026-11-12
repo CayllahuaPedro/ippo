@@ -17,7 +17,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
       <main className="mx-auto w-full max-w-[1080px] px-4 sm:px-8 lg:px-12">
         <Hero locale={locale} copy={copy} />
         <MethodSection copy={copy.method} />
-        <HelpsSection copy={copy.helps} />
+        <HelpsSection locale={locale} copy={copy.helps} snippets={copy.snippets} />
         <StatusSection copy={copy.status} />
         <ClosingSection locale={locale} copy={copy} />
       </main>

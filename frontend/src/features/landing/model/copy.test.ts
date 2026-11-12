@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { copy, formatForecast } from "./copy";
+import { copy, formatForecast, formatTemplate } from "./copy";
 
 function walk(
   en: unknown,
@@ -42,6 +42,10 @@ describe("landing copy", () => {
 
   it("no copy names other products", () => {
     expect(JSON.stringify(copy)).not.toMatch(/refold|migaku|\bmia\b|fluent in/i);
+  });
+
+  it("fills named placeholders and leaves unknown ones alone", () => {
+    expect(formatTemplate("Buscar {word} {other}", { word: "駅" })).toBe("Buscar 駅 {other}");
   });
 
   it("formats the forecast template", () => {
