@@ -27,15 +27,22 @@ export function DemoPopup({
 }: DemoPopupProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const opener = document.activeElement;
+  const openerRef = useRef<HTMLElement | null>(null);
 
+  useEffect(() => {
+    const active = document.activeElement;
+    openerRef.current =
+      active instanceof HTMLElement && active !== document.body ? active : null;
+    ref.current?.focus();
+  }, [entry.lemma]);
+
+  useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as Node;
-      if (ref.current?.contains(target) || opener?.contains(target)) return;
+      if (ref.current?.contains(target) || openerRef.current?.contains(target)) return;
       onClose();
     };
     document.addEventListener("keydown", onKeyDown);
@@ -44,9 +51,17 @@ export function DemoPopup({
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
-      if (opener instanceof HTMLElement) opener.focus();
     };
   }, [onClose]);
+
+  useEffect(
+    () => () => {
+      const active = document.activeElement;
+      const focusLost = active === document.body || ref.current?.contains(active);
+      if (focusLost) openerRef.current?.focus();
+    },
+    [],
+  );
 
   const marks = [
     { state: "known", label: copy.markKnown },
@@ -64,9 +79,10 @@ export function DemoPopup({
       ref={ref}
       role="dialog"
       aria-label={entry.lemma}
+      tabIndex={-1}
       style={style}
       className={cn(
-        "mt-4 border border-hairline bg-ground p-4",
+        "mt-4 border border-hairline bg-ground p-4 focus:outline-none",
         "lg:absolute lg:left-(--popup-left) lg:top-(--popup-top) lg:z-10 lg:mt-0 lg:w-(--popup-width)",
       )}
     >
@@ -94,6 +110,13 @@ export function DemoPopup({
             {mark.label}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={onClose}
+          className="ml-auto cursor-pointer border border-transparent px-3 py-1.5 text-[14px] text-muted hover:text-ink"
+        >
+          {copy.close}
+        </button>
       </div>
     </div>
   );
