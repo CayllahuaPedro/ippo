@@ -2,12 +2,25 @@ import { cn } from "@/lib/cn";
 import { bandGeometry } from "@/lib/forecast";
 import type { Forecast } from "@/lib/types";
 
+export type ForecastBlockLabels = {
+  noForecast: string;
+  abstains: string;
+  understand: (low: number, high: number) => string;
+};
+
+export const forecastBlockLabels: ForecastBlockLabels = {
+  noForecast: "No forecast",
+  abstains: "No forecast · the model abstains on this text",
+  understand: (low, high) => `you'll understand · likely ${low}–${high}%`,
+};
+
 type ForecastBlockProps = {
   /** `null` when the learner model abstains on this text. */
   forecast: Forecast | null;
   size?: "lg" | "md";
   align?: "start" | "end";
   className?: string;
+  labels?: Partial<ForecastBlockLabels>;
 };
 
 const numberSize = {
@@ -23,7 +36,9 @@ export function ForecastBlock({
   size = "md",
   align = "start",
   className,
+  labels,
 }: ForecastBlockProps) {
+  const text = { ...forecastBlockLabels, ...labels };
   const alignment = align === "end" && "lg:items-end lg:text-right";
 
   if (!forecast) {
@@ -31,11 +46,11 @@ export function ForecastBlock({
       <div className={cn("flex flex-col", alignment, className)}>
         <p className={cn("leading-none font-normal text-faint", numberSize[size])}>
           <span aria-hidden>—</span>
-          <span className="sr-only">No forecast</span>
+          <span className="sr-only">{text.noForecast}</span>
         </p>
         <div aria-hidden className="mt-4 h-3 w-full max-w-[320px] bg-track" />
         <p className="mt-2.5 text-[15px] text-faint">
-          No forecast · the model abstains on this text
+          {text.abstains}
         </p>
       </div>
     );
@@ -64,7 +79,7 @@ export function ForecastBlock({
         />
       </div>
       <p className="mt-2.5 text-[15px] text-muted tabular-nums">
-        you&apos;ll understand · likely {forecast.low}–{forecast.high}%
+        {text.understand(forecast.low, forecast.high)}
       </p>
     </div>
   );
