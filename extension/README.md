@@ -177,4 +177,5 @@ Planned:
 
 ## Licence
 
-Personal project, unlicensed for redistribution. JMdict and Kanjium carry their own licences.
+AGPL-3.0, like the rest of the repo — see [LICENSE](../LICENSE). JMdict and Kanjium carry their
+own licences.
