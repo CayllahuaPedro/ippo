@@ -14,6 +14,18 @@ from nihon_ml.tokenize import TRACKABLE, tokens
 
 _LEVEL_FILES = {"n5": 0, "n4": 1, "n3": 2, "n2": 3, "n1": 4}
 
+ITEM_CSV_HEADER = [
+    "item_key",
+    "item_id",
+    "item_ambiguous",
+    "lemma",
+    "reading",
+    "pos",
+    "level",
+    "source_surface",
+    "source_reading",
+]
+
 
 def headword_to_item_key(surface: str) -> str | None:
     content = [t for t in tokens(surface) if t.frame_bucket == TRACKABLE]
@@ -27,6 +39,48 @@ def headword_to_item_id(surface: str, reading: str | None, jmdict: Jmdict) -> st
     return resolution.item_id if resolution else None
 
 
+def build_level_rows(
+    headwords: list[tuple[str, str]], jmdict: Jmdict, ordinal: int
+) -> tuple[list[list], dict]:
+    """One CSV row per distinct headword identity.
+
+    A headword is kept when it has a UniDic `item_key` or a JMdict `item_id`. Rows are deduped on
+    `item_id` when there is one, so two words that UniDic collapses into one lemma both survive.
+    """
+    rows: list[list] = []
+    seen: set[str] = set()
+    stats = {"skipped_multitoken": 0, "unique": 0, "ambiguous": 0, "unmatched": 0}
+    for surface, source_reading in headwords:
+        key = headword_to_item_key(surface)
+        resolution = jmdict.resolve(surface, source_reading or None)
+        if key is None and resolution is None:
+            stats["skipped_multitoken"] += 1
+            continue
+        identity = resolution.item_id if resolution else key
+        if identity in seen:
+            continue
+        seen.add(identity)
+        if resolution is None:
+            stats["unmatched"] += 1
+        else:
+            stats["ambiguous" if resolution.ambiguous else "unique"] += 1
+        lemma, reading, pos = key.split("|") if key else ("", "", "")
+        rows.append(
+            [
+                key or "",
+                resolution.item_id if resolution else "",
+                resolution.ambiguous if resolution else "",
+                lemma,
+                reading,
+                pos,
+                ordinal,
+                surface,
+                source_reading,
+            ]
+        )
+    return rows, stats
+
+
 def load_jlpt_levels(csv_dir: pathlib.Path) -> dict[str, int]:
     levels: dict[str, int] = {}
     for stem, level in _LEVEL_FILES.items():
@@ -36,6 +90,8 @@ def load_jlpt_levels(csv_dir: pathlib.Path) -> dict[str, int]:
         with path.open(encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 key = row["item_key"]
+                if not key:
+                    continue
                 # A key can appear across lists (homograph, or fugashi collapsing two
                 # surfaces to one lemma). It's known as soon as its easiest level is reached,
                 # so the minimum level wins — never inflate difficulty by taking a later list.

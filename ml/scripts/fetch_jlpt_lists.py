@@ -23,7 +23,7 @@ import urllib.request
 from collections import defaultdict
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from nihon_ml.jlpt.lists import headword_to_item_key
+from nihon_ml.jlpt.lists import ITEM_CSV_HEADER, build_level_rows
 from nihon_ml.jmdict import Jmdict
 
 _ML = pathlib.Path(__file__).resolve().parents[1]
@@ -38,17 +38,6 @@ _LEVEL_ORDINAL = {5: 0, 4: 1, 3: 2, 2: 3, 1: 4}
 # The kanji+hiragana deck is the one filename that exists for every level N5-N1
 # (the -eng-hiragana variant only exists for N5). Fields are Front=surface, Back=reading.
 _URL = "http://www.tanos.co.uk/jlpt/jlpt{n}/vocab/n{n}-vocab-kanji-hiragana.anki"
-_HEADER = [
-    "item_key",
-    "item_id",
-    "item_ambiguous",
-    "lemma",
-    "reading",
-    "pos",
-    "level",
-    "source_surface",
-    "source_reading",
-]
 
 
 def _download(n: int) -> pathlib.Path:
@@ -86,49 +75,18 @@ def _normalize_level(n: int, jmdict: Jmdict) -> dict:
     _OUT.mkdir(parents=True, exist_ok=True)
     out_path = _OUT / f"n{n}.csv"
 
-    seen: set[str] = set()
-    kept = skipped = 0
-    id_unique = id_ambiguous = id_unmatched = 0
+    rows, counts = build_level_rows(raw, jmdict, ordinal)
     with out_path.open("w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(_HEADER)
-        for surface, source_reading in raw:
-            key = headword_to_item_key(surface)
-            if key is None:
-                skipped += 1
-                continue
-            if key in seen:
-                continue
-            seen.add(key)
-            lemma, reading, pos = key.split("|")
-            resolution = jmdict.resolve(surface, source_reading or None)
-            if resolution is None:
-                id_unmatched += 1
-            elif resolution.ambiguous:
-                id_ambiguous += 1
-            else:
-                id_unique += 1
-            writer.writerow(
-                [
-                    key,
-                    resolution.item_id if resolution else "",
-                    resolution.ambiguous if resolution else "",
-                    lemma,
-                    reading,
-                    pos,
-                    ordinal,
-                    surface,
-                    source_reading,
-                ]
-            )
-            kept += 1
+        writer.writerow(ITEM_CSV_HEADER)
+        writer.writerows(rows)
     return {
         "level": f"n{n}",
         "ordinal": ordinal,
         "headwords": len(raw),
-        "kept": kept,
-        "skipped_multitoken": skipped,
-        "item_id": {"unique": id_unique, "ambiguous": id_ambiguous, "unmatched": id_unmatched},
+        "kept": len(rows),
+        "skipped_multitoken": counts["skipped_multitoken"],
+        "item_id": {k: counts[k] for k in ("unique", "ambiguous", "unmatched")},
         "csv": str(out_path),
     }
 

@@ -36,6 +36,8 @@ jobs:
               - '.github/workflows/ci.yml'
             ml:
               - 'ml/**'
+              - 'extension/tests/fixtures/item-identity.json'
+              - 'extension/src/core/item.ts'
               - '.github/workflows/ci.yml'
             extension:
               - 'extension/**'
