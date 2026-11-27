@@ -6,8 +6,8 @@ describe('transformJmdict', () => {
     const raw = [
       {
         id: '1467640',
-        kanji: [{ text: '猫' }],
-        kana: [{ text: 'ねこ' }, { text: 'ネコ' }],
+        kanji: [{ text: '猫', common: false }],
+        kana: [{ text: 'ねこ', common: false }, { text: 'ネコ', common: false }],
         sense: [
           { partOfSpeech: ['n'], gloss: [{ text: 'cat' }, { text: 'feline' }] },
         ],
@@ -19,9 +19,46 @@ describe('transformJmdict', () => {
         kanji: ['猫'],
         kana: ['ねこ', 'ネコ'],
         forms: ['猫', 'ねこ', 'ネコ'],
+        common: false,
         senses: [{ pos: ['n'], gloss: ['cat', 'feline'] }],
       },
     ]);
+  });
+
+  it('marks an entry common when any kana form is common', () => {
+    const raw = [
+      {
+        id: '1004190',
+        kanji: [],
+        kana: [{ text: 'こと', common: true }],
+        sense: [{ partOfSpeech: ['n'], gloss: [{ text: 'thing' }] }],
+      },
+    ];
+    expect(transformJmdict(raw)[0].common).toBe(true);
+  });
+
+  it('marks an entry common when any kanji form is common', () => {
+    const raw = [
+      {
+        id: '1',
+        kanji: [{ text: '猫', common: true }],
+        kana: [{ text: 'ねこ', common: false }],
+        sense: [{ partOfSpeech: ['n'], gloss: [{ text: 'cat' }] }],
+      },
+    ];
+    expect(transformJmdict(raw)[0].common).toBe(true);
+  });
+
+  it('leaves an entry uncommon when no form is common', () => {
+    const raw = [
+      {
+        id: '2',
+        kanji: [{ text: '他', common: false }],
+        kana: [{ text: 'ほか', common: false }],
+        sense: [{ partOfSpeech: ['n'], gloss: [{ text: 'other' }] }],
+      },
+    ];
+    expect(transformJmdict(raw)[0].common).toBe(false);
   });
 });
 

@@ -2,6 +2,7 @@ import type { JpToken } from './tokenizer';
 import { classifyPitch, type PitchPattern } from './pitch';
 import { furigana } from './furigana';
 import { katakanaToHiragana } from './kana';
+import type { ItemRef } from './item';
 import type { TokenQuery } from './messages';
 
 export interface RenderToken {
@@ -11,11 +12,13 @@ export interface RenderToken {
   basicForm: string;
   reading?: string;
   parts?: TokenQuery[];
+  item?: ItemRef;
 }
 
 export function buildRenderTokens(
   tokens: JpToken[],
   accents: (number | null)[],
+  items: (ItemRef | null | undefined)[] = [],
 ): RenderToken[] {
   return tokens.map((t, i) => {
     const reading = t.reading ? katakanaToHiragana(t.reading) : undefined;
@@ -27,6 +30,7 @@ export function buildRenderTokens(
       basicForm: t.basicForm,
       reading,
       ...(t.parts && { parts: t.parts }),
+      ...(items[i] && { item: items[i] }),
     };
   });
 }

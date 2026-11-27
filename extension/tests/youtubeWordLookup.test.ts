@@ -13,6 +13,7 @@ const result = (gloss: string): LookupResult => ({
       kanji: [gloss],
       kana: ['x'],
       forms: [gloss],
+      common: false,
       senses: [{ pos: ['n'], gloss: [gloss] }],
     },
   ],

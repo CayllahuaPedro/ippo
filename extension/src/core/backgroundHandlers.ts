@@ -1,11 +1,13 @@
 import { isImported, importData, lookupEntries, getAccent } from './db';
 import { hasKanji, katakanaToHiragana } from './kana';
+import { resolveItem } from './item';
 import type {
   AnnotateResult,
   ErrorResult,
   FindCompoundsResult,
   LookupResult,
   Msg,
+  ResolveItemsResult,
   TokenQuery,
 } from './messages';
 import type { DictEntry, PitchMap, PosTagMap } from './types';
@@ -26,7 +28,7 @@ export async function handleBackgroundMessage(
   msg: Msg,
   loadAssets: AssetLoader,
   loadPosTags: PosTagLoader,
-):Promise<{ ok: true } | AnnotateResult | FindCompoundsResult | LookupResult | ErrorResult | undefined> {
+):Promise<{ ok: true } | AnnotateResult | FindCompoundsResult | ResolveItemsResult | LookupResult | ErrorResult | undefined> {
   switch (msg.type) {
     case 'ensure-imported': {
       if (!(await isImported(db))) {
@@ -46,6 +48,18 @@ export async function handleBackgroundMessage(
         ),
       );
       return { accents };
+    }
+    case 'resolve-items': {
+      const items = await Promise.all(
+        msg.tokens.map(async (query) => {
+          const forms = new Map<string, DictEntry[]>();
+          for (const form of new Set([query.basicForm, query.surface])) {
+            forms.set(form, await lookupEntries(db, form));
+          }
+          return resolveItem(query, (form) => forms.get(form) ?? []);
+        }),
+      );
+      return { items };
     }
     case 'find-compounds': {
       const matches = await Promise.all(

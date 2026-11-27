@@ -1,0 +1,968 @@
+{
+ "entries": [
+  {
+   "id": "1006830",
+   "kanji": [
+    "其の"
+   ],
+   "kana": [
+    "その",
+    "そん"
+   ],
+   "forms": [
+    "其の",
+    "その",
+    "そん"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "adj-pn"
+     ],
+     "gloss": [
+      "that"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1157170",
+   "kanji": [
+    "為る"
+   ],
+   "kana": [
+    "する"
+   ],
+   "forms": [
+    "為る",
+    "する"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "vs-i"
+     ],
+     "gloss": [
+      "to do"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1176240",
+   "kanji": [
+    "園",
+    "苑",
+    "薗"
+   ],
+   "kana": [
+    "その"
+   ],
+   "forms": [
+    "園",
+    "苑",
+    "薗",
+    "その"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "garden"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1203260",
+   "kanji": [
+    "他",
+    "外"
+   ],
+   "kana": [
+    "ほか"
+   ],
+   "forms": [
+    "他",
+    "外",
+    "ほか"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "another place"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1255430",
+   "kanji": [
+    "月"
+   ],
+   "kana": [
+    "つき"
+   ],
+   "forms": [
+    "月",
+    "つき"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "Moon"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1296400",
+   "kanji": [
+    "有る",
+    "在る"
+   ],
+   "kana": [
+    "ある"
+   ],
+   "forms": [
+    "有る",
+    "在る",
+    "ある"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5r-i",
+      "vi"
+     ],
+     "gloss": [
+      "to be"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1298670",
+   "kanji": [
+    "刷る",
+    "摺る"
+   ],
+   "kana": [
+    "する"
+   ],
+   "forms": [
+    "刷る",
+    "摺る",
+    "する"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5r",
+      "vt"
+     ],
+     "gloss": [
+      "to print"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1378440",
+   "kanji": [
+    "生"
+   ],
+   "kana": [
+    "き"
+   ],
+   "forms": [
+    "生",
+    "き"
+   ],
+   "common": false,
+   "senses": [
+    {
+     "pos": [
+      "n",
+      "pref"
+     ],
+     "gloss": [
+      "pure"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1378450",
+   "kanji": [
+    "生"
+   ],
+   "kana": [
+    "なま"
+   ],
+   "forms": [
+    "生",
+    "なま"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "adj-no",
+      "n"
+     ],
+     "gloss": [
+      "raw"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1433030",
+   "kanji": [
+    "通る",
+    "透る",
+    "徹る"
+   ],
+   "kana": [
+    "とおる"
+   ],
+   "forms": [
+    "通る",
+    "透る",
+    "徹る",
+    "とおる"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5r",
+      "vi"
+     ],
+     "gloss": [
+      "to go by"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1447690",
+   "kanji": [
+    "東京",
+    "東亰"
+   ],
+   "kana": [
+    "とうきょう",
+    "とうけい"
+   ],
+   "forms": [
+    "東京",
+    "東亰",
+    "とうきょう",
+    "とうけい"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "Tokyo"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1457210",
+   "kanji": [
+    "届ける",
+    "屆ける"
+   ],
+   "kana": [
+    "とどける"
+   ],
+   "forms": [
+    "届ける",
+    "屆ける",
+    "とどける"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v1",
+      "vt"
+     ],
+     "gloss": [
+      "to deliver"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1567440",
+   "kanji": [
+    "掏る"
+   ],
+   "kana": [
+    "する",
+    "スる"
+   ],
+   "forms": [
+    "掏る",
+    "する",
+    "スる"
+   ],
+   "common": false,
+   "senses": [
+    {
+     "pos": [
+      "v5r",
+      "vt"
+     ],
+     "gloss": [
+      "to pickpocket"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1581900",
+   "kanji": [
+    "剃る"
+   ],
+   "kana": [
+    "そる",
+    "する"
+   ],
+   "forms": [
+    "剃る",
+    "そる",
+    "する"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5r",
+      "vt"
+     ],
+     "gloss": [
+      "to shave"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1586840",
+   "kanji": [
+    "或る",
+    "或"
+   ],
+   "kana": [
+    "ある"
+   ],
+   "forms": [
+    "或る",
+    "或",
+    "ある"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "adj-pn"
+     ],
+     "gloss": [
+      "a certain ..."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1595910",
+   "kanji": [
+    "擦る",
+    "擂る",
+    "摩る",
+    "磨る"
+   ],
+   "kana": [
+    "する"
+   ],
+   "forms": [
+    "擦る",
+    "擂る",
+    "摩る",
+    "磨る",
+    "する"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5r",
+      "vt"
+     ],
+     "gloss": [
+      "to rub"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1883210",
+   "kanji": [
+    "食肉目"
+   ],
+   "kana": [
+    "しょくにくもく"
+   ],
+   "forms": [
+    "食肉目",
+    "しょくにくもく"
+   ],
+   "common": false,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "Carnivora"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1949190",
+   "kanji": [
+    "他"
+   ],
+   "kana": [
+    "た"
+   ],
+   "forms": [
+    "他",
+    "た"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "adv",
+      "n"
+     ],
+     "gloss": [
+      "other (esp. people and abstract matters)"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2088240",
+   "kanji": [
+    "生"
+   ],
+   "kana": [
+    "せい",
+    "しょう"
+   ],
+   "forms": [
+    "生",
+    "せい",
+    "しょう"
+   ],
+   "common": false,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "life"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2153740",
+   "kanji": [
+    "月"
+   ],
+   "kana": [
+    "げつ"
+   ],
+   "forms": [
+    "月",
+    "げつ"
+   ],
+   "common": false,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "Monday"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2871532",
+   "kanji": [
+    "月"
+   ],
+   "kana": [
+    "がつ"
+   ],
+   "forms": [
+    "月",
+    "がつ"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n-suf"
+     ],
+     "gloss": [
+      "month (of the year)"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "999999",
+   "kanji": [
+    "試験語"
+   ],
+   "kana": [
+    "しけんご"
+   ],
+   "forms": [
+    "試験語",
+    "しけんご"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "synthetic"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1000000",
+   "kanji": [
+    "試験語"
+   ],
+   "kana": [
+    "しけんご"
+   ],
+   "forms": [
+    "試験語",
+    "しけんご"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "synthetic"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1162120",
+   "kanji": [
+    "１月",
+    "一月"
+   ],
+   "kana": [
+    "いちがつ"
+   ],
+   "forms": [
+    "１月",
+    "一月",
+    "いちがつ"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "January"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1586265",
+   "kanji": [
+    "空く"
+   ],
+   "kana": [
+    "すく"
+   ],
+   "forms": [
+    "空く",
+    "すく"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5k",
+      "vi"
+     ],
+     "gloss": [
+      "to become less crowded"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1586270",
+   "kanji": [
+    "開く",
+    "空く",
+    "明く"
+   ],
+   "kana": [
+    "あく"
+   ],
+   "forms": [
+    "開く",
+    "空く",
+    "明く",
+    "あく"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5k",
+      "vi"
+     ],
+     "gloss": [
+      "to open (e.g. doors)"
+     ]
+    }
+   ]
+  }
+ ],
+ "cases": [
+  {
+   "name": "month reading がつ picks the 月 entry that reads がつ",
+   "surface": "月",
+   "basicForm": "月",
+   "baseReading": "がつ",
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:2871532",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "moon in 月が resolves by reading",
+   "surface": "月",
+   "basicForm": "月",
+   "baseReading": "つき",
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1255430",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "month without a reading keeps both common entries",
+   "surface": "月",
+   "basicForm": "月",
+   "baseReading": null,
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1255430",
+    "ambiguous": true,
+    "candidates": [
+     "jmdict:1255430",
+     "jmdict:2871532"
+    ]
+   }
+  },
+  {
+   "name": "other resolves by reading",
+   "surface": "他",
+   "basicForm": "他",
+   "baseReading": "ほか",
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1203260",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "raw resolves by reading",
+   "surface": "生",
+   "basicForm": "生",
+   "baseReading": "なま",
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1378450",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "その stays ambiguous between 其の and 園",
+   "surface": "その",
+   "basicForm": "その",
+   "baseReading": "その",
+   "pos": "連体詞",
+   "posDetail": "*",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1006830",
+    "ambiguous": true,
+    "candidates": [
+     "jmdict:1006830",
+     "jmdict:1176240"
+    ]
+   }
+  },
+  {
+   "name": "ある verb stays ambiguous with 或る",
+   "surface": "ある",
+   "basicForm": "ある",
+   "baseReading": "ある",
+   "pos": "動詞",
+   "posDetail": "自立",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1296400",
+    "ambiguous": true,
+    "candidates": [
+     "jmdict:1296400",
+     "jmdict:1586840"
+    ]
+   }
+  },
+  {
+   "name": "する keeps only the common candidates",
+   "surface": "する",
+   "basicForm": "する",
+   "baseReading": "する",
+   "pos": "動詞",
+   "posDetail": "自立",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1157170",
+    "ambiguous": true,
+    "candidates": [
+     "jmdict:1157170",
+     "jmdict:1298670",
+     "jmdict:1581900",
+     "jmdict:1595910"
+    ]
+   }
+  },
+  {
+   "name": "inflected 通って resolves through its base form",
+   "surface": "通っ",
+   "basicForm": "通る",
+   "baseReading": "とおる",
+   "pos": "動詞",
+   "posDetail": "自立",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1433030",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "inflected 届けた resolves through its base form",
+   "surface": "届け",
+   "basicForm": "届ける",
+   "baseReading": "とどける",
+   "pos": "動詞",
+   "posDetail": "自立",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1457210",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "merged compound resolves as one entry",
+   "surface": "食肉目",
+   "basicForm": "食肉目",
+   "baseReading": "しょくにくもく",
+   "pos": "名詞",
+   "posDetail": "複合",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1883210",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "numeric tiebreak prefers 999999 over 1000000",
+   "surface": "試験語",
+   "basicForm": "試験語",
+   "baseReading": null,
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:999999",
+    "ambiguous": true,
+    "candidates": [
+     "jmdict:999999",
+     "jmdict:1000000"
+    ]
+   }
+  },
+  {
+   "name": "生 resolves to the uncommon せい entry by reading",
+   "surface": "生",
+   "basicForm": "生",
+   "baseReading": "せい",
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:2088240",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "proper noun is not trackable",
+   "surface": "東京",
+   "basicForm": "東京",
+   "baseReading": "とうきょう",
+   "pos": "名詞",
+   "posDetail": "固有名詞",
+   "trackable": false,
+   "expected": null
+  },
+  {
+   "name": "non-independent noun こと is not trackable",
+   "surface": "こと",
+   "basicForm": "こと",
+   "baseReading": "こと",
+   "pos": "名詞",
+   "posDetail": "非自立",
+   "trackable": false,
+   "expected": null
+  },
+  {
+   "name": "word missing from the dictionary has no id",
+   "surface": "ぬぬぬぬぬ",
+   "basicForm": "ぬぬぬぬぬ",
+   "baseReading": null,
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": null
+  },
+  {
+   "name": "a reading that matches nothing keeps the unfiltered set",
+   "surface": "他",
+   "basicForm": "他",
+   "baseReading": "ぜんぜん",
+   "pos": "名詞",
+   "posDetail": "一般",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1203260",
+    "ambiguous": true,
+    "candidates": [
+     "jmdict:1203260",
+     "jmdict:1949190"
+    ]
+   }
+  },
+  {
+   "name": "single-token 一月 resolves to the month-of-January entry",
+   "surface": "一月",
+   "basicForm": "一月",
+   "baseReading": "いちがつ",
+   "pos": "名詞",
+   "posDetail": "副詞可能",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1162120",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "inflected 空い resolves to あく by its derived reading",
+   "surface": "空い",
+   "basicForm": "空く",
+   "baseReading": "あく",
+   "pos": "動詞",
+   "posDetail": "自立",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1586270",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "nominal suffix たち is not trackable",
+   "surface": "たち",
+   "basicForm": "たち",
+   "baseReading": "たち",
+   "pos": "名詞",
+   "posDetail": "接尾",
+   "trackable": false,
+   "expected": null
+  },
+  {
+   "name": "verbal suffix せ is not trackable",
+   "surface": "せ",
+   "basicForm": "せる",
+   "baseReading": "せ",
+   "pos": "動詞",
+   "posDetail": "接尾",
+   "trackable": false,
+   "expected": null
+  }
+ ]
+}

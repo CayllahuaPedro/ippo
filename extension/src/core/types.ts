@@ -8,6 +8,7 @@ export interface DictEntry {
   kanji: string[];
   kana: string[];
   forms: string[];
+  common: boolean;
   senses: DictSense[];
 }
 

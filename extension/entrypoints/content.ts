@@ -1,6 +1,7 @@
 import { parseParts } from '../src/core/compounds';
 import { analyzeText } from '../src/core/analyze';
-import { initTokenizer, tokenize } from '../src/core/tokenizer';
+import type { ItemQuery } from '../src/core/item';
+import { baseReadings, initTokenizer, tokenize } from '../src/core/tokenizer';
 import {
   findJapaneseTextNodes,
   parseTextNode,
@@ -16,6 +17,7 @@ import {
   type ErrorResult,
   type FindCompoundsResult,
   type LookupResult,
+  type ResolveItemsResult,
   type TokenQuery,
 } from '../src/core/messages';
 
@@ -41,8 +43,16 @@ export default defineContentScript({
       return res.found;
     };
 
+    const resolveItems = async (tokens: ItemQuery[]) => {
+      const res = (await browser.runtime.sendMessage({ type: 'resolve-items', tokens })) as
+        | ResolveItemsResult
+        | ErrorResult;
+      if (isErrorResult(res)) throw new Error(res.error);
+      return res.items;
+    };
+
     const analyze = (text: string) =>
-      analyzeText(text, { tokenize, findCompounds, annotate });
+      analyzeText(text, { tokenize, findCompounds, annotate, baseReadings, resolveItems });
 
     async function parsePage() {
       injectStyles(browser.runtime.getURL(FONTS_CSS_PATH));
