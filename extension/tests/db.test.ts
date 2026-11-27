@@ -9,10 +9,32 @@ const entries: DictEntry[] = [
     kanji: ['猫'],
     kana: ['ねこ'],
     forms: ['猫', 'ねこ'],
+    common: true,
     senses: [{ pos: ['n'], gloss: ['cat'] }],
   },
 ];
 const pitch = { '猫|ねこ': 1, 猫: 1 };
+
+describe('db schema upgrade', () => {
+  it('drops a version-1 import so the dictionary is imported again with the common flag', async () => {
+    const v1 = await new Promise<IDBDatabase>((resolve, reject) => {
+      const req = indexedDB.open('migaku-jp-upgrade', 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        db.createObjectStore('entries', { keyPath: 'id' }).createIndex('forms', 'forms', { multiEntry: true });
+        db.createObjectStore('pitch');
+        db.createObjectStore('meta').put(true, 'imported');
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+    v1.close();
+
+    const upgraded = await openDb('migaku-jp-upgrade');
+    expect(await isImported(upgraded)).toBe(false);
+    upgraded.close();
+  });
+});
 
 describe('db', () => {
   let db: IDBDatabase;

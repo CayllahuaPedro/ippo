@@ -2,8 +2,8 @@ import type { DictEntry, PitchMap, PosTagMap } from '../core/types';
 
 interface RawWord {
   id: string;
-  kanji: { text: string }[];
-  kana: { text: string }[];
+  kanji: { text: string; common?: boolean }[];
+  kana: { text: string; common?: boolean }[];
   sense: { partOfSpeech: string[]; gloss: { text: string }[] }[];
 }
 
@@ -16,6 +16,7 @@ export function transformJmdict(words: RawWord[]): DictEntry[] {
       kanji,
       kana,
       forms: [...new Set([...kanji, ...kana])],
+      common: [...w.kanji, ...w.kana].some((f) => f.common === true),
       senses: w.sense.map((s) => ({
         pos: s.partOfSpeech,
         gloss: s.gloss.map((g) => g.text),

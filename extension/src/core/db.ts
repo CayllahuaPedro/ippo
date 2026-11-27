@@ -1,18 +1,20 @@
 import type { DictEntry, PitchMap } from './types';
 
 const DB_NAME = 'migaku-jp';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const CHUNK = 2000;
 
-export function openDb(): Promise<IDBDatabase> {
+export function openDb(name = DB_NAME): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    const req = indexedDB.open(name, DB_VERSION);
     req.onupgradeneeded = () => {
       const db = req.result;
+      if (db.objectStoreNames.contains('entries')) db.deleteObjectStore('entries');
       const entries = db.createObjectStore('entries', { keyPath: 'id' });
       entries.createIndex('forms', 'forms', { multiEntry: true });
-      db.createObjectStore('pitch');
-      db.createObjectStore('meta');
+      if (!db.objectStoreNames.contains('pitch')) db.createObjectStore('pitch');
+      if (db.objectStoreNames.contains('meta')) req.transaction!.objectStore('meta').clear();
+      else db.createObjectStore('meta');
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
