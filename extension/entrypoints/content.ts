@@ -1,7 +1,7 @@
 import { parseParts } from '../src/core/compounds';
 import { analyzeText } from '../src/core/analyze';
 import type { ItemQuery } from '../src/core/item';
-import { baseReading, initTokenizer, tokenize } from '../src/core/tokenizer';
+import { baseReadings, initTokenizer, tokenize } from '../src/core/tokenizer';
 import {
   findJapaneseTextNodes,
   parseTextNode,
@@ -52,7 +52,7 @@ export default defineContentScript({
     };
 
     const analyze = (text: string) =>
-      analyzeText(text, { tokenize, findCompounds, annotate, baseReading, resolveItems });
+      analyzeText(text, { tokenize, findCompounds, annotate, baseReadings, resolveItems });
 
     async function parsePage() {
       injectStyles(browser.runtime.getURL(FONTS_CSS_PATH));

@@ -18,7 +18,7 @@ describe('item identity fixture', () => {
     expect(isTrackable(token)).toBe(c.trackable);
     if (!c.trackable) return;
     const ref = resolveItem(
-      { basicForm: c.basicForm, surface: c.surface, baseReading: c.baseReading ?? undefined },
+      { basicForm: c.basicForm, surface: c.surface, baseReadings: c.baseReading ? [c.baseReading] : [] },
       byForm,
     );
     expect(ref).toEqual(c.expected);
@@ -28,12 +28,22 @@ describe('item identity fixture', () => {
 describe('resolveItem', () => {
   it('never looks up the unknown-word placeholder as a form', () => {
     const lookup = vi.fn(() => []);
-    expect(resolveItem({ basicForm: '*', surface: 'ﾎﾞｯﾄ' }, lookup)).toBeNull();
+    expect(resolveItem({ basicForm: '*', surface: 'ﾎﾞｯﾄ', baseReadings: [] }, lookup)).toBeNull();
     expect(lookup).not.toHaveBeenCalledWith('*');
   });
 
+  it('uses the first reading that matches a candidate and skips the ones that match nothing', () => {
+    const ref = resolveItem({ basicForm: '他', surface: '他', baseReadings: ['ぜんぜん', 'ほか'] }, byForm);
+    expect(ref).toEqual({ itemId: 'jmdict:1203260', ambiguous: false });
+  });
+
+  it('prefers an earlier matching reading over a later one', () => {
+    const ref = resolveItem({ basicForm: '空く', surface: '空い', baseReadings: ['アク', 'スク'] }, byForm);
+    expect(ref).toEqual({ itemId: 'jmdict:1586270', ambiguous: false });
+  });
+
   it('falls back to the surface form when the base form is not in the dictionary', () => {
-    const ref = resolveItem({ basicForm: '*', surface: '食肉目' }, byForm);
+    const ref = resolveItem({ basicForm: '*', surface: '食肉目', baseReadings: [] }, byForm);
     expect(ref?.itemId).toBe('jmdict:1883210');
   });
 });
@@ -43,7 +53,7 @@ describe('isTrackable', () => {
     expect(isTrackable({ surface: 'x', basicForm: 'x', pos, posDetail: '*' })).toBe(false);
   });
 
-  it.each([['動詞', '非自立'], ['形容詞', '非自立'], ['名詞', '数']])('ignores %s %s', (pos, posDetail) => {
+  it.each([['動詞', '非自立'], ['形容詞', '非自立'], ['名詞', '数'], ['動詞', '接尾'], ['名詞', '接尾'], ['形容詞', '接尾']])('ignores %s %s', (pos, posDetail) => {
     expect(isTrackable({ surface: 'x', basicForm: 'x', pos, posDetail })).toBe(false);
   });
 

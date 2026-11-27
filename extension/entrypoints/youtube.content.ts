@@ -9,7 +9,7 @@ import {
 } from '../src/core/messages';
 import { analyzeText } from '../src/core/analyze';
 import type { ItemQuery } from '../src/core/item';
-import { baseReading, initTokenizer, tokenize } from '../src/core/tokenizer';
+import { baseReadings, initTokenizer, tokenize } from '../src/core/tokenizer';
 import { DEFAULT_SETTINGS, getSettings, watchSettings, type Settings } from '../src/core/settings';
 import { isToIsolated, watchVideoId } from '../src/surfaces/youtube/bridge';
 import { setNativeHidden } from '../src/surfaces/youtube/page';
@@ -48,7 +48,7 @@ const findCompounds = async (forms: string[]) =>
 const resolveItems = async (tokens: ItemQuery[]) =>
   (await send<ResolveItemsResult>({ type: 'resolve-items', tokens })).items;
 const analyze = (text: string) =>
-  analyzeText(text, { tokenize, findCompounds, annotate, baseReading, resolveItems });
+  analyzeText(text, { tokenize, findCompounds, annotate, baseReadings, resolveItems });
 const lookup = (word: WordRef) => send<LookupResult>({ type: 'lookup', ...word });
 
 async function initialSettings(): Promise<Settings> {

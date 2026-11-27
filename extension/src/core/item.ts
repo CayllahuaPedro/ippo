@@ -11,13 +11,13 @@ export interface ItemRef {
 export interface ItemQuery {
   basicForm: string;
   surface: string;
-  baseReading?: string;
+  baseReadings: string[];
 }
 
 const ITEM_NAMESPACE = 'jmdict:';
 const UNKNOWN_BASE_FORM = '*';
 const TRACKABLE_POS = new Set(['名詞', '動詞', '形容詞', '副詞', '連体詞', '接続詞', '感動詞']);
-const UNTRACKED_DETAILS = new Set(['固有名詞', '数', '非自立']);
+const UNTRACKED_DETAILS = new Set(['固有名詞', '数', '非自立', '接尾']);
 
 export function isTrackable(t: JpToken): boolean {
   return TRACKABLE_POS.has(t.pos) && !UNTRACKED_DETAILS.has(t.posDetail);
@@ -47,8 +47,11 @@ export function resolveItem(
   let candidates = candidatesFor(query, entriesByForm);
   if (candidates.length === 0) return null;
 
-  const reading = query.baseReading && katakanaToHiragana(query.baseReading);
-  if (reading) candidates = keepIfAny(candidates, (e) => e.kana.some((k) => katakanaToHiragana(k) === reading));
+  const matching = query.baseReadings
+    .map(katakanaToHiragana)
+    .map((reading) => candidates.filter((e) => e.kana.some((k) => katakanaToHiragana(k) === reading)))
+    .find((matches) => matches.length > 0);
+  if (matching) candidates = matching;
   if (candidates.length > 1) candidates = keepIfAny(candidates, (e) => e.common);
 
   const sorted = candidates.toSorted(byNumericId);

@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, it, expect, beforeAll } from 'vitest';
-import { baseReading, initTokenizer, tokenize } from '../src/core/tokenizer';
+import { baseReadings, initTokenizer, tokenize } from '../src/core/tokenizer';
 
 describe('tokenizer', () => {
   beforeAll(async () => {
@@ -25,18 +25,23 @@ describe('tokenizer', () => {
     expect(tokens.map((t) => t.posDetail)).toEqual(['一般', '接尾', '連体化', '一般']);
   });
 
-  it('derives the reading of the dictionary form for an inflected verb', async () => {
-    const [inflected] = await tokenize('飼っている');
-    expect(await baseReading(inflected)).toBe('カウ');
+  it('derives the dictionary-form reading from the token itself, then from the base form alone', async () => {
+    const [vacant] = await tokenize('空いた席');
+    expect(await baseReadings(vacant)).toEqual(['アク', 'スク']);
   });
 
-  it('reuses the surface reading when the token is already in dictionary form', async () => {
+  it('lists a single reading when both derivations agree', async () => {
+    const [inflected] = await tokenize('飼っている');
+    expect(await baseReadings(inflected)).toEqual(['カウ']);
+  });
+
+  it('keeps the isolated reading for irregular stems whose derived reading does not exist', async () => {
+    const [come] = await tokenize('来た');
+    expect(await baseReadings(come)).toEqual(['キル', 'クル']);
+  });
+
+  it('uses the surface reading when the token is already in dictionary form', async () => {
     const [noun] = await tokenize('猫を飼う');
-    expect(await baseReading(noun)).toBe('ネコ');
-  });
-
-  it('computes the reading of a given dictionary form once', async () => {
-    const [inflected] = await tokenize('飼っている');
-    expect(baseReading(inflected)).toBe(baseReading(inflected));
+    expect(await baseReadings(noun)).toEqual(['ネコ']);
   });
 });

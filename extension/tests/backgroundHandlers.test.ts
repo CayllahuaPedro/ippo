@@ -100,8 +100,8 @@ describe('handleBackgroundMessage', () => {
       {
         type: 'resolve-items',
         tokens: [
-          { basicForm: '飼う', surface: '飼っ', baseReading: 'カウ' },
-          { basicForm: '謎', surface: '謎' },
+          { basicForm: '飼う', surface: '飼っ', baseReadings: ['カウ'] },
+          { basicForm: '謎', surface: '謎', baseReadings: [] },
         ],
       },
       loadAssets,
@@ -113,7 +113,7 @@ describe('handleBackgroundMessage', () => {
   it('resolve-items marks homographs without a reading as ambiguous', async () => {
     const res = (await handleBackgroundMessage(
       db,
-      { type: 'resolve-items', tokens: [{ basicForm: '目', surface: '目' }] },
+      { type: 'resolve-items', tokens: [{ basicForm: '目', surface: '目', baseReadings: [] }] },
       loadAssets,
       loadPosTags,
     )) as ResolveItemsResult;

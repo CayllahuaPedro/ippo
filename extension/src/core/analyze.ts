@@ -8,7 +8,7 @@ export interface AnalyzeDeps {
   tokenize(text: string): Promise<JpToken[]>;
   findCompounds(forms: string[]): Promise<Record<string, string>>;
   annotate(tokens: TokenQuery[]): Promise<AnnotateResult>;
-  baseReading(token: JpToken): Promise<string | undefined>;
+  baseReadings(token: JpToken): Promise<string[]>;
   resolveItems(queries: ItemQuery[]): Promise<(ItemRef | null)[]>;
 }
 
@@ -37,7 +37,7 @@ async function resolveTrackableItems(
       trackable.map(async ({ token }) => ({
         basicForm: token.basicForm,
         surface: token.surface,
-        baseReading: await deps.baseReading(token),
+        baseReadings: await deps.baseReadings(token),
       })),
     );
     const resolved = await deps.resolveItems(queries);

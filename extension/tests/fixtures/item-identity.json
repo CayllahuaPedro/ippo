@@ -597,16 +597,96 @@
      ]
     }
    ]
+  },
+  {
+   "id": "1162120",
+   "kanji": [
+    "１月",
+    "一月"
+   ],
+   "kana": [
+    "いちがつ"
+   ],
+   "forms": [
+    "１月",
+    "一月",
+    "いちがつ"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "n"
+     ],
+     "gloss": [
+      "January"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1586265",
+   "kanji": [
+    "空く"
+   ],
+   "kana": [
+    "すく"
+   ],
+   "forms": [
+    "空く",
+    "すく"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5k",
+      "vi"
+     ],
+     "gloss": [
+      "to become less crowded"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1586270",
+   "kanji": [
+    "開く",
+    "空く",
+    "明く"
+   ],
+   "kana": [
+    "あく"
+   ],
+   "forms": [
+    "開く",
+    "空く",
+    "明く",
+    "あく"
+   ],
+   "common": true,
+   "senses": [
+    {
+     "pos": [
+      "v5k",
+      "vi"
+     ],
+     "gloss": [
+      "to open (e.g. doors)"
+     ]
+    }
+   ]
   }
  ],
  "cases": [
   {
-   "name": "month suffix in 一月 resolves by reading",
+   "name": "month reading がつ picks the 月 entry that reads がつ",
    "surface": "月",
    "basicForm": "月",
    "baseReading": "がつ",
    "pos": "名詞",
-   "posDetail": "接尾",
+   "posDetail": "一般",
    "trackable": true,
    "expected": {
     "itemId": "jmdict:2871532",
@@ -813,8 +893,8 @@
   },
   {
    "name": "word missing from the dictionary has no id",
-   "surface": "ぴょんぴょん",
-   "basicForm": "ぴょんぴょん",
+   "surface": "ぬぬぬぬぬ",
+   "basicForm": "ぬぬぬぬぬ",
    "baseReading": null,
    "pos": "名詞",
    "posDetail": "一般",
@@ -837,6 +917,52 @@
      "jmdict:1949190"
     ]
    }
+  },
+  {
+   "name": "single-token 一月 resolves to the month-of-January entry",
+   "surface": "一月",
+   "basicForm": "一月",
+   "baseReading": "いちがつ",
+   "pos": "名詞",
+   "posDetail": "副詞可能",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1162120",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "inflected 空い resolves to あく by its derived reading",
+   "surface": "空い",
+   "basicForm": "空く",
+   "baseReading": "あく",
+   "pos": "動詞",
+   "posDetail": "自立",
+   "trackable": true,
+   "expected": {
+    "itemId": "jmdict:1586270",
+    "ambiguous": false
+   }
+  },
+  {
+   "name": "nominal suffix たち is not trackable",
+   "surface": "たち",
+   "basicForm": "たち",
+   "baseReading": "たち",
+   "pos": "名詞",
+   "posDetail": "接尾",
+   "trackable": false,
+   "expected": null
+  },
+  {
+   "name": "verbal suffix せ is not trackable",
+   "surface": "せ",
+   "basicForm": "せる",
+   "baseReading": "せ",
+   "pos": "動詞",
+   "posDetail": "接尾",
+   "trackable": false,
+   "expected": null
   }
  ]
 }

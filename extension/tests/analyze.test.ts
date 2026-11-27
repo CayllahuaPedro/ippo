@@ -16,7 +16,7 @@ function makeDeps(overrides: Partial<AnalyzeDeps> = {}): AnalyzeDeps {
     tokenize: async () => compoundTokens,
     findCompounds: async () => ({ 食肉目: 'しょくにくもく' }),
     annotate: async () => ({ accents: [4, null] }),
-    baseReading: async (t) => t.reading,
+    baseReadings: async (t) => (t.reading ? [t.reading] : []),
     resolveItems: async (queries) => queries.map(() => null),
     ...overrides,
   };
@@ -99,7 +99,7 @@ describe('analyzeText', () => {
           },
         }),
       );
-      expect(queries).toEqual([[{ basicForm: '猫', surface: '猫', baseReading: 'ネコ' }]]);
+      expect(queries).toEqual([[{ basicForm: '猫', surface: '猫', baseReadings: ['ネコ'] }]]);
       expect(out[0].item).toEqual(catRef);
       expect(out[1].item).toBeUndefined();
       expect(out[2].item).toBeUndefined();
@@ -140,7 +140,7 @@ describe('analyzeText', () => {
       expect(out[0].surface).toBe('猫');
     });
 
-    it('sends the base-form reading of an inflected token', async () => {
+    it('sends the base-form readings of an inflected token', async () => {
       const queries: ItemQuery[][] = [];
       const inflected: JpToken = { surface: '飼っ', basicForm: '飼う', reading: 'カッ', pos: '動詞', posDetail: '自立' };
       await analyzeText(
@@ -149,14 +149,14 @@ describe('analyzeText', () => {
           tokenize: async () => [inflected],
           findCompounds: async () => ({}),
           annotate: async () => ({ accents: [1] }),
-          baseReading: async () => 'カウ',
+          baseReadings: async () => ['カウ'],
           resolveItems: async (q) => {
             queries.push(q);
             return [catRef];
           },
         }),
       );
-      expect(queries[0]).toEqual([{ basicForm: '飼う', surface: '飼っ', baseReading: 'カウ' }]);
+      expect(queries[0]).toEqual([{ basicForm: '飼う', surface: '飼っ', baseReadings: ['カウ'] }]);
     });
   });
 });
