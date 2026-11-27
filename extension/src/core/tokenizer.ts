@@ -30,6 +30,20 @@ export function initTokenizer(dicPath: string): Promise<void> {
   return tokenizerPromise.then(() => undefined);
 }
 
+const baseReadings = new Map<string, Promise<string | undefined>>();
+
+export function baseReading(t: JpToken): Promise<string | undefined> {
+  if (t.basicForm === t.surface) return Promise.resolve(t.reading);
+  let cached = baseReadings.get(t.basicForm);
+  if (!cached) {
+    cached = tokenize(t.basicForm).then((parts) =>
+      parts.every((p) => p.reading) ? parts.map((p) => p.reading).join('') : undefined,
+    );
+    baseReadings.set(t.basicForm, cached);
+  }
+  return cached;
+}
+
 export async function tokenize(text: string): Promise<JpToken[]> {
   if (!tokenizerPromise) throw new Error('tokenizer not initialized');
   const tokenizer = await tokenizerPromise;

@@ -3,7 +3,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { openDb } from '../src/core/db';
 import { handleBackgroundMessage } from '../src/core/backgroundHandlers';
 import type { DictEntry } from '../src/core/types';
-import type { LookupResult } from '../src/core/messages';
+import type { LookupResult, ResolveItemsResult } from '../src/core/messages';
 
 const assets = {
   entries: [
@@ -92,6 +92,32 @@ describe('handleBackgroundMessage', () => {
       loadPosTags,
     );
     expect(res).toEqual({ accents: [1, null] });
+  });
+
+  it('resolve-items returns an item ref per token and null when out of dictionary', async () => {
+    const res = await handleBackgroundMessage(
+      db,
+      {
+        type: 'resolve-items',
+        tokens: [
+          { basicForm: '飼う', surface: '飼っ', baseReading: 'カウ' },
+          { basicForm: '謎', surface: '謎' },
+        ],
+      },
+      loadAssets,
+      loadPosTags,
+    );
+    expect(res).toEqual({ items: [{ itemId: 'jmdict:1', ambiguous: false }, null] });
+  });
+
+  it('resolve-items marks homographs without a reading as ambiguous', async () => {
+    const res = (await handleBackgroundMessage(
+      db,
+      { type: 'resolve-items', tokens: [{ basicForm: '目', surface: '目' }] },
+      loadAssets,
+      loadPosTags,
+    )) as ResolveItemsResult;
+    expect(res.items[0]).toEqual({ itemId: 'jmdict:6', ambiguous: true, candidates: ['jmdict:6', 'jmdict:7'] });
   });
 
   it('lookup returns entries, accent and the descriptions of their pos tags', async () => {

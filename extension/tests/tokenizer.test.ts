@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, it, expect, beforeAll } from 'vitest';
-import { initTokenizer, tokenize } from '../src/core/tokenizer';
+import { baseReading, initTokenizer, tokenize } from '../src/core/tokenizer';
 
 describe('tokenizer', () => {
   beforeAll(async () => {
@@ -23,5 +23,20 @@ describe('tokenizer', () => {
   it('exposes the POS sub-category', async () => {
     const tokens = await tokenize('食肉目の動物');
     expect(tokens.map((t) => t.posDetail)).toEqual(['一般', '接尾', '連体化', '一般']);
+  });
+
+  it('derives the reading of the dictionary form for an inflected verb', async () => {
+    const [inflected] = await tokenize('飼っている');
+    expect(await baseReading(inflected)).toBe('カウ');
+  });
+
+  it('reuses the surface reading when the token is already in dictionary form', async () => {
+    const [noun] = await tokenize('猫を飼う');
+    expect(await baseReading(noun)).toBe('ネコ');
+  });
+
+  it('computes the reading of a given dictionary form once', async () => {
+    const [inflected] = await tokenize('飼っている');
+    expect(baseReading(inflected)).toBe(baseReading(inflected));
   });
 });
