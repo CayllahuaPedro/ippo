@@ -67,6 +67,21 @@ different refusals — high-OOV text and sentences too short to judge — and hi
 replaced with **≤ 20% refusal on judgeable-length sentences (`n_content >= 3`)**.
 See `docs/superpowers/specs/2026-08-03-short-sentence-gate-design.md`.
 
+## Item identity
+
+Learner data is keyed by JMdict entry id (`jmdict:<id>`), computed in the extension; `nihon_ml.jmdict`
+maps word-level resources to the same ids. Design: `docs/superpowers/specs/2026-11-12-item-identity-jmdict-design.md`.
+
+Rerun the UniDic-vs-IPADIC agreement measurement after a dictionary or tokenizer change. It needs
+`extension/public/dict/jmdict.min.json` (`npm run build:dict` in `extension/`) and the Tatoeba dump:
+
+```bash
+python scripts/measure_identity.py --n 2000 --seed 20261112
+```
+
+The span-agreement rows count UniDic content words one by one, so they will not reproduce the
+spec's UniDic-side share (91.5 %) exactly; the other rows track the spec within a few points.
+
 ## Spot-check
 
 The human half of the gate. `label_spotcheck.py` shows one sentence at a time **with the weak

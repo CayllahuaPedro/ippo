@@ -43,8 +43,11 @@ class Jmdict:
     def load(cls, path: pathlib.Path) -> "Jmdict":
         return cls(json.loads(pathlib.Path(path).read_text(encoding="utf-8")))
 
+    def entries_for(self, form: str) -> list[dict]:
+        return self._by_form.get(form, [])
+
     def resolve(self, form: str, reading: str | None) -> Resolution | None:
-        candidates = self._by_form.get(form, [])
+        candidates = self.entries_for(form)
         if not candidates:
             return None
         if reading:
