@@ -12,6 +12,7 @@ const data = {
       kanji: ['猫'],
       kana: ['ねこ'],
       forms: ['猫', 'ねこ'],
+      common: false,
       senses: [{ pos: ['n'], gloss: ['cat'] }],
     },
   ],
@@ -24,6 +25,7 @@ describe('renderPopupHtml', () => {
       kanji: ['食肉'],
       kana: ['しょくにく'],
       forms: ['食肉'],
+      common: false,
       senses: [{ pos: ['n'], gloss: ['meat', 'flesh'] }],
     };
     const html = renderPopupHtml({
