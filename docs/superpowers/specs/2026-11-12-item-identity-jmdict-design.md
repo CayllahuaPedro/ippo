@@ -70,7 +70,8 @@ the written form. Part-of-speech names also differ by dictionary. The extension 
 ### The id
 
 `item_id` is the JMdict entry sequence number with a namespace prefix (`"jmdict:1255430"`), taken
-from the `id` field already present in `extension/public/dict/jmdict.min.json`. The prefix costs
+from the `id` field already present in `extension/public/dict/jmdict.min.json`. That field is a
+string; the prefix is applied to it as is, in both TypeScript and Python. The prefix costs
 nothing now and keeps room for other item spaces later (per-kanji, grammar points) without
 collisions. JMdict sequence numbers are
 stable across releases; an entry that is merged or withdrawn upstream is the only way an id
@@ -100,7 +101,7 @@ For each trackable token, in order:
    `common` flag, which the raw `jmdict-eng.json` has (`kana[].common`, `kanji[].common`) and the
    build currently drops; carry it into `jmdict.min.json`.
 4. **Result**: one candidate → `item_id` set, `ambiguous: false`. Several → `item_id` set to the
-   remaining candidate with the lowest sequence number (deterministic) and `ambiguous: true`, with the full `candidates` list kept. None →
+   remaining candidate with the lowest sequence number, compared numerically (deterministic) and `ambiguous: true`, with the full `candidates` list kept. None →
    the token is out of dictionary and gets no `item_id`.
 
 When the learner opens the popup and picks an entry (lookup, mining), that choice is
@@ -121,9 +122,14 @@ tokenizer. JLPT lists and, later, frequency tables gain an `item_id` column. It 
 
 ### Dictionary version
 
-`jmdict.min.json` records the JMdict release it was built from. A rebuild compares the old and new
-id sets and fails loudly if an id that existed before disappears, so no logged id ever points at
-nothing without someone deciding what to do about it.
+The dictionary build (`extension/scripts/build-dict.ts`) enforces id stability. A committed
+manifest records the JMdict release and the set of entry ids the last accepted build contained.
+Every build compares its ids against the manifest and aborts if an id in the manifest is missing
+from the new build, naming the missing ids. Because the manifest is committed, the check works on
+a fresh clone and in CI, unlike the generated `jmdict.min.json`, which is gitignored.
+
+Accepting a rebuild that adds ids is automatic: the manifest is rewritten. Accepting one that
+removes ids needs an explicit flag and a human decision about the logged data that points at them.
 
 ## Testing
 
@@ -142,9 +148,10 @@ nothing without someone deciding what to do about it.
 - The `jmdict:` namespace prefix on ids.
 - Lowest sequence number as the deterministic pick among ambiguous candidates.
 - Python reads the extension's `jmdict.min.json` directly, so there is one dictionary file.
+- The id-stability check is a step of the dictionary build, backed by a committed manifest.
 
 ## Left to the builder
 
 - How to derive the base-form reading of inflected tokens.
 - Where `resolveItem` lives in `extension/src/core/` and how it plugs into `analyzeText`.
-- The storage shape of the dictionary-version check.
+- The manifest's storage shape (full id list vs. a compact encoding) and the name of the override flag.
