@@ -1,6 +1,7 @@
 """JLPT list ingestion: headword → item_key normalization + level loading (spec §4)."""
 
-from nihon_ml.jlpt.lists import headword_to_item_key, load_jlpt_levels
+from nihon_ml.jlpt.lists import headword_to_item_id, headword_to_item_key, load_jlpt_levels
+from nihon_ml.jmdict import Jmdict
 
 _HEADER = "item_key,lemma,reading,pos,level,source_surface,source_reading"
 
@@ -17,6 +18,24 @@ def test_suru_headword_fuses_to_one_item():
 def test_multitoken_headword_is_skipped():
     # An expression that tokenizes to several content tokens has no single identity → skip.
     assert headword_to_item_key("本を読む") is None
+
+
+_NEKO = {
+    "id": "1467640",
+    "kanji": ["猫"],
+    "kana": ["ねこ", "ネコ"],
+    "forms": ["猫", "ねこ", "ネコ"],
+    "common": True,
+    "senses": [{"pos": ["n"], "gloss": ["cat"]}],
+}
+
+
+def test_headword_resolves_to_a_jmdict_item_id():
+    assert headword_to_item_id("猫", "ねこ", Jmdict([_NEKO])) == "jmdict:1467640"
+
+
+def test_headword_missing_from_the_dictionary_has_no_item_id():
+    assert headword_to_item_id("謎語", "なぞご", Jmdict([_NEKO])) is None
 
 
 def test_load_jlpt_levels_merges_per_level_csvs(tmp_path):

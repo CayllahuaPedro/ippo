@@ -24,8 +24,11 @@ from collections import defaultdict
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from nihon_ml.jlpt.lists import headword_to_item_key
+from nihon_ml.jmdict import Jmdict
 
-_DATA = pathlib.Path(__file__).resolve().parents[1] / "data"
+_ML = pathlib.Path(__file__).resolve().parents[1]
+_DATA = _ML / "data"
+_JMDICT = _ML.parent / "extension" / "public" / "dict" / "jmdict.min.json"
 _RAW = _DATA / "raw" / "jlpt"
 _OUT = _DATA / "jlpt" / "lists"
 _UA = {"User-Agent": "Mozilla/5.0 (nihon-ai fetch_jlpt_lists)"}
@@ -35,7 +38,17 @@ _LEVEL_ORDINAL = {5: 0, 4: 1, 3: 2, 2: 3, 1: 4}
 # The kanji+hiragana deck is the one filename that exists for every level N5-N1
 # (the -eng-hiragana variant only exists for N5). Fields are Front=surface, Back=reading.
 _URL = "http://www.tanos.co.uk/jlpt/jlpt{n}/vocab/n{n}-vocab-kanji-hiragana.anki"
-_HEADER = ["item_key", "lemma", "reading", "pos", "level", "source_surface", "source_reading"]
+_HEADER = [
+    "item_key",
+    "item_id",
+    "item_ambiguous",
+    "lemma",
+    "reading",
+    "pos",
+    "level",
+    "source_surface",
+    "source_reading",
+]
 
 
 def _download(n: int) -> pathlib.Path:
@@ -67,7 +80,7 @@ def _extract_vocab(db_path: pathlib.Path) -> list[tuple[str, str]]:
     return rows
 
 
-def _normalize_level(n: int) -> dict:
+def _normalize_level(n: int, jmdict: Jmdict) -> dict:
     raw = _extract_vocab(_download(n))
     ordinal = _LEVEL_ORDINAL[n]
     _OUT.mkdir(parents=True, exist_ok=True)
@@ -75,6 +88,7 @@ def _normalize_level(n: int) -> dict:
 
     seen: set[str] = set()
     kept = skipped = 0
+    id_unique = id_ambiguous = id_unmatched = 0
     with out_path.open("w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(_HEADER)
@@ -87,7 +101,26 @@ def _normalize_level(n: int) -> dict:
                 continue
             seen.add(key)
             lemma, reading, pos = key.split("|")
-            writer.writerow([key, lemma, reading, pos, ordinal, surface, source_reading])
+            resolution = jmdict.resolve(surface, source_reading or None)
+            if resolution is None:
+                id_unmatched += 1
+            elif resolution.ambiguous:
+                id_ambiguous += 1
+            else:
+                id_unique += 1
+            writer.writerow(
+                [
+                    key,
+                    resolution.item_id if resolution else "",
+                    resolution.ambiguous if resolution else "",
+                    lemma,
+                    reading,
+                    pos,
+                    ordinal,
+                    surface,
+                    source_reading,
+                ]
+            )
             kept += 1
     return {
         "level": f"n{n}",
@@ -95,6 +128,7 @@ def _normalize_level(n: int) -> dict:
         "headwords": len(raw),
         "kept": kept,
         "skipped_multitoken": skipped,
+        "item_id": {"unique": id_unique, "ambiguous": id_ambiguous, "unmatched": id_unmatched},
         "csv": str(out_path),
     }
 
@@ -102,9 +136,13 @@ def _normalize_level(n: int) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--levels", type=int, nargs="*", default=[5, 4, 3, 2, 1])
+    ap.add_argument("--jmdict", type=pathlib.Path, default=_JMDICT)
     args = ap.parse_args()
 
-    stats = [_normalize_level(n) for n in args.levels]
+    if not args.jmdict.exists():
+        sys.exit(f"{args.jmdict} not found; run `npm run build:dict` in extension/ first")
+    jmdict = Jmdict.load(args.jmdict)
+    stats = [_normalize_level(n, jmdict) for n in args.levels]
     (_OUT / "stats.json").write_text(
         json.dumps(
             {"source": "tanos.co.uk JLPT vocab (reconstructed N5-N1)", "levels": stats},
@@ -117,7 +155,7 @@ def main() -> None:
         rate = s["skipped_multitoken"] / s["headwords"] if s["headwords"] else 0
         print(
             f"{s['level']}: {s['kept']} kept, {s['skipped_multitoken']} skipped "
-            f"({rate:.1%} multi-token) -> {s['csv']}"
+            f"({rate:.1%} multi-token), item ids {s['item_id']} -> {s['csv']}"
         )
 
 

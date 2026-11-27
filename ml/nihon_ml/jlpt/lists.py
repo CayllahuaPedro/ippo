@@ -9,6 +9,7 @@ don't resolve to a single content token are skipped (and counted upstream, not s
 import csv
 import pathlib
 
+from nihon_ml.jmdict import Jmdict
 from nihon_ml.tokenize import TRACKABLE, tokens
 
 _LEVEL_FILES = {"n5": 0, "n4": 1, "n3": 2, "n2": 3, "n1": 4}
@@ -19,6 +20,11 @@ def headword_to_item_key(surface: str) -> str | None:
     if len(content) != 1:
         return None
     return content[0].item_key
+
+
+def headword_to_item_id(surface: str, reading: str | None, jmdict: Jmdict) -> str | None:
+    resolution = jmdict.resolve(surface, reading)
+    return resolution.item_id if resolution else None
 
 
 def load_jlpt_levels(csv_dir: pathlib.Path) -> dict[str, int]:
