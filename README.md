@@ -30,18 +30,19 @@ routes are not.
 | Vocabulary-difficulty estimator — weak supervision + abstention | **Working** (Phase 0, CPU-only) |
 | Reader UI — tokenization, furigana modes, word states, popups | **Working** (fixture passage) |
 | Discover UI — shelves, comprehension dial | **Working** (fixture data) |
-| Ippo for Chrome — furigana, pitch-accent colouring, YouTube dual subtitles | **Working** (offline, see [extension/](extension/README.md)) |
+| Ippo for Chrome — furigana, pitch-accent colouring, YouTube dual subtitles, JMdict item ids | **Working** (offline, see [extension/](extension/README.md)) |
+| Accounts, cards, SRS and sync (`api/`, Hono + Better Auth + Postgres) | **Designed, not built** — see [the MVP architecture](docs/superpowers/specs/2026-11-28-mvp-architecture-design.md) |
 | `POST /classify` | **Stub** — returns `{"detail": "not implemented"}` |
 | `GET /mining/queue` | **Stub** |
 | `GET /progress` | **Stub** |
 | Retrieval / embeddings (ChromaDB) | **Not built** — no retrieval code |
-| Learner-model persistence (SQLite) | **Not built** — `DATABASE_URL` is wired, nothing reads it |
+| Learner-model persistence | **Not built** — planned in Postgres behind `api/` |
 | Fine-tuned JLPT BERT | Roadmap — see [Roadmap](#roadmap) |
 | CI — GitHub Actions, per-unit jobs on pull requests and pushes to `main` | **Working** (see [`ci.yml`](.github/workflows/ci.yml)) |
 | Docker, deployment | **Not set up** |
 
-144 tests pass across the three app units (`53` backend, `25` ML, `66` frontend), and the
-Chrome extension adds `240` more.
+Tests pass across the three app units (`53` backend, `51` ML, `66` frontend), and the Chrome
+extension adds `312` more.
 
 ---
 
@@ -206,9 +207,9 @@ npm run build                 # load extension/.output/chrome-mv3 as an unpacked
 
 ```bash
 cd backend  && .venv/bin/python -m pytest      # 53 tests
-cd ml       && .venv/bin/python -m pytest      # 25 tests
+cd ml       && .venv/bin/python -m pytest      # 51 tests
 cd frontend && npm run check                   # typecheck + arch lint + 66 tests
-cd extension && npm test                       # 240 tests
+cd extension && npm test                       # 312 tests
 ```
 
 ---
@@ -232,10 +233,12 @@ Not built. Listed so the gap between this repo and the product is explicit.
 
 - **Retrieval for the tutor** — ChromaDB + `intfloat/multilingual-e5-base` embeddings over the
   passage, replacing today's direct prompt with grounded retrieval.
-- **Learner model persistence** — known-set, reading history and progress in SQLite, behind the
-  three stubbed routes.
+- **Accounts and a built-in SRS** — Google sign-in, one deck shared by the web app and the
+  extension, FSRS scheduling, one-click mining from the popup. Designed in
+  `docs/superpowers/specs/2026-11-28-mvp-architecture-design.md`.
+- **Learner model persistence** — known-set, reading history and progress in Postgres.
 - **Auto-mining engine** — surface 1T sentences (exactly one unknown word), ranked by corpus
-  frequency, exportable to Anki.
+  frequency, into the built-in SRS.
 - **Fine-tuned JLPT classifier** — `cl-tohoku/bert-base-japanese-v3` trained on the weak-labelled
   dataset, to generalize past the lookup teacher.
 - **Grammar-point detector** — the second difficulty axis: which Genki/Bunpro points a sentence

@@ -4,7 +4,7 @@
 
 ## Platform
 
-web
+web and a Chrome extension (Ippo for Chrome)
 
 ## Users
 
@@ -49,8 +49,9 @@ outside what the classifier can judge, it abstains and says so instead of guessi
   Feature boundaries under `frontend/src/features/` are enforced by dependency-cruiser.
 - Japanese typography is a first-class constraint: ruby/furigana, mixed kana/kanji/Latin text,
   and readable sizes for dense kanji.
-- Open decision: the navigation set. Built today: Reader, Discover, Tutor. Mentioned elsewhere
-  but not built: SRS, Mining queue, Progress. The backend for mining and progress is stubbed.
+- Navigation: built today are Reader, Discover and Tutor. SRS is decided and designed
+  (`docs/superpowers/specs/2026-11-28-mvp-architecture-design.md`) but not built; Mining queue and
+  Progress are not built.
 
 ## Brand Commitments
 

@@ -3,6 +3,10 @@
 FastAPI service: a level-aware tutor streamed over SSE, plus stubs for the routes that would
 carry the classifier, mining and progress. Only `/tutor` and `/health` do anything today.
 
+Planned: this becomes an **internal** service, reachable only from the public `api/` (see
+`docs/superpowers/specs/2026-11-28-mvp-architecture-design.md`). Accounts, cards and mining move
+to `api/`.
+
 ## Layout
 
 ```

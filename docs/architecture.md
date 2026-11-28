@@ -58,11 +58,27 @@ tokenizer, a model runtime) get added in the same change as the code that import
 
 ## Deployment
 
-**Not set up.** There is no `Dockerfile`, no CI workflow and no deploy configuration in the repo.
-Any deployment claim elsewhere in this repository would be aspirational.
+**Not set up.** There is no `Dockerfile` and no deploy configuration in the repo. CI runs one job
+per unit (`.github/workflows/ci.yml`). Any deployment claim elsewhere in this repository would be
+aspirational.
 
 Planned targets, once the pieces above exist:
 
 - Backend → a container host (the estimator would run in-process; no GPU needed for Phase 0).
 - Frontend → a static/Node host with the backend URL injected at build time.
 - Fine-tuned model → HuggingFace Hub, pulled at runtime _(roadmap, after the BERT fine-tune)_.
+
+## Planned: accounts, cards and sync (MVP)
+
+Approved in `docs/superpowers/specs/2026-11-28-mvp-architecture-design.md`; **none of it is built
+yet**. In short:
+
+- A new public backend, `api/` (Hono + Better Auth with Google login + Drizzle on Postgres,
+  running on Bun), owns users, decks, cards, reviews and sync.
+- `backend/` becomes an internal service (tutor, and later the classifier and learner model)
+  reachable only from `api/`.
+- The web app uses a session cookie; the extension gets a bearer token handed over by the web app.
+- The SRS runs FSRS on the server; every review is appended to `review_log`.
+- One VPS with Docker Compose: Caddy in front, Postgres and the Python service on the internal
+  network only.
+
