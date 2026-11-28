@@ -11,6 +11,9 @@ Everything runs locally. No backend, no account — the dictionary (~44 MB of JM
 pitch data) is imported into IndexedDB on first run and never leaves the browser. The only
 network traffic is YouTube's own subtitle endpoint.
 
+Planned: sign-in and one-click mining into the built-in SRS, through the public `api/`
+(`docs/superpowers/specs/2026-11-28-mvp-architecture-design.md`). Looking words up stays local.
+
 <!-- TODO: demo.gif — before/after of clicking "Anotar página" on a Japanese article -->
 <!-- TODO: dual-subs.gif — a YouTube video playing with Japanese + English lines -->
 
@@ -173,7 +176,8 @@ Planned:
 - Service-worker keepalive and progress reporting during the initial 44 MB import.
 - Furigana in the subtitles and word frequency in the popup.
 - Dual subtitles on Netflix (phase 3), reusing the same overlay.
-- Anki export.
+- Custom dictionaries in the Yomitan format.
+- Mining from the popup into the built-in SRS (replaces the earlier Anki-export plan).
 
 ## Licence
 

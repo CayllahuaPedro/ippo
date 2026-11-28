@@ -1,6 +1,9 @@
 # Item Model Contract — Identity & Comprehension Aggregation
 
-Status: design, approved (2026-06-17). Not yet implemented.
+Status: design, approved (2026-06-17). §1 (item identity) is **superseded** by
+`2026-11-12-item-identity-jmdict-design.md`, implemented in PR #15: the canonical id is
+`jmdict:<entry id>`, computed in the extension. §2 (comprehension aggregation) still holds and is
+not yet implemented.
 
 This is the cross-cutting contract every module shares: rarity profiler, KT learner
 model, mining engine, known-set, and tutor all key off the same item identity, and all
